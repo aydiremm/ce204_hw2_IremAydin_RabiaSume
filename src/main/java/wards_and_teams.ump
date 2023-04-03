@@ -1,0 +1,144 @@
+namespace ce204_hw2_wards_and_teams_lib;
+
+
+class History {
+
+}
+
+class Address {  
+  street;  
+  city;  
+  postalCode;  
+  country;  
+}
+
+class Phone {
+  phoneNumber;
+  phoneHolderName;
+  relation;
+}
+class Hospital
+{
+  unique name;
+  Address address;
+  Phone phone;
+  1 <@>- * Ward;
+  1 <@>- 1..* Team;
+}
+
+class Team
+{
+  unique name;
+}
+
+class Ward
+{
+  unique id;
+  Gender patientsGender;
+  Integer capacity;
+  //[patient.upper <= capacity]
+}
+
+class Patient
+{
+  
+enum Gender 
+{
+  male,
+  female
+}
+  unique id;
+  Gender gender;
+  Date birthDate;
+  Integer age = Java { new Date(System.currentTimeMillis()).getYear() - birthDate.getYear() };
+  Date accepted;
+  History sickness;
+  String[] prescriptions;
+  String[] allergies;
+  String[] specialReqs;
+  * -- 1 Team;
+}
+association {  
+  1 Ward ward -- * Patient patient;  
+}  
+
+class Doctor
+{
+  String[] specialty;
+  String[] locations;
+  * -- * Patient treats;
+  0..* -<@> 0..1 Team;
+}
+
+class JuniourDoctor
+{
+  isA Doctor;
+}
+
+class ConsultantDoctor
+{
+  isA Doctor;
+  1 -- 0..1 Team team_leader;
+  1 -- * Patient ultimate_responsibility;
+}
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class Address
+{
+  position 50 30 109 45;
+}
+
+class Phone
+{
+  position 50 130 109 45;
+}
+
+class Hospital
+{
+  position 50 230 109 45;
+  position.association Hospital__Ward 9,92 30,0;
+  position.association Hospital__Team 26,92 30,0;
+}
+
+class Team
+{
+  position 50 330 109 45;
+}
+
+class Ward
+{
+  position 50 430 109 45;
+}
+
+class Patient
+{
+  position 487 24 173.113 177.462;
+  position.association Patient__Team 0,10 113,0;
+}
+
+class Doctor
+{
+  position 250 130 109 45;
+  position.association Doctor__Team 0,10 110,6;
+}
+
+class JuniourDoctor
+{
+  position 250 230 109 45;
+}
+
+class ConsultantDoctor
+{
+  position 250 330 109 45;
+  position.association ConsultantDoctor__Patient:ultimate_responsibility 30,0 13,177;
+  position.association ConsultantDoctor__Team:team_leader 0,10 110,10;
+}
+
+class History
+{
+  position 50 30 109 45;
+}
