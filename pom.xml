@@ -5,7 +5,7 @@
 
     <groupId>io.github.ucoruh</groupId>
     <artifactId>ce204_hw2_IremAydin_RabiaSume</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
