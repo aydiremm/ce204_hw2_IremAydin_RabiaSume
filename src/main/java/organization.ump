@@ -1,0 +1,232 @@
+namespace ce204_hw2_organization_lib;
+
+class Address {  
+  street;  
+  city;  
+  postalCode;  
+  country;  
+}
+
+class Phone {
+  phoneNumber;
+  phoneHolderName;
+  relation;
+}
+
+class History {
+
+}
+
+class Person
+{
+  enum Gender { male, female }
+  title;
+  givenName;
+  middleName;
+  familyName;
+  name = Java { title + " " + givenName + " " + middleName + " " + familyName};
+  Date birthDate;
+  Gender gender;
+  Address homeAddress;
+  Phone phone;
+  
+}
+
+class Hospital
+{
+  unique name;
+  Address address;
+  Phone phone;
+  * -- * Person;
+  1 <@>- * Department;
+  
+}
+
+class Patient
+{
+unique id;
+name;
+Gender gender;
+Date birthDate;
+Integer age;
+Date accepted;
+History sickness;
+String[] prescriptions;
+String[] allergies;
+String[] specialReqs;
+isA Person;
+}
+
+class Department
+{
+    1 <@>- * Staff;
+}
+
+class OperationsStaff
+{
+  isA Staff;
+  * -- * Patient;
+}
+
+class AdministrativeStaff
+{
+  isA Staff;
+}
+
+class Doctor
+{
+  String[] specialty;
+String[] locations;
+isA OperationsStaff;
+}
+
+class Nurse
+{
+  isA OperationsStaff;
+}
+
+class Surgeon
+{
+  isA Doctor;
+}
+
+class FrontDeskStaff
+{
+  isA AdministrativeStaff;
+}
+
+class Receptionist
+{
+  isA FrontDeskStaff;
+}
+
+class TechnicalStaff
+{
+  isA Staff;
+}
+
+class Technician
+{
+  isA TechnicalStaff;
+}
+
+class Technologist
+{
+  isA TechnicalStaff;
+}
+
+class Staff
+{
+  Date joined;
+String[] education;
+String[] certification;
+String[] languages;
+isA Person;
+}
+
+class SurgicalTechnologist
+{
+  isA Technologist;
+}
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class Phone
+{
+  position 50 130 109 45;
+}
+
+class History
+{
+  position 50 230 109 45;
+}
+
+class Person
+{
+  position 50 330 109 45;
+}
+
+class Hospital
+{
+  position 50 430 109 45;
+}
+
+class Patient
+{
+  position 250 30 109 45;
+}
+
+class Department
+{
+  position 250 130 109 45;
+  position.association Department__Staff 110,10 0,10;
+}
+
+class OperationsStaff
+{
+  position 250 230 109 45;
+  position.association OperationsStaff__Patient 30,0 22,160;
+}
+
+class AdministrativeStaff
+{
+  position 250 330 109 45;
+}
+
+class Doctor
+{
+  position 250 430 109 45;
+}
+
+class Nurse
+{
+  position 450 30 109 45;
+}
+
+class Surgeon
+{
+  position 450 130 109 45;
+}
+
+class FrontDeskStaff
+{
+  position 450 230 109 45;
+}
+
+class Receptionist
+{
+  position 450 330 109 45;
+}
+
+class TechnicalStaff
+{
+  position 450 430 109 45;
+}
+
+class Technician
+{
+  position 650 30 109 45;
+}
+
+class Technologist
+{
+  position 650 130 109 45;
+}
+
+class Staff
+{
+  position 650 230 109 45;
+}
+
+class SurgicalTechnologist
+{
+  position 650 330 109 45;
+}
+
+class Address
+{
+  position 50 30 109 45;
+}

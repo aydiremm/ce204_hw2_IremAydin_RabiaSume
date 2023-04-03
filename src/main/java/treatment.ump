@@ -1,0 +1,97 @@
+namespace ce204_hw2_treatment_lib;
+
+class Patient
+{
+  * -- * Prescription;
+  * -- * Treatment;
+}
+
+class Doctor
+{
+  * -- * Patient;
+  * -- * Prescription write;
+  * -- * Treatment;
+}
+
+class Examination
+{
+  1 -- * Patient;
+  1 -- * Doctor;
+}
+
+class Diagnosis
+{
+  * -- * Examination;
+  * -- * Prescription results_prescription;
+  * -- * Patient;
+  * -- * Doctor make;
+  * -- * Treatment results_diagnosis;
+}
+
+class Prescription
+{
+  1 -- * Therapy;
+}
+
+class Treatment
+{
+}
+
+class Surgery
+{
+  isA Treatment;
+}
+
+class Therapy
+{
+  isA Treatment;
+}
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class Patient
+{
+  position 50 30 109 45;
+  position.association Patient__Treatment 110,10 0,10;
+}
+
+class Doctor
+{
+  position 50 130 109 45;
+  position.association Doctor__Treatment 110,6 0,10;
+}
+
+class Examination
+{
+  position 50 230 109 45;
+}
+
+class Diagnosis
+{
+  position 50 330 109 45;
+  position.association Diagnosis__Treatment:results_diagnosis 109,0 0,10;
+}
+
+class Prescription
+{
+  position 50 430 109 45;
+  position.association Prescription__Therapy 110,4 0,10;
+}
+
+class Treatment
+{
+  position 250 30 109 45;
+}
+
+class Surgery
+{
+  position 250 130 109 45;
+}
+
+class Therapy
+{
+  position 250 230 109 45;
+}
