@@ -2,27 +2,27 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
-
 import java.sql.Date;
 import java.util.*;
 
-// line 72 "../../model.ump"
-// line 175 "../../model.ump"
+// line 71 "../organization.ump"
+// line 174 "../organization.ump"
 /**
  * @brief The AdministrativeStaff class represents the administrative staff in
  *        an organization.
  * @details AdministrativeStaff class inherits from the Staff class. it has no
  *          additional member variables or methods compared to the Staff class.
  */
-public class AdministrativeStaff extends Staff {
+public class AdministrativeStaff extends Staff
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
 	/**
 	 * @brief Constructor for the AdministrativeStaff class.
@@ -44,22 +44,21 @@ public class AdministrativeStaff extends Staff {
 	 * @param aDepartment    The department the administrative staff member belongs
 	 *                       to.
 	 */
-	public AdministrativeStaff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName,
-			Date aBirthDate, String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation,
-			String aCertification, String aLanguages, Department aDepartment) {
-		super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined,
-				aEducation, aCertification, aLanguages, aDepartment);
-	}
+  public AdministrativeStaff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined, Department aDepartment)
+  {
+    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aDepartment);
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
+  //------------------------
+  // INTERFACE
+  //------------------------
 	/**
 	 * @brief Deletes the AdministrativeStaff object.
 	 * @details Calls the delete method of the parent class, Staff.
 	 */
-	public void delete() {
-		super.delete();
-	}
+  public void delete()
+  {
+    super.delete();
+  }
 
 }

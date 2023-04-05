@@ -2,21 +2,22 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
-
 import java.util.*;
 import java.sql.Date;
 
-// line 84 "../../model.ump"
-// line 185 "../../model.ump"
-public class Nurse extends OperationsStaff {
+// line 83 "../organization.ump"
+// line 184 "../organization.ump"
+public class Nurse extends OperationsStaff
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
+
 	/**
 	 * @brief Constructs a Nurse object with the given parameters.
 	 * 
@@ -34,20 +35,18 @@ public class Nurse extends OperationsStaff {
 	 * @param aLanguages     The nurse's languages.
 	 * @param aDepartment    The department to which the nurse belongs.
 	 */
+  public Nurse(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined, Department aDepartment)
+  {
+    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aDepartment);
+  }
 
-	public Nurse(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate,
-			String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification,
-			String aLanguages, Department aDepartment) {
-		super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined,
-				aEducation, aCertification, aLanguages, aDepartment);
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-
-	public void delete() {
-		super.delete();
-	}
+  public void delete()
+  {
+    super.delete();
+  }
 
 }

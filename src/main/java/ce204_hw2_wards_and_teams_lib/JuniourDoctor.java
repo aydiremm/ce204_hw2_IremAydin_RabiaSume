@@ -4,9 +4,9 @@
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
 
-// line 74 "../../model.ump"
-// line 137 "../../model.ump"
-public class JuniourDoctor extends DoctorWT
+// line 73 "../wards_and_teams.ump"
+// line 129 "../wards_and_teams.ump"
+public class JuniourDoctor extends Doctor
 {
 
   //------------------------
@@ -16,10 +16,16 @@ public class JuniourDoctor extends DoctorWT
   //------------------------
   // CONSTRUCTOR
   //------------------------
+	/**
 
-  public JuniourDoctor(String aSpecialty, String aLocations)
+	Constructs a Junior Doctor with the given specialty and locations.
+	@param aSpecialty the specialty of the Junior Doctor.
+	@param aLocations the locations where the Junior Doctor is available.
+	*/
+
+  public JuniourDoctor()
   {
-    super(aLocations, aLocations, aLocations, aLocations, null, aLocations, aLocations, aLocations, null, aLocations, aLocations, aLocations, null, aLocations, aLocations);
+    super();
   }
 
   //------------------------

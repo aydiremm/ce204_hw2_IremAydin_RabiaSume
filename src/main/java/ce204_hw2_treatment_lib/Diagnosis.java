@@ -2,28 +2,28 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_treatment_lib;
-
 import java.util.*;
 
-// line 23 "../../model.ump"
-// line 60 "../../model.ump"
-public class Diagnosis {
+// line 22 "../treatment.ump"
+// line 72 "../treatment.ump"
+public class Diagnosis
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// Diagnosis Associations
-	private PatientTrT patientTrT;
-	private List<DoctorTrT> doctorTrTs;
-	private List<Examination> examinations;
-	private List<Prescription> prescriptions;
-	private List<Treatment> treatments;
+  //Diagnosis Associations
+  private List<Examination> examinations;
+  private List<Prescription> results_prescription;
+  private List<Patient> patients;
+  private List<Doctor> make;
+  private List<Treatment> results_diagnosis;
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
-	/**
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
+  /**
 	 * @brief Constructor for creating a Diagnosis object with the given patientTrT
 	 *        attribute.
 	 * @param aPatientTrT The PatientTrT object associated with the diagnosis.
@@ -31,646 +31,622 @@ public class Diagnosis {
 	 *        the patientTrT association multiplicity constraint.
 	 */
 
-	public Diagnosis(PatientTrT aPatientTrT) {
-		boolean didAddPatientTrT = setPatientTrT(aPatientTrT);
-		if (!didAddPatientTrT) {
-			throw new RuntimeException(
-					"Unable to create diagnosi due to patientTrT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-		}
-		doctorTrTs = new ArrayList<DoctorTrT>();
-		examinations = new ArrayList<Examination>();
-		prescriptions = new ArrayList<Prescription>();
-		treatments = new ArrayList<Treatment>();
-	}
+  public Diagnosis()
+  {
+    examinations = new ArrayList<Examination>();
+    results_prescription = new ArrayList<Prescription>();
+    patients = new ArrayList<Patient>();
+    make = new ArrayList<Doctor>();
+    results_diagnosis = new ArrayList<Treatment>();
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	/* Code from template association_GetOne */
-	public PatientTrT getPatientTrT() {
-		return patientTrT;
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
+  /* Code from template association_GetMany */
+  public Examination getExamination(int index)
+  {
+    Examination aExamination = examinations.get(index);
+    return aExamination;
+  }
 
-	/* Code from template association_GetMany */
-	public DoctorTrT getDoctorTrT(int index) {
-		DoctorTrT aDoctorTrT = doctorTrTs.get(index);
-		return aDoctorTrT;
-	}
+  public List<Examination> getExaminations()
+  {
+    List<Examination> newExaminations = Collections.unmodifiableList(examinations);
+    return newExaminations;
+  }
 
-	public List<DoctorTrT> getDoctorTrTs() {
-		List<DoctorTrT> newDoctorTrTs = Collections.unmodifiableList(doctorTrTs);
-		return newDoctorTrTs;
-	}
+  public int numberOfExaminations()
+  {
+    int number = examinations.size();
+    return number;
+  }
 
-	public int numberOfDoctorTrTs() {
-		int number = doctorTrTs.size();
-		return number;
-	}
+  public boolean hasExaminations()
+  {
+    boolean has = examinations.size() > 0;
+    return has;
+  }
 
-	public boolean hasDoctorTrTs() {
-		boolean has = doctorTrTs.size() > 0;
-		return has;
-	}
+  public int indexOfExamination(Examination aExamination)
+  {
+    int index = examinations.indexOf(aExamination);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Prescription getResults_prescription(int index)
+  {
+    Prescription aResults_prescription = results_prescription.get(index);
+    return aResults_prescription;
+  }
 
-	public int indexOfDoctorTrT(DoctorTrT aDoctorTrT) {
-		int index = doctorTrTs.indexOf(aDoctorTrT);
-		return index;
-	}
+  public List<Prescription> getResults_prescription()
+  {
+    List<Prescription> newResults_prescription = Collections.unmodifiableList(results_prescription);
+    return newResults_prescription;
+  }
 
-	/* Code from template association_GetMany */
-	public Examination getExamination(int index) {
-		Examination aExamination = examinations.get(index);
-		return aExamination;
-	}
+  public int numberOfResults_prescription()
+  {
+    int number = results_prescription.size();
+    return number;
+  }
 
-	public List<Examination> getExaminations() {
-		List<Examination> newExaminations = Collections.unmodifiableList(examinations);
-		return newExaminations;
-	}
+  public boolean hasResults_prescription()
+  {
+    boolean has = results_prescription.size() > 0;
+    return has;
+  }
 
-	public int numberOfExaminations() {
-		int number = examinations.size();
-		return number;
-	}
+  public int indexOfResults_prescription(Prescription aResults_prescription)
+  {
+    int index = results_prescription.indexOf(aResults_prescription);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Patient getPatient(int index)
+  {
+    Patient aPatient = patients.get(index);
+    return aPatient;
+  }
 
-	public boolean hasExaminations() {
-		boolean has = examinations.size() > 0;
-		return has;
-	}
+  public List<Patient> getPatients()
+  {
+    List<Patient> newPatients = Collections.unmodifiableList(patients);
+    return newPatients;
+  }
 
-	public int indexOfExamination(Examination aExamination) {
-		int index = examinations.indexOf(aExamination);
-		return index;
-	}
+  public int numberOfPatients()
+  {
+    int number = patients.size();
+    return number;
+  }
 
-	/* Code from template association_GetMany */
-	public Prescription getPrescription(int index) {
-		Prescription aPrescription = prescriptions.get(index);
-		return aPrescription;
-	}
+  public boolean hasPatients()
+  {
+    boolean has = patients.size() > 0;
+    return has;
+  }
 
-	public List<Prescription> getPrescriptions() {
-		List<Prescription> newPrescriptions = Collections.unmodifiableList(prescriptions);
-		return newPrescriptions;
-	}
+  public int indexOfPatient(Patient aPatient)
+  {
+    int index = patients.indexOf(aPatient);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Doctor getMake(int index)
+  {
+    Doctor aMake = make.get(index);
+    return aMake;
+  }
 
-	public int numberOfPrescriptions() {
-		int number = prescriptions.size();
-		return number;
-	}
+  public List<Doctor> getMake()
+  {
+    List<Doctor> newMake = Collections.unmodifiableList(make);
+    return newMake;
+  }
 
-	public boolean hasPrescriptions() {
-		boolean has = prescriptions.size() > 0;
-		return has;
-	}
+  public int numberOfMake()
+  {
+    int number = make.size();
+    return number;
+  }
 
-	public int indexOfPrescription(Prescription aPrescription) {
-		int index = prescriptions.indexOf(aPrescription);
-		return index;
-	}
+  public boolean hasMake()
+  {
+    boolean has = make.size() > 0;
+    return has;
+  }
 
-	/* Code from template association_GetMany */
-	public Treatment getTreatment(int index) {
-		Treatment aTreatment = treatments.get(index);
-		return aTreatment;
-	}
+  public int indexOfMake(Doctor aMake)
+  {
+    int index = make.indexOf(aMake);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Treatment getResults_diagnosi(int index)
+  {
+    Treatment aResults_diagnosi = results_diagnosis.get(index);
+    return aResults_diagnosi;
+  }
 
-	public List<Treatment> getTreatments() {
-		List<Treatment> newTreatments = Collections.unmodifiableList(treatments);
-		return newTreatments;
-	}
+  public List<Treatment> getResults_diagnosis()
+  {
+    List<Treatment> newResults_diagnosis = Collections.unmodifiableList(results_diagnosis);
+    return newResults_diagnosis;
+  }
 
-	public int numberOfTreatments() {
-		int number = treatments.size();
-		return number;
-	}
+  public int numberOfResults_diagnosis()
+  {
+    int number = results_diagnosis.size();
+    return number;
+  }
 
-	public boolean hasTreatments() {
-		boolean has = treatments.size() > 0;
-		return has;
-	}
-
+  public boolean hasResults_diagnosis()
+  {
+    boolean has = results_diagnosis.size() > 0;
+    return has;
+  }
 	/**
 	 * @brief Returns the index of the given treatment in the treatments list.
 	 * @param aTreatment The Treatment object to search for.
 	 * @return The index of the treatment in the treatments list, or -1 if the
 	 *         treatment is not found.
 	 */
+  public int indexOfResults_diagnosi(Treatment aResults_diagnosi)
+  {
+    int index = results_diagnosis.indexOf(aResults_diagnosi);
+    return index;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfExaminations()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToManyMethod */
+  public boolean addExamination(Examination aExamination)
+  {
+    boolean wasAdded = false;
+    if (examinations.contains(aExamination)) { return false; }
+    examinations.add(aExamination);
+    if (aExamination.indexOfDiagnosi(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aExamination.addDiagnosi(this);
+      if (!wasAdded)
+      {
+        examinations.remove(aExamination);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  public boolean removeExamination(Examination aExamination)
+  {
+    boolean wasRemoved = false;
+    if (!examinations.contains(aExamination))
+    {
+      return wasRemoved;
+    }
 
-	public int indexOfTreatment(Treatment aTreatment) {
-		int index = treatments.indexOf(aTreatment);
-		return index;
-	}
+    int oldIndex = examinations.indexOf(aExamination);
+    examinations.remove(oldIndex);
+    if (aExamination.indexOfDiagnosi(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aExamination.removeDiagnosi(this);
+      if (!wasRemoved)
+      {
+        examinations.add(oldIndex,aExamination);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addExaminationAt(Examination aExamination, int index)
+  {  
+    boolean wasAdded = false;
+    if(addExamination(aExamination))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfExaminations()) { index = numberOfExaminations() - 1; }
+      examinations.remove(aExamination);
+      examinations.add(index, aExamination);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
 
-	/* Code from template association_SetOneToMany */
+  public boolean addOrMoveExaminationAt(Examination aExamination, int index)
+  {
+    boolean wasAdded = false;
+    if(examinations.contains(aExamination))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfExaminations()) { index = numberOfExaminations() - 1; }
+      examinations.remove(aExamination);
+      examinations.add(index, aExamination);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addExaminationAt(aExamination, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfResults_prescription()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToManyMethod */
+  public boolean addResults_prescription(Prescription aResults_prescription)
+  {
+    boolean wasAdded = false;
+    if (results_prescription.contains(aResults_prescription)) { return false; }
+    results_prescription.add(aResults_prescription);
+    if (aResults_prescription.indexOfDiagnosi(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aResults_prescription.addDiagnosi(this);
+      if (!wasAdded)
+      {
+        results_prescription.remove(aResults_prescription);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  public boolean removeResults_prescription(Prescription aResults_prescription)
+  {
+    boolean wasRemoved = false;
+    if (!results_prescription.contains(aResults_prescription))
+    {
+      return wasRemoved;
+    }
+
+    int oldIndex = results_prescription.indexOf(aResults_prescription);
+    results_prescription.remove(oldIndex);
+    if (aResults_prescription.indexOfDiagnosi(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aResults_prescription.removeDiagnosi(this);
+      if (!wasRemoved)
+      {
+        results_prescription.add(oldIndex,aResults_prescription);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addResults_prescriptionAt(Prescription aResults_prescription, int index)
+  {  
+    boolean wasAdded = false;
+    if(addResults_prescription(aResults_prescription))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfResults_prescription()) { index = numberOfResults_prescription() - 1; }
+      results_prescription.remove(aResults_prescription);
+      results_prescription.add(index, aResults_prescription);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveResults_prescriptionAt(Prescription aResults_prescription, int index)
+  {
+    boolean wasAdded = false;
+    if(results_prescription.contains(aResults_prescription))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfResults_prescription()) { index = numberOfResults_prescription() - 1; }
+      results_prescription.remove(aResults_prescription);
+      results_prescription.add(index, aResults_prescription);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addResults_prescriptionAt(aResults_prescription, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfPatients()
+  {
+    return 0;
+  }	/* Code from template association_SetOneToMany */
 	/**
-	 * @brief Sets the patientTrT attribute of the Diagnosis object to the given
-	 *        PatientTrT object.
+	 * @brief Adds patient to the attribute of the Diagnosis object
+	 *        Patient object.
 	 * @param aPatientTrT The PatientTrT object to set as the patientTrT attribute.
 	 * @return True if the patientTrT attribute was successfully set, false
 	 *         otherwise.
 	 */
-	public boolean setPatientTrT(PatientTrT aPatientTrT) {
-		boolean wasSet = false;
-		if (aPatientTrT == null) {
-			return wasSet;
-		}
+  public boolean addPatient(Patient aPatient)
+  {
+    boolean wasAdded = false;
+    if (patients.contains(aPatient)) { return false; }
+    patients.add(aPatient);
+    if (aPatient.indexOfDiagnosi(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aPatient.addDiagnosi(this);
+      if (!wasAdded)
+      {
+        patients.remove(aPatient);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  public boolean removePatient(Patient aPatient)
+  {
+    boolean wasRemoved = false;
+    if (!patients.contains(aPatient))
+    {
+      return wasRemoved;
+    }
 
-		PatientTrT existingPatientTrT = patientTrT;
-		patientTrT = aPatientTrT;
-		if (existingPatientTrT != null && !existingPatientTrT.equals(aPatientTrT)) {
-			existingPatientTrT.removeDiagnosi(this);
-		}
-		patientTrT.addDiagnosi(this);
-		wasSet = true;
-		return wasSet;
-	}
+    int oldIndex = patients.indexOf(aPatient);
+    patients.remove(oldIndex);
+    if (aPatient.indexOfDiagnosi(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aPatient.removeDiagnosi(this);
+      if (!wasRemoved)
+      {
+        patients.add(oldIndex,aPatient);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addPatientAt(Patient aPatient, int index)
+  {  
+    boolean wasAdded = false;
+    if(addPatient(aPatient))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
+      patients.remove(aPatient);
+      patients.add(index, aPatient);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
 
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfDoctorTrTs() {
-		return 0;
-	}
+  public boolean addOrMovePatientAt(Patient aPatient, int index)
+  {
+    boolean wasAdded = false;
+    if(patients.contains(aPatient))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
+      patients.remove(aPatient);
+      patients.add(index, aPatient);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addPatientAt(aPatient, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfMake()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToManyMethod */
+  public boolean addMake(Doctor aMake)
+  {
+    boolean wasAdded = false;
+    if (make.contains(aMake)) { return false; }
+    make.add(aMake);
+    if (aMake.indexOfDiagnosi(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aMake.addDiagnosi(this);
+      if (!wasAdded)
+      {
+        make.remove(aMake);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  public boolean removeMake(Doctor aMake)
+  {
+    boolean wasRemoved = false;
+    if (!make.contains(aMake))
+    {
+      return wasRemoved;
+    }
 
-	/* Code from template association_AddManyToManyMethod */
-	/**
-	 * Adds a DoctorTrT to the list of doctors associated with this Diagnosis.
-	 * 
-	 * @param aDoctorTrT the DoctorTrT to be added
-	 * @return true if the DoctorTrT was added successfully, false otherwise
-	 */
-	public boolean addDoctorTrT(DoctorTrT aDoctorTrT) {
-		boolean wasAdded = false;
-		if (doctorTrTs.contains(aDoctorTrT)) {
-			return false;
-		}
-		doctorTrTs.add(aDoctorTrT);
-		if (aDoctorTrT.indexOfDiagnosi(this) != -1) {
-			wasAdded = true;
-		} else {
-			wasAdded = aDoctorTrT.addDiagnosi(this);
-			if (!wasAdded) {
-				doctorTrTs.remove(aDoctorTrT);
-			}
-		}
-		return wasAdded;
-	}
+    int oldIndex = make.indexOf(aMake);
+    make.remove(oldIndex);
+    if (aMake.indexOfDiagnosi(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aMake.removeDiagnosi(this);
+      if (!wasRemoved)
+      {
+        make.add(oldIndex,aMake);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addMakeAt(Doctor aMake, int index)
+  {  
+    boolean wasAdded = false;
+    if(addMake(aMake))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfMake()) { index = numberOfMake() - 1; }
+      make.remove(aMake);
+      make.add(index, aMake);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
 
-	/* Code from template association_RemoveMany */
-	/**
-	 * Removes a DoctorTrT from the list of doctors associated with this Diagnosis.
-	 * 
-	 * @param aDoctorTrT the DoctorTrT to be removed
-	 * @return true if the DoctorTrT was removed successfully, false otherwise
-	 */
-	public boolean removeDoctorTrT(DoctorTrT aDoctorTrT) {
-		boolean wasRemoved = false;
-		if (!doctorTrTs.contains(aDoctorTrT)) {
-			return wasRemoved;
-		}
+  public boolean addOrMoveMakeAt(Doctor aMake, int index)
+  {
+    boolean wasAdded = false;
+    if(make.contains(aMake))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfMake()) { index = numberOfMake() - 1; }
+      make.remove(aMake);
+      make.add(index, aMake);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addMakeAt(aMake, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfResults_diagnosis()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToManyMethod */
+  public boolean addResults_diagnosi(Treatment aResults_diagnosi)
+  {
+    boolean wasAdded = false;
+    if (results_diagnosis.contains(aResults_diagnosi)) { return false; }
+    results_diagnosis.add(aResults_diagnosi);
+    if (aResults_diagnosi.indexOfDiagnosi(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aResults_diagnosi.addDiagnosi(this);
+      if (!wasAdded)
+      {
+        results_diagnosis.remove(aResults_diagnosi);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  public boolean removeResults_diagnosi(Treatment aResults_diagnosi)
+  {
+    boolean wasRemoved = false;
+    if (!results_diagnosis.contains(aResults_diagnosi))
+    {
+      return wasRemoved;
+    }
 
-		int oldIndex = doctorTrTs.indexOf(aDoctorTrT);
-		doctorTrTs.remove(oldIndex);
-		if (aDoctorTrT.indexOfDiagnosi(this) == -1) {
-			wasRemoved = true;
-		} else {
-			wasRemoved = aDoctorTrT.removeDiagnosi(this);
-			if (!wasRemoved) {
-				doctorTrTs.add(oldIndex, aDoctorTrT);
-			}
-		}
-		return wasRemoved;
-	}
+    int oldIndex = results_diagnosis.indexOf(aResults_diagnosi);
+    results_diagnosis.remove(oldIndex);
+    if (aResults_diagnosi.indexOfDiagnosi(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aResults_diagnosi.removeDiagnosi(this);
+      if (!wasRemoved)
+      {
+        results_diagnosis.add(oldIndex,aResults_diagnosi);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addResults_diagnosiAt(Treatment aResults_diagnosi, int index)
+  {  
+    boolean wasAdded = false;
+    if(addResults_diagnosi(aResults_diagnosi))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfResults_diagnosis()) { index = numberOfResults_diagnosis() - 1; }
+      results_diagnosis.remove(aResults_diagnosi);
+      results_diagnosis.add(index, aResults_diagnosi);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
 
-	/* Code from template association_AddIndexControlFunctions */
-	/**
-	 * 
-	 * Adds the given DoctorTrT to the list of DoctorTrTs at the specified index.
-	 * 
-	 * @param aDoctorTrT The DoctorTrT to be added to the list.
-	 * @param index      The index at which to add the DoctorTrT to the list.
-	 * @return True if the DoctorTrT was successfully added at the specified index,
-	 *         false otherwise.
-	 */
+  public boolean addOrMoveResults_diagnosiAt(Treatment aResults_diagnosi, int index)
+  {
+    boolean wasAdded = false;
+    if(results_diagnosis.contains(aResults_diagnosi))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfResults_diagnosis()) { index = numberOfResults_diagnosis() - 1; }
+      results_diagnosis.remove(aResults_diagnosi);
+      results_diagnosis.add(index, aResults_diagnosi);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addResults_diagnosiAt(aResults_diagnosi, index);
+    }
+    return wasAdded;
+  }
 
-	public boolean addDoctorTrTAt(DoctorTrT aDoctorTrT, int index) {
-		boolean wasAdded = false;
-		if (addDoctorTrT(aDoctorTrT)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfDoctorTrTs()) {
-				index = numberOfDoctorTrTs() - 1;
-			}
-			doctorTrTs.remove(aDoctorTrT);
-			doctorTrTs.add(index, aDoctorTrT);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	/**
-	 * 
-	 * Adds the given DoctorTrT to the list of DoctorTrTs at the specified index, or
-	 * moves it to that index if it is already in the list.
-	 * 
-	 * @param aDoctorTrT The DoctorTrT to be added or moved to the list.
-	 * @param index      The index at which to add or move the DoctorTrT to in the
-	 *                   list.
-	 * @return True if the DoctorTrT was successfully added or moved to the
-	 *         specified index, false otherwise.
-	 */
-
-	public boolean addOrMoveDoctorTrTAt(DoctorTrT aDoctorTrT, int index) {
-		boolean wasAdded = false;
-		if (doctorTrTs.contains(aDoctorTrT)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfDoctorTrTs()) {
-				index = numberOfDoctorTrTs() - 1;
-			}
-			doctorTrTs.remove(aDoctorTrT);
-			doctorTrTs.add(index, aDoctorTrT);
-			wasAdded = true;
-		} else {
-			wasAdded = addDoctorTrTAt(aDoctorTrT, index);
-		}
-		return wasAdded;
-	}
-	/* Code from template association_MinimumNumberOfMethod */
-
-	/**
-	 * 
-	 * Returns the minimum number of examinations for this class.
-	 * 
-	 * @return The minimum number of examinations, which is 0.
-	 */
-	public static int minimumNumberOfExaminations() {
-		return 0;
-	}
-
-	/* Code from template association_AddManyToManyMethod */
-	/**
-	 * 
-	 * Adds the given Examination to the list of Examinations associated with this
-	 * Diagnosi.
-	 * 
-	 * @param aExamination The Examination to add to the list of Examinations.
-	 * @return True if the Examination was successfully added to the list, false
-	 *         otherwise.
-	 */
-	public boolean addExamination(Examination aExamination) {
-		boolean wasAdded = false;
-		if (examinations.contains(aExamination)) {
-			return false;
-		}
-		examinations.add(aExamination);
-		if (aExamination.indexOfDiagnosi(this) != -1) {
-			wasAdded = true;
-		} else {
-			wasAdded = aExamination.addDiagnosi(this);
-			if (!wasAdded) {
-				examinations.remove(aExamination);
-			}
-		}
-		return wasAdded;
-	}
-
-	/**
-	 * 
-	 * Removes the given Examination from the list of Examinations associated with
-	 * this Diagnosi.
-	 * 
-	 * @param aExamination The Examination to remove from the list of Examinations.
-	 * @return True if the Examination was successfully removed from the list, false
-	 *         otherwise.
-	 */
-	/* Code from template association_RemoveMany */
-	public boolean removeExamination(Examination aExamination) {
-		boolean wasRemoved = false;
-		if (!examinations.contains(aExamination)) {
-			return wasRemoved;
-		}
-
-		int oldIndex = examinations.indexOf(aExamination);
-		examinations.remove(oldIndex);
-		if (aExamination.indexOfDiagnosi(this) == -1) {
-			wasRemoved = true;
-		} else {
-			wasRemoved = aExamination.removeDiagnosi(this);
-			if (!wasRemoved) {
-				examinations.add(oldIndex, aExamination);
-			}
-		}
-		return wasRemoved;
-	}
-	/* Code from template association_AddIndexControlFunctions */
-
-	/**
-	 * 
-	 * Adds the given Examination object at the specified index in the list of
-	 * examinations associated with this Diagnosi object. If the Examination is
-	 * successfully added, the method returns true; otherwise, it returns false. If
-	 * the specified index is negative, the Examination is added at index 0. If the
-	 * specified index is greater than the number of examinations, the Examination
-	 * is added at index numberOfExaminations() - 1.
-	 * 
-	 * @param aExamination The Examination object to add to the list of
-	 *                     examinations.
-	 * @param index        The index at which to add the Examination object.
-	 * @return true if the Examination is successfully added; false otherwise.
-	 */
-	public boolean addExaminationAt(Examination aExamination, int index) {
-		boolean wasAdded = false;
-		if (addExamination(aExamination)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfExaminations()) {
-				index = numberOfExaminations() - 1;
-			}
-			examinations.remove(aExamination);
-			examinations.add(index, aExamination);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	/**
-	 * 
-	 * Adds the given Examination object at the specified index in the list of
-	 * examinations associated with this Diagnosi object, or moves it to the
-	 * specified index if it is already in the list. If the Examination is
-	 * successfully added or moved, the method returns true; otherwise, it returns
-	 * false. If the specified index is negative, the Examination is added or moved
-	 * to index 0. If the specified index is greater than the number of
-	 * examinations, the Examination is added or moved to index
-	 * numberOfExaminations() - 1.
-	 * 
-	 * @param aExamination The Examination object to add or move in the list of
-	 *                     examinations.
-	 * @param index        The index at which to add or move the Examination object.
-	 * @return true if the Examination is successfully added or moved; false
-	 *         otherwise.
-	 */
-	public boolean addOrMoveExaminationAt(Examination aExamination, int index) {
-		boolean wasAdded = false;
-		if (examinations.contains(aExamination)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfExaminations()) {
-				index = numberOfExaminations() - 1;
-			}
-			examinations.remove(aExamination);
-			examinations.add(index, aExamination);
-			wasAdded = true;
-		} else {
-			wasAdded = addExaminationAt(aExamination, index);
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_MinimumNumberOfMethod */
-	/**
-	 * 
-	 * Returns the minimum number of Prescription objects associated with this
-	 * Diagnosi object, which is 0.
-	 * 
-	 * @return 0, the minimum number of Prescription objects.
-	 */
-	public static int minimumNumberOfPrescriptions() {
-		return 0;
-	}
-
-	/* Code from template association_AddManyToManyMethod */
-	/**
-	 * 
-	 * Adds the given Prescription object to the list of prescriptions associated
-	 * with this Diagnosi object. If the Prescription is successfully added, the
-	 * method returns true; otherwise, it returns false. If the Prescription is
-	 * already associated with this Diagnosi object, the method returns false. If
-	 * the Prescription is not associated with this Diagnosi object, it is added to
-	 * the list and its addDiagnosi method is called to add this Diagnosi object to
-	 * its list of associated Diagnosi objects. If the addDiagnosi method call
-	 * fails, the Prescription is removed from the list.
-	 * 
-	 * @param aPrescription The Prescription object to add to the list of
-	 *                      prescriptions.
-	 * @return true if the Prescription is successfully added; false otherwise.
-	 */
-	public boolean addPrescription(Prescription aPrescription) {
-		boolean wasAdded = false;
-		if (prescriptions.contains(aPrescription)) {
-			return false;
-		}
-		prescriptions.add(aPrescription);
-		if (aPrescription.indexOfDiagnosi(this) != -1) {
-			wasAdded = true;
-		} else {
-			wasAdded = aPrescription.addDiagnosi(this);
-			if (!wasAdded) {
-				prescriptions.remove(aPrescription);
-			}
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_RemoveMany */
-	/**
-	 * 
-	 * Removes the given Prescription object from the list of prescriptions
-	 * associated with this Diagnosi object. If the Prescription is successfully
-	 * removed, the method returns true; otherwise, it returns false. If the
-	 * Prescription is not associated with this Diagnosi object, the method returns
-	 * false. If the Prescription is associated with this Diagnosi object, it is
-	 * removed from the list and its removeDiagnosi method is called to remove this
-	 * Diagnosi object from its list of associated Diagnosi objects. If the
-	 * removeDiagnosi method call fails, the Prescription is added back to the list.
-	 * 
-	 * @param aPrescription The Prescription object to remove from the list of
-	 *                      prescriptions.
-	 * @return true if the Prescription is successfully removed; false otherwise.
-	 */
-	public boolean removePrescription(Prescription aPrescription) {
-		boolean wasRemoved = false;
-		if (!prescriptions.contains(aPrescription)) {
-			return wasRemoved;
-		}
-
-		int oldIndex = prescriptions.indexOf(aPrescription);
-		prescriptions.remove(oldIndex);
-		if (aPrescription.indexOfDiagnosi(this) == -1) {
-			wasRemoved = true;
-		} else {
-			wasRemoved = aPrescription.removeDiagnosi(this);
-			if (!wasRemoved) {
-				prescriptions.add(oldIndex, aPrescription);
-			}
-		}
-		return wasRemoved;
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	/**
-	 * Adds the given prescription to the list of prescriptions at the specified
-	 * index. If the prescription was added successfully, returns true; otherwise,
-	 * returns false.
-	 * 
-	 * @param aPrescription the prescription to add
-	 * @param index         the index at which to add the prescription
-	 * @return true if the prescription was added successfully; false otherwise
-	 */
-	public boolean addPrescriptionAt(Prescription aPrescription, int index) {
-		boolean wasAdded = false;
-		if (addPrescription(aPrescription)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfPrescriptions()) {
-				index = numberOfPrescriptions() - 1;
-			}
-			prescriptions.remove(aPrescription);
-			prescriptions.add(index, aPrescription);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	/**
-	 * Adds the given prescription to the list of prescriptions at the specified
-	 * index, or moves it to that index if it's already in the list. If the
-	 * prescription was added or moved successfully, returns true; otherwise,
-	 * returns false.
-	 * 
-	 * @param aPrescription the prescription to add or move
-	 * @param index         the index at which to add or move the prescription
-	 * @return true if the prescription was added or moved successfully; false
-	 *         otherwise
-	 */
-
-	public boolean addOrMovePrescriptionAt(Prescription aPrescription, int index) {
-		boolean wasAdded = false;
-		if (prescriptions.contains(aPrescription)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfPrescriptions()) {
-				index = numberOfPrescriptions() - 1;
-			}
-			prescriptions.remove(aPrescription);
-			prescriptions.add(index, aPrescription);
-			wasAdded = true;
-		} else {
-			wasAdded = addPrescriptionAt(aPrescription, index);
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfTreatments() {
-		return 0;
-	}
-	/* Code from template association_AddManyToManyMethod */
-
-	public boolean addTreatment(Treatment aTreatment) {
-		boolean wasAdded = false;
-		if (treatments.contains(aTreatment)) {
-			return false;
-		}
-		treatments.add(aTreatment);
-		if (aTreatment.indexOfDiagnosi(this) != -1) {
-			wasAdded = true;
-		} else {
-			wasAdded = aTreatment.addDiagnosi(this);
-			if (!wasAdded) {
-				treatments.remove(aTreatment);
-			}
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_RemoveMany */
-	public boolean removeTreatment(Treatment aTreatment) {
-		boolean wasRemoved = false;
-		if (!treatments.contains(aTreatment)) {
-			return wasRemoved;
-		}
-
-		int oldIndex = treatments.indexOf(aTreatment);
-		treatments.remove(oldIndex);
-		if (aTreatment.indexOfDiagnosi(this) == -1) {
-			wasRemoved = true;
-		} else {
-			wasRemoved = aTreatment.removeDiagnosi(this);
-			if (!wasRemoved) {
-				treatments.add(oldIndex, aTreatment);
-			}
-		}
-		return wasRemoved;
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	public boolean addTreatmentAt(Treatment aTreatment, int index) {
-		boolean wasAdded = false;
-		if (addTreatment(aTreatment)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfTreatments()) {
-				index = numberOfTreatments() - 1;
-			}
-			treatments.remove(aTreatment);
-			treatments.add(index, aTreatment);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	public boolean addOrMoveTreatmentAt(Treatment aTreatment, int index) {
-		boolean wasAdded = false;
-		if (treatments.contains(aTreatment)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfTreatments()) {
-				index = numberOfTreatments() - 1;
-			}
-			treatments.remove(aTreatment);
-			treatments.add(index, aTreatment);
-			wasAdded = true;
-		} else {
-			wasAdded = addTreatmentAt(aTreatment, index);
-		}
-		return wasAdded;
-	}
-
-	public void delete() {
-		PatientTrT placeholderPatientTrT = patientTrT;
-		this.patientTrT = null;
-		if (placeholderPatientTrT != null) {
-			placeholderPatientTrT.removeDiagnosi(this);
-		}
-		ArrayList<DoctorTrT> copyOfDoctorTrTs = new ArrayList<DoctorTrT>(doctorTrTs);
-		doctorTrTs.clear();
-		for (DoctorTrT aDoctorTrT : copyOfDoctorTrTs) {
-			aDoctorTrT.removeDiagnosi(this);
-		}
-		ArrayList<Examination> copyOfExaminations = new ArrayList<Examination>(examinations);
-		examinations.clear();
-		for (Examination aExamination : copyOfExaminations) {
-			aExamination.removeDiagnosi(this);
-		}
-		ArrayList<Prescription> copyOfPrescriptions = new ArrayList<Prescription>(prescriptions);
-		prescriptions.clear();
-		for (Prescription aPrescription : copyOfPrescriptions) {
-			aPrescription.removeDiagnosi(this);
-		}
-		ArrayList<Treatment> copyOfTreatments = new ArrayList<Treatment>(treatments);
-		treatments.clear();
-		for (Treatment aTreatment : copyOfTreatments) {
-			aTreatment.removeDiagnosi(this);
-		}
-	}
+  public void delete()
+  {
+    ArrayList<Examination> copyOfExaminations = new ArrayList<Examination>(examinations);
+    examinations.clear();
+    for(Examination aExamination : copyOfExaminations)
+    {
+      aExamination.removeDiagnosi(this);
+    }
+    ArrayList<Prescription> copyOfResults_prescription = new ArrayList<Prescription>(results_prescription);
+    results_prescription.clear();
+    for(Prescription aResults_prescription : copyOfResults_prescription)
+    {
+      aResults_prescription.removeDiagnosi(this);
+    }
+    ArrayList<Patient> copyOfPatients = new ArrayList<Patient>(patients);
+    patients.clear();
+    for(Patient aPatient : copyOfPatients)
+    {
+      aPatient.removeDiagnosi(this);
+    }
+    ArrayList<Doctor> copyOfMake = new ArrayList<Doctor>(make);
+    make.clear();
+    for(Doctor aMake : copyOfMake)
+    {
+      aMake.removeDiagnosi(this);
+    }
+    ArrayList<Treatment> copyOfResults_diagnosis = new ArrayList<Treatment>(results_diagnosis);
+    results_diagnosis.clear();
+    for(Treatment aResults_diagnosi : copyOfResults_diagnosis)
+    {
+      aResults_diagnosi.removeDiagnosi(this);
+    }
+  }
 
 }

@@ -3,46 +3,28 @@
 
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
-import ce204_hw2_organization_lib.*;
-import ce204_hw2_organization_lib.Address;
-import ce204_hw2_organization_lib.Phone;
 
-// line 21 "../../model.ump"
-// line 91 "../../model.ump"
-// line 117 "../../model.ump"
-public class HospitalWT extends Hospital
+// line 20 "../wards_and_teams.ump"
+// line 100 "../wards_and_teams.ump"
+public class Hospital
 {
 
-  public HospitalWT(String aName, String aAddress, String aPhone) {
-		super(aName, aAddress, aPhone);
-		// TODO Auto-generated constructor stub
-	    address = aAddress;
-	    phone = aPhone;
-	    if (!setName(aName))
-	    {
-	      throw new RuntimeException("Cannot create due to duplicate name. See http://manual.umple.org?RE003ViolationofUniqueness.html");
-	    }
-	    wards = new ArrayList<Ward>();
-	    teams = new ArrayList<Team>();
-	}
-
-
-//------------------------
+  //------------------------
   // STATIC VARIABLES
   //------------------------
 
-  private static Map<String, HospitalWT> hospitalwtsByName = new HashMap<String, HospitalWT>();
+  private static Map<String, Hospital> hospitalsByName = new HashMap<String, Hospital>();
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //HospitalWT Attributes
+  //Hospital Attributes
   private String name;
-  private String address;
-  private String phone;
+  private Address address;
+  private Phone phone;
 
-  //HospitalWT Associations
+  //Hospital Associations
   private List<Ward> wards;
   private List<Team> teams;
 
@@ -50,6 +32,17 @@ public class HospitalWT extends Hospital
   // CONSTRUCTOR
   //------------------------
 
+  public Hospital(String aName, Address aAddress, Phone aPhone)
+  {
+    address = aAddress;
+    phone = aPhone;
+    if (!setName(aName))
+    {
+      throw new RuntimeException("Cannot create due to duplicate name. See http://manual.umple.org?RE003ViolationofUniqueness.html");
+    }
+    wards = new ArrayList<Ward>();
+    teams = new ArrayList<Team>();
+  }
 
   //------------------------
   // INTERFACE
@@ -68,13 +61,13 @@ public class HospitalWT extends Hospital
     name = aName;
     wasSet = true;
     if (anOldName != null) {
-      hospitalwtsByName.remove(anOldName);
+      hospitalsByName.remove(anOldName);
     }
-    hospitalwtsByName.put(aName, this);
+    hospitalsByName.put(aName, this);
     return wasSet;
   }
 
-  public boolean setAddress(String aAddress)
+  public boolean setAddress(Address aAddress)
   {
     boolean wasSet = false;
     address = aAddress;
@@ -82,7 +75,7 @@ public class HospitalWT extends Hospital
     return wasSet;
   }
 
-  public boolean setPhone(String aPhone)
+  public boolean setPhone(Phone aPhone)
   {
     boolean wasSet = false;
     phone = aPhone;
@@ -95,9 +88,9 @@ public class HospitalWT extends Hospital
     return name;
   }
   /* Code from template attribute_GetUnique */
-  public static HospitalWT getWithName(String aName)
+  public static Hospital getWithName(String aName)
   {
-    return hospitalwtsByName.get(aName);
+    return hospitalsByName.get(aName);
   }
   /* Code from template attribute_HasUnique */
   public static boolean hasWithName(String aName)
@@ -105,12 +98,12 @@ public class HospitalWT extends Hospital
     return getWithName(aName) != null;
   }
 
-  public String getAddress()
+  public Address getAddress()
   {
     return address;
   }
 
-  public String getPhone()
+  public Phone getPhone()
   {
     return phone;
   }
@@ -180,7 +173,7 @@ public class HospitalWT extends Hospital
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Ward addWard(String aId, String aPatientsGender, int aCapacity)
+  public Ward addWard(String aId, Patient.Gender aPatientsGender, int aCapacity)
   {
     return new Ward(aId, aPatientsGender, aCapacity, this);
   }
@@ -189,11 +182,11 @@ public class HospitalWT extends Hospital
   {
     boolean wasAdded = false;
     if (wards.contains(aWard)) { return false; }
-    HospitalWT existingHospitalWT = aWard.getHospitalWT();
-    boolean isNewHospitalWT = existingHospitalWT != null && !this.equals(existingHospitalWT);
-    if (isNewHospitalWT)
+    Hospital existingHospital = aWard.getHospital();
+    boolean isNewHospital = existingHospital != null && !this.equals(existingHospital);
+    if (isNewHospital)
     {
-      aWard.setHospitalWT(this);
+      aWard.setHospital(this);
     }
     else
     {
@@ -206,8 +199,8 @@ public class HospitalWT extends Hospital
   public boolean removeWard(Ward aWard)
   {
     boolean wasRemoved = false;
-    //Unable to remove aWard, as it must always have a hospitalWT
-    if (!this.equals(aWard.getHospitalWT()))
+    //Unable to remove aWard, as it must always have a hospital
+    if (!this.equals(aWard.getHospital()))
     {
       wards.remove(aWard);
       wasRemoved = true;
@@ -268,16 +261,16 @@ public class HospitalWT extends Hospital
   {
     boolean wasAdded = false;
     if (teams.contains(aTeam)) { return false; }
-    HospitalWT existingHospitalWT = aTeam.getHospitalWT();
-    boolean isNewHospitalWT = existingHospitalWT != null && !this.equals(existingHospitalWT);
+    Hospital existingHospital = aTeam.getHospital();
+    boolean isNewHospital = existingHospital != null && !this.equals(existingHospital);
 
-    if (isNewHospitalWT && existingHospitalWT.numberOfTeams() <= minimumNumberOfTeams())
+    if (isNewHospital && existingHospital.numberOfTeams() <= minimumNumberOfTeams())
     {
       return wasAdded;
     }
-    if (isNewHospitalWT)
+    if (isNewHospital)
     {
-      aTeam.setHospitalWT(this);
+      aTeam.setHospital(this);
     }
     else
     {
@@ -290,13 +283,13 @@ public class HospitalWT extends Hospital
   public boolean removeTeam(Team aTeam)
   {
     boolean wasRemoved = false;
-    //Unable to remove aTeam, as it must always have a hospitalWT
-    if (this.equals(aTeam.getHospitalWT()))
+    //Unable to remove aTeam, as it must always have a hospital
+    if (this.equals(aTeam.getHospital()))
     {
       return wasRemoved;
     }
 
-    //hospitalWT already at minimum (1)
+    //hospital already at minimum (1)
     if (numberOfTeams() <= minimumNumberOfTeams())
     {
       return wasRemoved;
@@ -341,7 +334,7 @@ public class HospitalWT extends Hospital
 
   public void delete()
   {
-    hospitalwtsByName.remove(getName());
+    hospitalsByName.remove(getName());
     while (wards.size() > 0)
     {
       Ward aWard = wards.get(wards.size() - 1);
@@ -362,8 +355,8 @@ public class HospitalWT extends Hospital
   public String toString()
   {
     return super.toString() + "["+
-            "name" + ":" + getName()+ "," +
-            "address" + ":" + getAddress()+ "," +
-            "phone" + ":" + getPhone()+ "]";
+            "name" + ":" + getName()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "address" + "=" + (getAddress() != null ? !getAddress().equals(this)  ? getAddress().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "phone" + "=" + (getPhone() != null ? !getPhone().equals(this)  ? getPhone().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

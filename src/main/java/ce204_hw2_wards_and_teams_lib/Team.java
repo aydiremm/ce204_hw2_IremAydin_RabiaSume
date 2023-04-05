@@ -5,8 +5,8 @@ package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
 import java.sql.Date;
 
-// line 30 "../../model.ump"
-// line 122 "../../model.ump"
+// line 29 "../wards_and_teams.ump"
+// line 107 "../wards_and_teams.ump"
 public class Team
 {
 
@@ -24,28 +24,37 @@ public class Team
   private String name;
 
   //Team Associations
-  private HospitalWT hospitalWT;
-  private List<PatientWT> patientWTs;
-  private List<DoctorWT> doctorWTs;
+  private Hospital hospital;
+  private List<Patient> patients;
+  private List<Doctor> doctors;
   private ConsultantDoctor consultantDoctor;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  /**
 
-  public Team(String aName, HospitalWT aHospitalWT, ConsultantDoctor aConsultantDoctor)
+  Creates a new Team with the given name, hospital, and consultant doctor.
+  @param aName the name of the team
+  @param aHospitalWT the hospital the team belongs to
+  @param aConsultantDoctor the consultant doctor of the team
+  @throws RuntimeException if there is a violation of uniqueness or multiplicity constraints
+  @see <a href="http://manual.umple.org?RE003ViolationofUniqueness.html">RE003ViolationofUniqueness</a>
+  @see <a href="http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html">RE002ViolationofAssociationMultiplicity</a>
+  */
+  public Team(String aName, Hospital aHospital, ConsultantDoctor aConsultantDoctor)
   {
     if (!setName(aName))
     {
       throw new RuntimeException("Cannot create due to duplicate name. See http://manual.umple.org?RE003ViolationofUniqueness.html");
     }
-    boolean didAddHospitalWT = setHospitalWT(aHospitalWT);
-    if (!didAddHospitalWT)
+    boolean didAddHospital = setHospital(aHospital);
+    if (!didAddHospital)
     {
-      throw new RuntimeException("Unable to create team due to hospitalWT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create team due to hospital. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    patientWTs = new ArrayList<PatientWT>();
-    doctorWTs = new ArrayList<DoctorWT>();
+    patients = new ArrayList<Patient>();
+    doctors = new ArrayList<Doctor>();
     boolean didAddConsultantDoctor = setConsultantDoctor(aConsultantDoctor);
     if (!didAddConsultantDoctor)
     {
@@ -56,7 +65,12 @@ public class Team
   //------------------------
   // INTERFACE
   //------------------------
+  /**
 
+  Sets the name of the team.
+  @param aName the name to set
+  @return true if the name was set, false otherwise
+  */
   public boolean setName(String aName)
   {
     boolean wasSet = false;
@@ -75,12 +89,23 @@ public class Team
     teamsByName.put(aName, this);
     return wasSet;
   }
+  /**
+
+  Gets the name of the team.
+  @return the name of the team
+  */
 
   public String getName()
   {
     return name;
   }
   /* Code from template attribute_GetUnique */
+  /**
+
+  Gets the team with the specified name.
+  @param aName the name of the team to get
+  @return the team with the specified name, or null if no such team exists
+  */
   public static Team getWithName(String aName)
   {
     return teamsByName.get(aName);
@@ -91,245 +116,333 @@ public class Team
     return getWithName(aName) != null;
   }
   /* Code from template association_GetOne */
-  public HospitalWT getHospitalWT()
+  public Hospital getHospital()
   {
-    return hospitalWT;
+    return hospital;
   }
   /* Code from template association_GetMany */
-  public PatientWT getPatientWT(int index)
-  {
-    PatientWT aPatientWT = patientWTs.get(index);
-    return aPatientWT;
-  }
+  /**
 
-  public List<PatientWT> getPatientWTs()
+  @brief Get the Patient object at the specified index.
+  @param index The index of the Patient to get.
+  @return The Patient object at the specified index.
+  */
+  public Patient getPatient(int index)
   {
-    List<PatientWT> newPatientWTs = Collections.unmodifiableList(patientWTs);
-    return newPatientWTs;
+    Patient aPatient = patients.get(index);
+    return aPatient;
   }
+  /**
 
-  public int numberOfPatientWTs()
+  @brief Get an unmodifiable list of all PatientWT objects associated with this Team.
+  @return An unmodifiable list of all PatientWT objects associated with this Team.
+  */
+  public List<Patient> getPatients()
   {
-    int number = patientWTs.size();
+    List<Patient> newPatients = Collections.unmodifiableList(patients);
+    return newPatients;
+  }
+  /**
+
+  @brief Get the number of Patient objects associated with this Team.
+  @return The number of Patient objects associated with this Team.
+  */
+  public int numberOfPatients()
+  {
+    int number = patients.size();
     return number;
   }
+  /**
 
-  public boolean hasPatientWTs()
+  @brief Check if this Team has any associated PatientWT objects.
+  @return True if this Team has at least one associated PatientWT object, false otherwise.
+  */
+
+  public boolean hasPatients()
   {
-    boolean has = patientWTs.size() > 0;
+    boolean has = patients.size() > 0;
     return has;
   }
+  /**
 
-  public int indexOfPatientWT(PatientWT aPatientWT)
+  @brief Get the index of the specified Patient object in the list of associated PatientWT objects.
+  @param aPatientWT The Patient object to get the index of.
+  @return The index of the specified Patient object, or -1 if it is not associated with this Team.
+  */
+  public int indexOfPatient(Patient aPatient)
   {
-    int index = patientWTs.indexOf(aPatientWT);
+    int index = patients.indexOf(aPatient);
     return index;
   }
   /* Code from template association_GetMany */
-  public DoctorWT getDoctorWT(int index)
-  {
-    DoctorWT aDoctorWT = doctorWTs.get(index);
-    return aDoctorWT;
-  }
+  /**
 
-  public List<DoctorWT> getDoctorWTs()
+  @brief Get the Doctor object at the specified index.
+  @param index The index of the Doctor to get.
+  @return The Doctor object at the specified index.
+  */
+  public Doctor getDoctor(int index)
   {
-    List<DoctorWT> newDoctorWTs = Collections.unmodifiableList(doctorWTs);
-    return newDoctorWTs;
+    Doctor aDoctor = doctors.get(index);
+    return aDoctor;
   }
+  /**
 
-  public int numberOfDoctorWTs()
+  @brief Get an unmodifiable list of all Doctor objects associated with this Team.
+  @return An unmodifiable list of all Doctor objects associated with this Team.
+  */
+  public List<Doctor> getDoctors()
   {
-    int number = doctorWTs.size();
+    List<Doctor> newDoctors = Collections.unmodifiableList(doctors);
+    return newDoctors;
+  }
+  /**
+
+  @brief Get the number of Doctor objects associated with this Team.
+  @return The number of Doctor objects associated with this Team.
+  */
+  public int numberOfDoctors()
+  {
+    int number = doctors.size();
     return number;
   }
+  /**
 
-  public boolean hasDoctorWTs()
+  @brief Check if this Team has any associated DoctorWT objects.
+  @return True if this Team has at least one associated DoctorWT object, false otherwise.
+  */
+
+  public boolean hasDoctors()
   {
-    boolean has = doctorWTs.size() > 0;
+    boolean has = doctors.size() > 0;
     return has;
   }
+  /**
 
-  public int indexOfDoctorWT(DoctorWT aDoctorWT)
+  @brief Get the index of the specified Doctor object in the list of associated DoctorWT objects.
+  @param aDoctor The Doctor object to get the index of.
+  @return The index of the specified Doctor object, or -1 if it is not associated with this Team.
+  */
+
+  public int indexOfDoctor(Doctor aDoctor)
   {
-    int index = doctorWTs.indexOf(aDoctorWT);
+    int index = doctors.indexOf(aDoctor);
     return index;
   }
   /* Code from template association_GetOne */
+  /**
+
+  @brief Get the ConsultantDoctor object associated with this Team.
+  @return The ConsultantDoctor object associated with this Team.
+  */
   public ConsultantDoctor getConsultantDoctor()
   {
     return consultantDoctor;
   }
   /* Code from template association_SetOneToMandatoryMany */
-  public boolean setHospitalWT(HospitalWT aHospitalWT)
+  public boolean setHospital(Hospital aHospital)
   {
     boolean wasSet = false;
-    //Must provide hospitalWT to team
-    if (aHospitalWT == null)
+    //Must provide hospital to team
+    if (aHospital == null)
     {
       return wasSet;
     }
 
-    if (hospitalWT != null && hospitalWT.numberOfTeams() <= HospitalWT.minimumNumberOfTeams())
+    if (hospital != null && hospital.numberOfTeams() <= Hospital.minimumNumberOfTeams())
     {
       return wasSet;
     }
 
-    HospitalWT existingHospitalWT = hospitalWT;
-    hospitalWT = aHospitalWT;
-    if (existingHospitalWT != null && !existingHospitalWT.equals(aHospitalWT))
+    Hospital existingHospital = hospital;
+    hospital = aHospital;
+    if (existingHospital != null && !existingHospital.equals(aHospital))
     {
-      boolean didRemove = existingHospitalWT.removeTeam(this);
+      boolean didRemove = existingHospital.removeTeam(this);
       if (!didRemove)
       {
-        hospitalWT = existingHospitalWT;
+        hospital = existingHospital;
         return wasSet;
       }
     }
-    hospitalWT.addTeam(this);
+    hospital.addTeam(this);
     wasSet = true;
     return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPatientWTs()
+  /**
+   * Returns the minimum number of PatientWT objects that must be associated with this Team.
+   * @return The minimum number of PatientWT objects that must be associated with this Team.
+   */
+  public static int minimumNumberOfPatients()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public PatientWT addPatientWT(String aId, String aGender, Date aBirthDate, Date aAccepted, String aSickness, String aPrescriptions, String aAllergies, String aSpecialReqs, ConsultantDoctor aConsultantDoctor, Ward aWard)
+  /**
+   * Adds a new Patient object to the patientWTs list of this Team.
+   * @param aId The ID of the patient.
+   * @param aGender The gender of the patient.
+   * @param aBirthDate The birth date of the patient.
+   * @param aAccepted The date the patient was accepted.
+   * @param aSickness The sickness of the patient.
+   * @param aPrescriptions The prescriptions of the patient.
+   * @param aAllergies The allergies of the patient.
+   * @param aSpecialReqs The special requirements of the patient.
+   * @param aConsultantDoctor The consultant doctor of the patient.
+   * @param aWard The ward of the patient.
+   * @return The newly created PatientWT object.
+   */
+  public Patient addPatient(String aId, Patient.Gender aGender, Date aBirthDate, Date aAccepted, History aSickness, ConsultantDoctor aConsultantDoctor, Ward aWard)
   {
-    return new PatientWT(aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aAccepted, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, 0, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, null, aWard);
+    return new Patient(aId, aGender, aBirthDate, aAccepted, aSickness, this, aConsultantDoctor, aWard);
   }
 
-  public boolean addPatientWT(PatientWT aPatientWT)
+  /**
+   * Adds the specified Patient object to the patientWTs list of this Team.
+   * @param aPatientWT The Patient object to add.
+   * @return True if the Patient object was added successfully, false otherwise.
+   */
+  public boolean addPatient(Patient aPatient)
   {
     boolean wasAdded = false;
-    if (patientWTs.contains(aPatientWT)) { return false; }
-    Team existingTeam = aPatientWT.getTeam();
+    if (patients.contains(aPatient)) { return false; }
+    Team existingTeam = aPatient.getTeam();
     boolean isNewTeam = existingTeam != null && !this.equals(existingTeam);
     if (isNewTeam)
     {
-      aPatientWT.setTeam(this);
+      aPatient.setTeam(this);
     }
     else
     {
-      patientWTs.add(aPatientWT);
+      patients.add(aPatient);
     }
     wasAdded = true;
     return wasAdded;
   }
+  /**
+   * Removes the specified Patient object from the patientWTs list of this Team.
+   * @param aPatientWT The Patient object to remove.
+   * @return True if the Patient object was removed successfully, false otherwise.
+   */
 
-  public boolean removePatientWT(PatientWT aPatientWT)
+  public boolean removePatient(Patient aPatient)
   {
     boolean wasRemoved = false;
-    //Unable to remove aPatientWT, as it must always have a team
-    if (!this.equals(aPatientWT.getTeam()))
+    //Unable to remove aPatient, as it must always have a team
+    if (!this.equals(aPatient.getTeam()))
     {
-      patientWTs.remove(aPatientWT);
+      patients.remove(aPatient);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addPatientWTAt(PatientWT aPatientWT, int index)
+  /**
+   * Adds the specified Patient object to the patientWTs list of this Team at the specified index.
+   * @param aPatient The Patient object to add.
+   * @param index The index at which to add the Patient object.
+   * @return True if the Patient object was added successfully, false otherwise.
+   */
+  public boolean addPatientAt(Patient aPatient, int index)
   {  
     boolean wasAdded = false;
-    if(addPatientWT(aPatientWT))
+    if(addPatient(aPatient))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfPatientWTs()) { index = numberOfPatientWTs() - 1; }
-      patientWTs.remove(aPatientWT);
-      patientWTs.add(index, aPatientWT);
+      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
+      patients.remove(aPatient);
+      patients.add(index, aPatient);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMovePatientWTAt(PatientWT aPatientWT, int index)
+  public boolean addOrMovePatientAt(Patient aPatient, int index)
   {
     boolean wasAdded = false;
-    if(patientWTs.contains(aPatientWT))
+    if(patients.contains(aPatient))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfPatientWTs()) { index = numberOfPatientWTs() - 1; }
-      patientWTs.remove(aPatientWT);
-      patientWTs.add(index, aPatientWT);
+      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
+      patients.remove(aPatient);
+      patients.add(index, aPatient);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addPatientWTAt(aPatientWT, index);
+      wasAdded = addPatientAt(aPatient, index);
     }
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfDoctorWTs()
+  public static int minimumNumberOfDoctors()
   {
     return 0;
   }
   /* Code from template association_AddManyToOptionalOne */
-  public boolean addDoctorWT(DoctorWT aDoctorWT)
+  public boolean addDoctor(Doctor aDoctor)
   {
     boolean wasAdded = false;
-    if (doctorWTs.contains(aDoctorWT)) { return false; }
-    Team existingTeam = aDoctorWT.getTeam();
+    if (doctors.contains(aDoctor)) { return false; }
+    Team existingTeam = aDoctor.getTeam();
     if (existingTeam == null)
     {
-      aDoctorWT.setTeam(this);
+      aDoctor.setTeam(this);
     }
     else if (!this.equals(existingTeam))
     {
-      existingTeam.removeDoctorWT(aDoctorWT);
-      addDoctorWT(aDoctorWT);
+      existingTeam.removeDoctor(aDoctor);
+      addDoctor(aDoctor);
     }
     else
     {
-      doctorWTs.add(aDoctorWT);
+      doctors.add(aDoctor);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeDoctorWT(DoctorWT aDoctorWT)
+  public boolean removeDoctor(Doctor aDoctor)
   {
     boolean wasRemoved = false;
-    if (doctorWTs.contains(aDoctorWT))
+    if (doctors.contains(aDoctor))
     {
-      doctorWTs.remove(aDoctorWT);
-      aDoctorWT.setTeam(null);
+      doctors.remove(aDoctor);
+      aDoctor.setTeam(null);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addDoctorWTAt(DoctorWT aDoctorWT, int index)
+  public boolean addDoctorAt(Doctor aDoctor, int index)
   {  
     boolean wasAdded = false;
-    if(addDoctorWT(aDoctorWT))
+    if(addDoctor(aDoctor))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctorWTs()) { index = numberOfDoctorWTs() - 1; }
-      doctorWTs.remove(aDoctorWT);
-      doctorWTs.add(index, aDoctorWT);
+      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
+      doctors.remove(aDoctor);
+      doctors.add(index, aDoctor);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveDoctorWTAt(DoctorWT aDoctorWT, int index)
+  public boolean addOrMoveDoctorAt(Doctor aDoctor, int index)
   {
     boolean wasAdded = false;
-    if(doctorWTs.contains(aDoctorWT))
+    if(doctors.contains(aDoctor))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctorWTs()) { index = numberOfDoctorWTs() - 1; }
-      doctorWTs.remove(aDoctorWT);
-      doctorWTs.add(index, aDoctorWT);
+      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
+      doctors.remove(aDoctor);
+      doctors.add(index, aDoctor);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addDoctorWTAt(aDoctorWT, index);
+      wasAdded = addDoctorAt(aDoctor, index);
     }
     return wasAdded;
   }
@@ -365,22 +478,22 @@ public class Team
   public void delete()
   {
     teamsByName.remove(getName());
-    HospitalWT placeholderHospitalWT = hospitalWT;
-    this.hospitalWT = null;
-    if(placeholderHospitalWT != null)
+    Hospital placeholderHospital = hospital;
+    this.hospital = null;
+    if(placeholderHospital != null)
     {
-      placeholderHospitalWT.removeTeam(this);
+      placeholderHospital.removeTeam(this);
     }
-    for(int i=patientWTs.size(); i > 0; i--)
+    for(int i=patients.size(); i > 0; i--)
     {
-      PatientWT aPatientWT = patientWTs.get(i - 1);
-      aPatientWT.delete();
+      Patient aPatient = patients.get(i - 1);
+      aPatient.delete();
     }
-    while (doctorWTs.size() > 0)
+    while (doctors.size() > 0)
     {
-      DoctorWT aDoctorWT = doctorWTs.get(doctorWTs.size() - 1);
-      aDoctorWT.delete();
-      doctorWTs.remove(aDoctorWT);
+      Doctor aDoctor = doctors.get(doctors.size() - 1);
+      aDoctor.delete();
+      doctors.remove(aDoctor);
     }
     
     ConsultantDoctor existingConsultantDoctor = consultantDoctor;
@@ -396,7 +509,7 @@ public class Team
   {
     return super.toString() + "["+
             "name" + ":" + getName()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "hospitalWT = "+(getHospitalWT()!=null?Integer.toHexString(System.identityHashCode(getHospitalWT())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "hospital = "+(getHospital()!=null?Integer.toHexString(System.identityHashCode(getHospital())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "consultantDoctor = "+(getConsultantDoctor()!=null?Integer.toHexString(System.identityHashCode(getConsultantDoctor())):"null");
   }
 }

@@ -2,34 +2,39 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
-
 import java.util.*;
 import java.sql.Date;
 
-// line 46 "../../model.ump"
-// line 158 "../../model.ump"
-public class Patient extends Person {
+// line 45 "../organization.ump"
+// line 157 "../organization.ump"
+public class Patient extends Person
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // STATIC VARIABLES
+  //------------------------
 
-	// Patient Attributes
-	private String id;
-	private int age;
-	private String accepted;
-	private String sickness;
-	private String prescriptions;
-	private String allergies;
-	private String specialReqs;
+  private static Map<String, Patient> patientsById = new HashMap<String, Patient>();
 
-	// Patient Associations
-	private List<OperationsStaff> operationsStaffs;
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
-	/**
+  //Patient Attributes
+  private String id;
+  private Date accepted;
+  private History sickness;
+  private List<String> prescriptions;
+  private List<String> allergies;
+  private List<String> specialReqs;
+
+  //Patient Associations
+  private List<OperationsStaff> operationsStaffs;
+
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
+  /**
 	 * Constructs a new Patient object with the specified details.
 	 *
 	 * @param aTitle         The patient's title.
@@ -49,66 +54,65 @@ public class Patient extends Person {
 	 * @param aSpecialReqs   The patient's special requirements.
 	 */
 
-	public Patient(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate,
-			String aGender, String aHomeAddress, String aPhone, String aId, int aAge, String aAccepted,
-			String aSickness, String aPrescriptions, String aAllergies, String aSpecialReqs) {
-		super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
-		id = aId;
-		age = aAge;
-		accepted = aAccepted;
-		sickness = aSickness;
-		prescriptions = aPrescriptions;
-		allergies = aAllergies;
-		specialReqs = aSpecialReqs;
-		operationsStaffs = new ArrayList<OperationsStaff>();
-	}
+  public Patient(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, String aId, Date aAccepted, History aSickness)
+  {
+    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
+    accepted = aAccepted;
+    sickness = aSickness;
+    prescriptions = new ArrayList<String>();
+    allergies = new ArrayList<String>();
+    specialReqs = new ArrayList<String>();
+    if (!setId(aId))
+    {
+      throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
+    }
+    operationsStaffs = new ArrayList<OperationsStaff>();
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	/**
+  //------------------------
+  // INTERFACE
+  //------------------------
+  /**
 	 * 
 	 * Sets the ID of the patient.
 	 * 
 	 * @param aId the new ID of the patient
 	 * @return true if the ID was successfully set
 	 */
-	public boolean setId(String aId) {
-		boolean wasSet = false;
-		id = aId;
-		wasSet = true;
-		return wasSet;
-	}
 
-	/**
-	 * 
-	 * Sets the age of the patient.
-	 * 
-	 * @param aAge the new age of the patient
-	 * @return true if the age was successfully set
-	 */
-	public boolean setAge(int aAge) {
-		boolean wasSet = false;
-		age = aAge;
-		wasSet = true;
-		return wasSet;
-	}
-
-	/**
+  public boolean setId(String aId)
+  {
+    boolean wasSet = false;
+    String anOldId = getId();
+    if (anOldId != null && anOldId.equals(aId)) {
+      return true;
+    }
+    if (hasWithId(aId)) {
+      return wasSet;
+    }
+    id = aId;
+    wasSet = true;
+    if (anOldId != null) {
+      patientsById.remove(anOldId);
+    }
+    patientsById.put(aId, this);
+    return wasSet;
+  }
+  /**
 	 * 
 	 * Sets the acceptance status of the patient.
 	 * 
 	 * @param aAccepted the new acceptance status of the patient
 	 * @return true if the acceptance status was successfully set
 	 */
-	public boolean setAccepted(String aAccepted) {
-		boolean wasSet = false;
-		accepted = aAccepted;
-		wasSet = true;
-		return wasSet;
-	}
-
-	/**
+  public boolean setAccepted(Date aAccepted)
+  {
+    boolean wasSet = false;
+    accepted = aAccepted;
+    wasSet = true;
+    return wasSet;
+  }
+  /**
 	 * 
 	 * Sets the sickness of the patient.
 	 * 
@@ -116,55 +120,77 @@ public class Patient extends Person {
 	 * @return true if the sickness was successfully set
 	 */
 
-	public boolean setSickness(String aSickness) {
-		boolean wasSet = false;
-		sickness = aSickness;
-		wasSet = true;
-		return wasSet;
-	}
-
-	/**
+  public boolean setSickness(History aSickness)
+  {
+    boolean wasSet = false;
+    sickness = aSickness;
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template attribute_SetMany */
+  /**
 	 * 
 	 * Sets the prescriptions of the patient.
 	 * 
 	 * @param aPrescriptions the new prescriptions of the patient
 	 * @return true if the prescriptions were successfully set
 	 */
+  public boolean addPrescription(String aPrescription)
+  {
+    boolean wasAdded = false;
+    wasAdded = prescriptions.add(aPrescription);
+    return wasAdded;
+  }
 
-	public boolean setPrescriptions(String aPrescriptions) {
-		boolean wasSet = false;
-		prescriptions = aPrescriptions;
-		wasSet = true;
-		return wasSet;
-	}
-
-	/**
+  public boolean removePrescription(String aPrescription)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = prescriptions.remove(aPrescription);
+    return wasRemoved;
+  }
+  /* Code from template attribute_SetMany */
+  /**
 	 * 
-	 * Sets the allergies of the patient.
+	 * Adds allergies to the patient.
 	 * 
-	 * @param aAllergies the new allergies of the patient
+	 * @param aAllergy the new allergy of the patient
 	 * @return true if the allergies were successfully set
 	 */
-	public boolean setAllergies(String aAllergies) {
-		boolean wasSet = false;
-		allergies = aAllergies;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean addAllergy(String aAllergy)
+  {
+    boolean wasAdded = false;
+    wasAdded = allergies.add(aAllergy);
+    return wasAdded;
+  }
+
+  public boolean removeAllergy(String aAllergy)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = allergies.remove(aAllergy);
+    return wasRemoved;
+  }
 
 	/**
 	 * 
-	 * Sets the special requirements of the patient.
+	 * Adds special requirement to the patient.
 	 * 
 	 * @param aSpecialReqs the new special requirements of the patient
 	 * @return true if the special requirements were successfully set
 	 */
-	public boolean setSpecialReqs(String aSpecialReqs) {
-		boolean wasSet = false;
-		specialReqs = aSpecialReqs;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean addSpecialReq(String aSpecialReq)
+  {
+    boolean wasAdded = false;
+    wasAdded = specialReqs.add(aSpecialReq);
+    return wasAdded;
+  }
+
+  public boolean removeSpecialReq(String aSpecialReq)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = specialReqs.remove(aSpecialReq);
+    return wasRemoved;
+  }
+
 
 	/**
 	 * 
@@ -172,79 +198,159 @@ public class Patient extends Person {
 	 * 
 	 * @return the ID of the patient
 	 */
-
-	public String getId() {
-		return id;
-	}
-
-	/**
+  public String getId()
+  {
+    return id;
+  }
+  /* Code from template attribute_GetUnique */
+  public static Patient getWithId(String aId)
+  {
+    return patientsById.get(aId);
+  }
+  /* Code from template attribute_HasUnique */
+  public static boolean hasWithId(String aId)
+  {
+    return getWithId(aId) != null;
+  }
+  /**
 	 * 
 	 * Gets the age of the patient.
 	 * 
 	 * @return the age of the patient
 	 */
-
-	public int getAge() {
-		return age;
-	}
-
-	/**
+  public int getAge()
+  {
+    return new Date(System.currentTimeMillis()).getYear() - getBirthDate().getYear();
+  }
+  /**
 	 * 
 	 * Gets the acceptance status of the patient.
 	 * 
 	 * @return the acceptance status of the patient
 	 */
-
-	public String getAccepted() {
-		return accepted;
-	}
-
-	/**
+  public Date getAccepted()
+  {
+    return accepted;
+  }
+  /**
 	 * 
 	 * Gets the sickness of the patient.
 	 * 
 	 * @return the sickness of the patient
 	 */
-
-	public String getSickness() {
-		return sickness;
-	}
-
-	/**
+  public History getSickness()
+  {
+    return sickness;
+  }
+  /* Code from template attribute_GetMany */
+  /**
 	 * 
 	 * Gets the prescriptions of the patient.
 	 * 
 	 * @return the prescriptions of the patient
 	 */
+  public String getPrescription(int index)
+  {
+    String aPrescription = prescriptions.get(index);
+    return aPrescription;
+  }
 
-	public String getPrescriptions() {
-		return prescriptions;
-	}
+  public String[] getPrescriptions()
+  {
+    String[] newPrescriptions = prescriptions.toArray(new String[prescriptions.size()]);
+    return newPrescriptions;
+  }
 
-	/**
+  public int numberOfPrescriptions()
+  {
+    int number = prescriptions.size();
+    return number;
+  }
+
+  public boolean hasPrescriptions()
+  {
+    boolean has = prescriptions.size() > 0;
+    return has;
+  }
+
+  public int indexOfPrescription(String aPrescription)
+  {
+    int index = prescriptions.indexOf(aPrescription);
+    return index;
+  }
+  /* Code from template attribute_GetMany */
+  public String getAllergy(int index)
+  {
+    String aAllergy = allergies.get(index);
+    return aAllergy;
+  }
+  /**
 	 * 
 	 * Gets the allergies of the patient.
 	 * 
 	 * @return the allergies of the patient
 	 */
+  public String[] getAllergies()
+  {
+    String[] newAllergies = allergies.toArray(new String[allergies.size()]);
+    return newAllergies;
+  }
 
-	public String getAllergies() {
-		return allergies;
-	}
+  public int numberOfAllergies()
+  {
+    int number = allergies.size();
+    return number;
+  }
 
-	/**
+  public boolean hasAllergies()
+  {
+    boolean has = allergies.size() > 0;
+    return has;
+  }
+
+  public int indexOfAllergy(String aAllergy)
+  {
+    int index = allergies.indexOf(aAllergy);
+    return index;
+  }
+  /* Code from template attribute_GetMany */
+  /**
 	 * 
 	 * Gets the special requirements of the patient.
 	 * 
 	 * @return the special requirements of the patient
 	 */
+  public String getSpecialReq(int index)
+  {
+    String aSpecialReq = specialReqs.get(index);
+    return aSpecialReq;
+  }
 
-	public String getSpecialReqs() {
-		return specialReqs;
-	}
+  public String[] getSpecialReqs()
+  {
+    String[] newSpecialReqs = specialReqs.toArray(new String[specialReqs.size()]);
+    return newSpecialReqs;
+  }
 
-	/* Code from template association_GetMany */
-	/**
+  public int numberOfSpecialReqs()
+  {
+    int number = specialReqs.size();
+    return number;
+  }
+
+  public boolean hasSpecialReqs()
+  {
+    boolean has = specialReqs.size() > 0;
+    return has;
+  }
+
+  public int indexOfSpecialReq(String aSpecialReq)
+  {
+    int index = specialReqs.indexOf(aSpecialReq);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  /**
 	 * 
 	 * Returns the OperationsStaff object at the specified index in the list of
 	 * OperationsStaffs.
@@ -252,12 +358,12 @@ public class Patient extends Person {
 	 * @param index The index of the desired OperationsStaff object.
 	 * @return The OperationsStaff object at the specified index.
 	 */
-	public OperationsStaff getOperationsStaff(int index) {
-		OperationsStaff aOperationsStaff = operationsStaffs.get(index);
-		return aOperationsStaff;
-	}
-
-	/**
+  public OperationsStaff getOperationsStaff(int index)
+  {
+    OperationsStaff aOperationsStaff = operationsStaffs.get(index);
+    return aOperationsStaff;
+  }
+  /**
 	 * 
 	 * Returns an unmodifiable list of all the OperationsStaffs associated with this
 	 * Patient.
@@ -265,30 +371,30 @@ public class Patient extends Person {
 	 * @return An unmodifiable list of OperationsStaffs.
 	 */
 
-	public List<OperationsStaff> getOperationsStaffs() {
-		List<OperationsStaff> newOperationsStaffs = Collections.unmodifiableList(operationsStaffs);
-		return newOperationsStaffs;
-	}
+  public List<OperationsStaff> getOperationsStaffs()
+  {
+    List<OperationsStaff> newOperationsStaffs = Collections.unmodifiableList(operationsStaffs);
+    return newOperationsStaffs;
+  }
 
-	public int numberOfOperationsStaffs() {
-		int number = operationsStaffs.size();
-		return number;
-	}
-
-	/**
+  public int numberOfOperationsStaffs()
+  {
+    int number = operationsStaffs.size();
+    return number;
+  }
+  /**
 	 * 
 	 * Returns true if this Patient has one or more OperationsStaffs associated with
 	 * it.
 	 * 
 	 * @return True if this Patient has one or more OperationsStaffs.
 	 */
-
-	public boolean hasOperationsStaffs() {
-		boolean has = operationsStaffs.size() > 0;
-		return has;
-	}
-
-	/**
+  public boolean hasOperationsStaffs()
+  {
+    boolean has = operationsStaffs.size() > 0;
+    return has;
+  }
+  /**
 	 * 
 	 * Returns the index of the specified OperationsStaff object in the list of
 	 * OperationsStaffs, or -1 if it is not found.
@@ -296,78 +402,84 @@ public class Patient extends Person {
 	 * @param aOperationsStaff The OperationsStaff object to find the index of.
 	 * @return The index of the OperationsStaff object, or -1 if it is not found.
 	 */
-
-	public int indexOfOperationsStaff(OperationsStaff aOperationsStaff) {
-		int index = operationsStaffs.indexOf(aOperationsStaff);
-		return index;
-	}
-
-	/* Code from template association_MinimumNumberOfMethod */
-	/**
+  public int indexOfOperationsStaff(OperationsStaff aOperationsStaff)
+  {
+    int index = operationsStaffs.indexOf(aOperationsStaff);
+    return index;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  /**
 	 * 
 	 * Returns the minimum number of OperationsStaffs that a Patient can have (which
 	 * is zero).
 	 * 
 	 * @return The minimum number of OperationsStaffs.
 	 */
-	public static int minimumNumberOfOperationsStaffs() {
-		return 0;
-	}
-
-	/* Code from template association_AddManyToManyMethod */
-	/**
+  public static int minimumNumberOfOperationsStaffs()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToManyMethod */
+  /**
 	 * 
 	 * Adds an OperationsStaff to this Patient's list of operations staffs.
 	 * 
 	 * @param aOperationsStaff the OperationsStaff to add
 	 * @return true if the OperationsStaff was added, false otherwise
 	 */
-	public boolean addOperationsStaff(OperationsStaff aOperationsStaff) {
-		boolean wasAdded = false;
-		if (operationsStaffs.contains(aOperationsStaff)) {
-			return false;
-		}
-		operationsStaffs.add(aOperationsStaff);
-		if (aOperationsStaff.indexOfPatient(this) != -1) {
-			wasAdded = true;
-		} else {
-			wasAdded = aOperationsStaff.addPatient(this);
-			if (!wasAdded) {
-				operationsStaffs.remove(aOperationsStaff);
-			}
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_RemoveMany */
-	/**
+  public boolean addOperationsStaff(OperationsStaff aOperationsStaff)
+  {
+    boolean wasAdded = false;
+    if (operationsStaffs.contains(aOperationsStaff)) { return false; }
+    operationsStaffs.add(aOperationsStaff);
+    if (aOperationsStaff.indexOfPatient(this) != -1)
+    {
+      wasAdded = true;
+    }
+    else
+    {
+      wasAdded = aOperationsStaff.addPatient(this);
+      if (!wasAdded)
+      {
+        operationsStaffs.remove(aOperationsStaff);
+      }
+    }
+    return wasAdded;
+  }
+  /* Code from template association_RemoveMany */
+  /**
 	 * 
 	 * Removes an OperationsStaff from this Patient's list of operations staffs.
 	 * 
 	 * @param aOperationsStaff the OperationsStaff to remove
 	 * @return true if the OperationsStaff was removed, false otherwise
 	 */
-	public boolean removeOperationsStaff(OperationsStaff aOperationsStaff) {
-		boolean wasRemoved = false;
-		if (!operationsStaffs.contains(aOperationsStaff)) {
-			return wasRemoved;
-		}
+  public boolean removeOperationsStaff(OperationsStaff aOperationsStaff)
+  {
+    boolean wasRemoved = false;
+    if (!operationsStaffs.contains(aOperationsStaff))
+    {
+      return wasRemoved;
+    }
 
-		int oldIndex = operationsStaffs.indexOf(aOperationsStaff);
-		operationsStaffs.remove(oldIndex);
-		if (aOperationsStaff.indexOfPatient(this) == -1) {
-			wasRemoved = true;
-		} else {
-			wasRemoved = aOperationsStaff.removePatient(this);
-			if (!wasRemoved) {
-				operationsStaffs.add(oldIndex, aOperationsStaff);
-			}
-		}
-		return wasRemoved;
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	/**
+    int oldIndex = operationsStaffs.indexOf(aOperationsStaff);
+    operationsStaffs.remove(oldIndex);
+    if (aOperationsStaff.indexOfPatient(this) == -1)
+    {
+      wasRemoved = true;
+    }
+    else
+    {
+      wasRemoved = aOperationsStaff.removePatient(this);
+      if (!wasRemoved)
+      {
+        operationsStaffs.add(oldIndex,aOperationsStaff);
+      }
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  /**
 	 * Adds an OperationsStaff object at the specified index in the list of
 	 * OperationsStaffs.
 	 * 
@@ -377,23 +489,20 @@ public class Patient extends Person {
 	 * @return true if the OperationsStaff object was successfully added at the
 	 *         specified index; false otherwise
 	 */
-	public boolean addOperationsStaffAt(OperationsStaff aOperationsStaff, int index) {
-		boolean wasAdded = false;
-		if (addOperationsStaff(aOperationsStaff)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfOperationsStaffs()) {
-				index = numberOfOperationsStaffs() - 1;
-			}
-			operationsStaffs.remove(aOperationsStaff);
-			operationsStaffs.add(index, aOperationsStaff);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	/**
+  public boolean addOperationsStaffAt(OperationsStaff aOperationsStaff, int index)
+  {  
+    boolean wasAdded = false;
+    if(addOperationsStaff(aOperationsStaff))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfOperationsStaffs()) { index = numberOfOperationsStaffs() - 1; }
+      operationsStaffs.remove(aOperationsStaff);
+      operationsStaffs.add(index, aOperationsStaff);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+  /**
 	 * Adds an OperationsStaff object at the specified index in the list of
 	 * OperationsStaffs or moves it to that index if it is already present in the
 	 * list.
@@ -405,40 +514,40 @@ public class Patient extends Person {
 	 *         the specified index; false otherwise
 	 */
 
-	public boolean addOrMoveOperationsStaffAt(OperationsStaff aOperationsStaff, int index) {
-		boolean wasAdded = false;
-		if (operationsStaffs.contains(aOperationsStaff)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfOperationsStaffs()) {
-				index = numberOfOperationsStaffs() - 1;
-			}
-			operationsStaffs.remove(aOperationsStaff);
-			operationsStaffs.add(index, aOperationsStaff);
-			wasAdded = true;
-		} else {
-			wasAdded = addOperationsStaffAt(aOperationsStaff, index);
-		}
-		return wasAdded;
-	}
-
-	/**
+  public boolean addOrMoveOperationsStaffAt(OperationsStaff aOperationsStaff, int index)
+  {
+    boolean wasAdded = false;
+    if(operationsStaffs.contains(aOperationsStaff))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfOperationsStaffs()) { index = numberOfOperationsStaffs() - 1; }
+      operationsStaffs.remove(aOperationsStaff);
+      operationsStaffs.add(index, aOperationsStaff);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addOperationsStaffAt(aOperationsStaff, index);
+    }
+    return wasAdded;
+  }
+  /**
 	 * Removes this Patient object from the system by removing all references to it
 	 * in the list of OperationsStaff objects that have this Patient object
 	 * associated with them, and then calling the delete method of the superclass.
 	 */
-
-	public void delete() {
-		ArrayList<OperationsStaff> copyOfOperationsStaffs = new ArrayList<OperationsStaff>(operationsStaffs);
-		operationsStaffs.clear();
-		for (OperationsStaff aOperationsStaff : copyOfOperationsStaffs) {
-			aOperationsStaff.removePatient(this);
-		}
-		super.delete();
-	}
-
-	/**
+  public void delete()
+  {
+    patientsById.remove(getId());
+    ArrayList<OperationsStaff> copyOfOperationsStaffs = new ArrayList<OperationsStaff>(operationsStaffs);
+    operationsStaffs.clear();
+    for(OperationsStaff aOperationsStaff : copyOfOperationsStaffs)
+    {
+      aOperationsStaff.removePatient(this);
+    }
+    super.delete();
+  }
+  /**
 	 * Returns a string representation of this Patient object in the following
 	 * format: Patient[id:<id>, age:<age>, accepted:<accepted>, sickness:<sickness>,
 	 * prescriptions:<prescriptions>, allergies:<allergies>,
@@ -447,10 +556,12 @@ public class Patient extends Person {
 	 * @return a string representation of this Patient object
 	 */
 
-	public String toString() {
-		return super.toString() + "[" + "id" + ":" + getId() + "," + "age" + ":" + getAge() + "," + "accepted" + ":"
-				+ getAccepted() + "," + "sickness" + ":" + getSickness() + "," + "prescriptions" + ":"
-				+ getPrescriptions() + "," + "allergies" + ":" + getAllergies() + "," + "specialReqs" + ":"
-				+ getSpecialReqs() + "]";
-	}
+  public String toString()
+  {
+    return super.toString() + "["+
+            "id" + ":" + getId()+ "," +
+            "age" + ":" + getAge()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "accepted" + "=" + (getAccepted() != null ? !getAccepted().equals(this)  ? getAccepted().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "sickness" + "=" + (getSickness() != null ? !getSickness().equals(this)  ? getSickness().toString().replaceAll("  ","    ") : "this" : "null");
+  }
 }

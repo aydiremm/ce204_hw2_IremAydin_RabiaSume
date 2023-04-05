@@ -2,187 +2,234 @@
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
-
 import java.sql.Date;
 import java.util.*;
 
-// line 119 "../../model.ump"
-// line 220 "../../model.ump"
-public class Staff extends Person {
+// line 118 "../organization.ump"
+// line 219 "../organization.ump"
+public class Staff extends Person
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// Staff Attributes
-	private Date joined;
-	private String education;
-	private String certification;
-	private String languages;
+  //Staff Attributes
+  private Date joined;
+  private List<String> education;
+  private List<String> certification;
+  private List<String> languages;
 
-	// Staff Associations
-	private Department department;
+  //Staff Associations
+  private Department department;
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
-	/**
-	 * @brief Constructs a new Staff object.
-	 * 
-	 * @param aTitle         The staff's title.
-	 * @param aGivenName     The staff's given name.
-	 * @param aMiddleName    The staff's middle name.
-	 * @param aFamilyName    The staff's family name.
-	 * @param aBirthDate     The staff's birth date.
-	 * @param aGender        The staff's gender.
-	 * @param aHomeAddress   The staff's home address.
-	 * @param aPhone         The staff's phone number.
-	 * @param aJoined        The date the staff joined the company.
-	 * @param aEducation     The staff's education level.
-	 * @param aCertification The staff's certification.
-	 * @param aLanguages     The staff's language proficiency.
-	 * @param aDepartment    The department that the staff is part of.
-	 * 
-	 * @throw RuntimeException If the department is not set.
-	 */
+  public Staff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined, Department aDepartment)
+  {
+    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
+    joined = aJoined;
+    education = new ArrayList<String>();
+    certification = new ArrayList<String>();
+    languages = new ArrayList<String>();
+    boolean didAddDepartment = setDepartment(aDepartment);
+    if (!didAddDepartment)
+    {
+      throw new RuntimeException("Unable to create staff due to department. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+  }
 
-	public Staff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate,
-			String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification,
-			String aLanguages, Department aDepartment) {
-		super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
-		joined = aJoined;
-		education = aEducation;
-		certification = aCertification;
-		languages = aLanguages;
-		boolean didAddDepartment = setDepartment(aDepartment);
-		if (!didAddDepartment) {
-			throw new RuntimeException(
-					"Unable to create staff due to department. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-		}
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	/**
-	 * @brief Sets the date the staff joined the company.
-	 * 
-	 * @param aJoined The date the staff joined the company.
-	 * @return True if the date was successfully set, false otherwise.
-	 */
+  public boolean setJoined(Date aJoined)
+  {
+    boolean wasSet = false;
+    joined = aJoined;
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template attribute_SetMany */
+  public boolean addEducation(String aEducation)
+  {
+    boolean wasAdded = false;
+    wasAdded = education.add(aEducation);
+    return wasAdded;
+  }
 
-	public boolean setJoined(Date aJoined) {
-		boolean wasSet = false;
-		joined = aJoined;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean removeEducation(String aEducation)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = education.remove(aEducation);
+    return wasRemoved;
+  }
+  /* Code from template attribute_SetMany */
+  public boolean addCertification(String aCertification)
+  {
+    boolean wasAdded = false;
+    wasAdded = certification.add(aCertification);
+    return wasAdded;
+  }
 
-	/**
-	 * @brief Sets the education level of the staff.
-	 * 
-	 * @param aEducation The education level of the staff.
-	 * @return True if the education level was successfully set, false otherwise.
-	 */
+  public boolean removeCertification(String aCertification)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = certification.remove(aCertification);
+    return wasRemoved;
+  }
+  /* Code from template attribute_SetMany */
+  public boolean addLanguage(String aLanguage)
+  {
+    boolean wasAdded = false;
+    wasAdded = languages.add(aLanguage);
+    return wasAdded;
+  }
 
-	public boolean setEducation(String aEducation) {
-		boolean wasSet = false;
-		education = aEducation;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean removeLanguage(String aLanguage)
+  {
+    boolean wasRemoved = false;
+    wasRemoved = languages.remove(aLanguage);
+    return wasRemoved;
+  }
 
-	/**
-	 * @brief Sets the certification of the staff.
-	 * 
-	 * @param aCertification The certification of the staff.
-	 * @return True if the certification was successfully set, false otherwise.
-	 */
+  public Date getJoined()
+  {
+    return joined;
+  }
+  /* Code from template attribute_GetMany */
+  public String getEducation(int index)
+  {
+    String aEducation = education.get(index);
+    return aEducation;
+  }
 
-	public boolean setCertification(String aCertification) {
-		boolean wasSet = false;
-		certification = aCertification;
-		wasSet = true;
-		return wasSet;
-	}
+  public String[] getEducation()
+  {
+    String[] newEducation = education.toArray(new String[education.size()]);
+    return newEducation;
+  }
 
-	/**
-	 * @brief Sets the language proficiency of the staff.
-	 * 
-	 * @param aLanguages The language proficiency of the staff.
-	 * @return True if the language proficiency was successfully set, false
-	 *         otherwise.
-	 */
+  public int numberOfEducation()
+  {
+    int number = education.size();
+    return number;
+  }
 
-	public boolean setLanguages(String aLanguages) {
-		boolean wasSet = false;
-		languages = aLanguages;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean hasEducation()
+  {
+    boolean has = education.size() > 0;
+    return has;
+  }
 
-	public Date getJoined() {
-		return joined;
-	}
+  public int indexOfEducation(String aEducation)
+  {
+    int index = education.indexOf(aEducation);
+    return index;
+  }
+  /* Code from template attribute_GetMany */
+  public String getCertification(int index)
+  {
+    String aCertification = certification.get(index);
+    return aCertification;
+  }
 
-	public String getEducation() {
-		return education;
-	}
+  public String[] getCertification()
+  {
+    String[] newCertification = certification.toArray(new String[certification.size()]);
+    return newCertification;
+  }
 
-	public String getCertification() {
-		return certification;
-	}
+  public int numberOfCertification()
+  {
+    int number = certification.size();
+    return number;
+  }
 
-	public String getLanguages() {
-		return languages;
-	}
+  public boolean hasCertification()
+  {
+    boolean has = certification.size() > 0;
+    return has;
+  }
 
-	/* Code from template association_GetOne */
-	public Department getDepartment() {
-		return department;
-	}
+  public int indexOfCertification(String aCertification)
+  {
+    int index = certification.indexOf(aCertification);
+    return index;
+  }
+  /* Code from template attribute_GetMany */
+  public String getLanguage(int index)
+  {
+    String aLanguage = languages.get(index);
+    return aLanguage;
+  }
 
-	/* Code from template association_SetOneToMany */
-	/**
-	 * @brief Sets the department of this staff member.
-	 *
-	 * @param aDepartment The department of this staff member.
-	 * @return True if the department was successfully set, false otherwise.
-	 */
-	public boolean setDepartment(Department aDepartment) {
-		boolean wasSet = false;
-		if (aDepartment == null) {
-			return wasSet;
-		}
+  public String[] getLanguages()
+  {
+    String[] newLanguages = languages.toArray(new String[languages.size()]);
+    return newLanguages;
+  }
 
-		Department existingDepartment = department;
-		department = aDepartment;
-		if (existingDepartment != null && !existingDepartment.equals(aDepartment)) {
-			existingDepartment.removeStaff(this);
-		}
-		department.addStaff(this);
-		wasSet = true;
-		return wasSet;
-	}
+  public int numberOfLanguages()
+  {
+    int number = languages.size();
+    return number;
+  }
 
-	public void delete() {
-		Department placeholderDepartment = department;
-		this.department = null;
-		if (placeholderDepartment != null) {
-			placeholderDepartment.removeStaff(this);
-		}
-		super.delete();
-	}
+  public boolean hasLanguages()
+  {
+    boolean has = languages.size() > 0;
+    return has;
+  }
 
-	public String toString() {
-		return super.toString() + "[" + "education" + ":" + getEducation() + "," + "certification" + ":"
-				+ getCertification() + "," + "languages" + ":" + getLanguages() + "]"
-				+ System.getProperties().getProperty("line.separator") + "  " + "joined" + "="
-				+ (getJoined() != null
-						? !getJoined().equals(this) ? getJoined().toString().replaceAll("  ", "    ") : "this"
-						: "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "department = "
-				+ (getDepartment() != null ? Integer.toHexString(System.identityHashCode(getDepartment())) : "null");
-	}
+  public int indexOfLanguage(String aLanguage)
+  {
+    int index = languages.indexOf(aLanguage);
+    return index;
+  }
+  /* Code from template association_GetOne */
+  public Department getDepartment()
+  {
+    return department;
+  }
+  /* Code from template association_SetOneToMany */
+  public boolean setDepartment(Department aDepartment)
+  {
+    boolean wasSet = false;
+    if (aDepartment == null)
+    {
+      return wasSet;
+    }
+
+    Department existingDepartment = department;
+    department = aDepartment;
+    if (existingDepartment != null && !existingDepartment.equals(aDepartment))
+    {
+      existingDepartment.removeStaff(this);
+    }
+    department.addStaff(this);
+    wasSet = true;
+    return wasSet;
+  }
+
+  public void delete()
+  {
+    Department placeholderDepartment = department;
+    this.department = null;
+    if(placeholderDepartment != null)
+    {
+      placeholderDepartment.removeStaff(this);
+    }
+    super.delete();
+  }
+
+
+  public String toString()
+  {
+    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "joined" + "=" + (getJoined() != null ? !getJoined().equals(this)  ? getJoined().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "department = "+(getDepartment()!=null?Integer.toHexString(System.identityHashCode(getDepartment())):"null");
+  }
 }
