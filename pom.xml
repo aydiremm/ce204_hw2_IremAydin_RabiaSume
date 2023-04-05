@@ -14,13 +14,49 @@
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		    <plugin>
+		      <groupId>com.github.jeluard</groupId>
+		      <artifactId>plantuml-maven-plugin</artifactId>
+		      <version>1.2</version>
+		      <configuration>
+		        <sourceFiles>
+		          <directory>${basedir}</directory>
+		          <includes>
+		            <include>*.bak</include>
+		          </includes>
+		        </sourceFiles>
+		      </configuration>
+		      <dependencies>
+		        <dependency>
+		          <groupId>net.sourceforge.plantuml</groupId>
+		          <artifactId>plantuml</artifactId>
+		          <version>8059</version>
+		        </dependency>
+		      </dependencies>
+		    </plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
 
