@@ -23,7 +23,13 @@ public class Patient
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  /**
+   * Creates a new patient with the given examination and empty lists of prescriptions,
+   * treatments, doctors, and diagnosis.
+   *
+   * @param aExamination The patient's initial examination.
+   * @throws RuntimeException if unable to add the given examination.
+   */
   public Patient(Examination aExamination)
   {
     prescriptions = new ArrayList<Prescription>();
@@ -64,7 +70,12 @@ public class Patient
     boolean has = prescriptions.size() > 0;
     return has;
   }
-
+  /**
+   * Returns the index of the specified prescription in the list of prescriptions for this patient.
+   *
+   * @param aPrescription the prescription to search for
+   * @return the index of the prescription, or -1 if the prescription is not found
+   */
   public int indexOfPrescription(Prescription aPrescription)
   {
     int index = prescriptions.indexOf(aPrescription);
@@ -94,7 +105,12 @@ public class Patient
     boolean has = treatments.size() > 0;
     return has;
   }
-
+  /**
+   * Returns the index of the specified treatment in the list of treatments for this patient.
+   *
+   * @param aTreatment the treatment to search for
+   * @return the index of the treatment, or -1 if the treatment is not found
+   */
   public int indexOfTreatment(Treatment aTreatment)
   {
     int index = treatments.indexOf(aTreatment);
@@ -171,6 +187,12 @@ public class Patient
     return 0;
   }
   /* Code from template association_AddManyToManyMethod */
+  /**
+   * Adds a prescription to the patient's list of prescriptions.
+   * 
+   * @param aPrescription The prescription to add.
+   * @return True if the prescription was successfully added, false otherwise.
+   */
   public boolean addPrescription(Prescription aPrescription)
   {
     boolean wasAdded = false;
@@ -191,6 +213,12 @@ public class Patient
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
+  /**
+   * Removes a prescription from the patient's list of prescriptions.
+   * 
+   * @param aPrescription The prescription to remove.
+   * @return True if the prescription was successfully removed, false otherwise.
+   */
   public boolean removePrescription(Prescription aPrescription)
   {
     boolean wasRemoved = false;

@@ -22,7 +22,9 @@ public class Prescription
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  /**
+   * Constructs a new Prescription object with empty lists of associated therapies, patients, doctors, and diagnoses.
+   */
   public Prescription()
   {
     therapies = new ArrayList<Therapy>();
@@ -58,7 +60,12 @@ public class Prescription
     boolean has = therapies.size() > 0;
     return has;
   }
-
+  /**
+   * Returns the index of the given therapy in the list of associated therapies.
+   *
+   * @param aTherapy The therapy to search for.
+   * @return The index of the therapy in the list, or -1 if it is not found.
+   */
   public int indexOfTherapy(Therapy aTherapy)
   {
     int index = therapies.indexOf(aTherapy);
@@ -88,7 +95,13 @@ public class Prescription
     boolean has = patients.size() > 0;
     return has;
   }
-
+  
+  /**
+   * Returns the index of the given patient in the list of associated patients.
+   *
+   * @param aPatient The patient to search for.
+   * @return The index of the patient in the list, or -1 if it is not found.
+   */
   public int indexOfPatient(Patient aPatient)
   {
     int index = patients.indexOf(aPatient);

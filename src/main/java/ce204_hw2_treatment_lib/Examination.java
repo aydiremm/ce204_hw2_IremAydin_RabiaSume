@@ -21,7 +21,11 @@ public class Examination
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  /**
+   * Constructor for the Examination class.
+   * 
+   * Initializes the lists of patients, doctors, and diagnoses.
+   */
   public Examination()
   {
     patients = new ArrayList<Patient>();
@@ -33,6 +37,13 @@ public class Examination
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
+  /**
+   * Returns the patient at the specified index.
+   * 
+   * @param index The index of the patient to retrieve.
+   * @return The patient at the specified index.
+   * @throws IndexOutOfBoundsException If the index is out of range.
+   */
   public Patient getPatient(int index)
   {
     Patient aPatient = patients.get(index);
@@ -132,6 +143,12 @@ public class Examination
   {
     return new Patient(this);
   }
+  /**
+   * Adds a patient to the examination.
+   * 
+   * @param aPatient The patient to add.
+   * @return True if the patient was successfully added, false otherwise.
+   */
 
   public boolean addPatient(Patient aPatient)
   {
@@ -163,6 +180,13 @@ public class Examination
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
+  /**
+   * Adds a patient to the examination at the specified index.
+   * 
+   * @param aPatient The patient to add.
+   * @param index The index at which to add the patient.
+   * @return True if the patient was successfully added, false otherwise.
+   */
   public boolean addPatientAt(Patient aPatient, int index)
   {  
     boolean wasAdded = false;
@@ -176,6 +200,14 @@ public class Examination
     }
     return wasAdded;
   }
+  /**
+   * Adds or moves a patient to the examination at the specified index.
+   * If the patient is already in the examination, it is moved to the specified index.
+   * 
+   * @param aPatient The patient to add or move.
+   * @param index The index at which to add or move the patient.
+   * @return True if the patient was successfully added or moved, false otherwise.
+   */
 
   public boolean addOrMovePatientAt(Patient aPatient, int index)
   {

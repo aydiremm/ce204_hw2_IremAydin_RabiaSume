@@ -19,7 +19,12 @@ public class Therapy extends Treatment
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  /**
+   * Constructs a new Therapy object with the specified prescription.
+   *
+   * @param aPrescription The prescription associated with this therapy.
+   * @throws RuntimeException if the prescription is not set successfully.
+   */
   public Therapy(Prescription aPrescription)
   {
     super();
@@ -39,6 +44,12 @@ public class Therapy extends Treatment
     return prescription;
   }
   /* Code from template association_SetOneToMany */
+  /**
+   * Sets the prescription associated with this therapy.
+   *
+   * @param aPrescription The prescription to associate with this therapy.
+   * @return true if the prescription is set successfully, false otherwise.
+   */
   public boolean setPrescription(Prescription aPrescription)
   {
     boolean wasSet = false;

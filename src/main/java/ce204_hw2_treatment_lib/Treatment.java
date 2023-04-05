@@ -33,6 +33,12 @@ public class Treatment
   // INTERFACE
   //------------------------
   /* Code from template association_GetMany */
+  /**
+   * Returns the patient at the specified index.
+   *
+   * @param index The index of the patient to retrieve.
+   * @return The patient at the specified index.
+   */
   public Patient getPatient(int index)
   {
     Patient aPatient = patients.get(index);
@@ -56,13 +62,24 @@ public class Treatment
     boolean has = patients.size() > 0;
     return has;
   }
-
+  /**
+   * Returns the index of the specified patient.
+   *
+   * @param aPatient The patient to search for.
+   * @return The index of the specified patient, or -1 if the patient is not found.
+   */
   public int indexOfPatient(Patient aPatient)
   {
     int index = patients.indexOf(aPatient);
     return index;
   }
   /* Code from template association_GetMany */
+  /**
+   * Returns the doctor at the specified index.
+   *
+   * @param index The index of the doctor to retrieve.
+   * @return The doctor at the specified index.
+   */
   public Doctor getDoctor(int index)
   {
     Doctor aDoctor = doctors.get(index);
@@ -86,6 +103,12 @@ public class Treatment
     boolean has = doctors.size() > 0;
     return has;
   }
+  /**
+   * Returns the index of the specified doctor.
+   *
+   * @param aDoctor The doctor to search for.
+   * @return The index of the specified doctor, or -1 if the doctor is not found.
+   */
 
   public int indexOfDoctor(Doctor aDoctor)
   {
@@ -93,6 +116,12 @@ public class Treatment
     return index;
   }
   /* Code from template association_GetMany */
+  /**
+   * Returns the diagnosis at the specified index.
+   *
+   * @param index The index of the diagnosis to retrieve.
+   * @return The diagnosis at the specified index.
+   */
   public Diagnosis getDiagnosi(int index)
   {
     Diagnosis aDiagnosi = diagnosis.get(index);
@@ -116,7 +145,12 @@ public class Treatment
     boolean has = diagnosis.size() > 0;
     return has;
   }
-
+  /**
+   * Returns the index of the specified diagnosis.
+   *
+   * @param aDiagnosi The diagnosis to search for.
+   * @return The index of the specified diagnosis, or -1 if the diagnosis is not found.
+   */
   public int indexOfDiagnosi(Diagnosis aDiagnosi)
   {
     int index = diagnosis.indexOf(aDiagnosi);
@@ -173,6 +207,13 @@ public class Treatment
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
+  /**
+   * Adds the specified patient at the specified index in the patient list.
+   *
+   * @param aPatient The patient to add.
+   * @param index The index at which to add the patient.
+   * @return true if the patient was added successfully, false otherwise.
+   */
   public boolean addPatientAt(Patient aPatient, int index)
   {  
     boolean wasAdded = false;
@@ -186,7 +227,13 @@ public class Treatment
     }
     return wasAdded;
   }
-
+  /**
+   * Adds the specified patient at the specified index in the patient list, or moves the patient to the specified index if it already exists in the list.
+   *
+   * @param aPatient The patient to add or move.
+   * @param index The index at which to add or move the patient.
+   * @return true if the patient was added or moved successfully, false otherwise.
+   */
   public boolean addOrMovePatientAt(Patient aPatient, int index)
   {
     boolean wasAdded = false;
