@@ -1,0 +1,312 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test organization {
+
+generate JUnit;
+
+depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+
+GIVEN:
+organization.ump;
+THEN:
+ 
+  /*-------------------------*/
+  /*  Association Test       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Address       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Phone       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class History       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Person       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Hospital       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [1,1] Department /////// 
+              
+              test createHospitalWithoutDepartment {              
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+              
+              assertTrue (aHospital.numberOfDepartments()== 0);
+              }
+              
+              
+              
+              test replaceMandatoryOneHospitalInDepartment { 
+              
+                                          
+              Hospital baHospital("RandomString1","unidentified","unidentified");
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department aDepartment(aHospital); 
+              Department baDepartment(aHospital);
+              
+              aDepartment.setHospital(baHospital);
+              assertEqual (aDepartment.getHospital() , baHospital);              
+              assertEqual(baDepartment.getHospital() , aHospital );
+                            
+              }
+              
+              
+              
+              test removeDepartmentInHospital {
+              
+              
+              Hospital baHospital("RandomString1","unidentified","unidentified");
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department aDepartment(aHospital);
+              aHospital.addDepartment(aDepartment);
+              
+              aDepartment.delete(); 
+              assertTrue (aHospital.numberOfDepartments() == 0);
+              }
+              
+              
+              
+              
+              test AddDepartmentToNewHospital { 
+              
+              
+              Hospital baHospital("RandomString1","unidentified","unidentified");
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department aDepartment(aHospital);
+              Department baDepartment(aHospital);
+              
+
+              aHospital.addDepartment(aDepartment);
+              aHospital.addDepartment(baDepartment);  
+        
+              assertEqual( aHospital.getDepartment(1),baDepartment); 
+              assertEqual ( baDepartment.getHospital(), aHospital);
+              assertEqual ( aHospital.numberOfDepartments(),  2);
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class Patient       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Department       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [1,1] Staff /////// 
+              
+              test createDepartmentWithoutStaff {              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department aDepartment(aHospital);
+              
+              assertTrue (aDepartment.numberOfStaffs()== 0);
+              }
+              
+              
+              
+              test replaceMandatoryOneDepartmentInStaff { 
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+                            
+              Department baDepartment(aHospital);
+              
+              Department aDepartment(aHospital);
+
+              Staff aStaff("Date.valueOf("1999-12-12")",aDepartment); 
+              Staff baStaff("Date.valueOf("1999-12-12")",aDepartment);
+              
+              aStaff.setDepartment(baDepartment);
+              assertEqual (aStaff.getDepartment() , baDepartment);              
+              assertEqual(baStaff.getDepartment() , aDepartment );
+                            
+              }
+              
+              
+              
+              test removeStaffInDepartment {
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department baDepartment(aHospital);
+              Department aDepartment(aHospital);
+
+              Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+              aDepartment.addStaff(aStaff);
+              
+              aStaff.delete(); 
+              assertTrue (aDepartment.numberOfStaffs() == 0);
+              }
+              
+              
+              
+              
+              test AddStaffToNewDepartment { 
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department baDepartment(aHospital);
+              
+              Department aDepartment(aHospital);
+
+              Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+              Staff baStaff("Date.valueOf("1999-12-12")",aDepartment);
+              
+
+              aDepartment.addStaff(aStaff);
+              aDepartment.addStaff(baStaff);  
+        
+              assertEqual( aDepartment.getStaff(1),baStaff); 
+              assertEqual ( baStaff.getDepartment(), aDepartment);
+              assertEqual ( aDepartment.numberOfStaffs(),  2);
+              }
+              
+              
+              
+
+              
+              /////// Association: -- [0,*] Hospital /////// 
+              
+              test createDepartmentWithHospital {              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department aDepartment(aHospital);
+              
+              assertTrue (aDepartment.getHospital() == aHospital);
+              }
+              
+              
+              
+              test replaceManyHospitalInOneDepartment{ 
+              
+              
+              Hospital baHospital("RandomString1","unidentified","unidentified");
+              
+              
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+                            
+              Department aDepartment(aHospital);
+              
+                            
+              //Hospital baHospital("RandomString1","unidentified","unidentified");
+              
+              aDepartment.setHospital(baHospital);
+              
+              assertEqual ( aDepartment.getHospital(),baHospital);              
+              
+                            
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class OperationsStaff       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class AdministrativeStaff       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Doctor       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Nurse       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Surgeon       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class FrontDeskStaff       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Receptionist       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class TechnicalStaff       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Technician       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Technologist       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Staff       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [0,*] Department /////// 
+              
+              test createStaffWithDepartment {              
+              Department aDepartment(aHospital);
+
+              Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+              
+              assertTrue (aStaff.getDepartment() == aDepartment);
+              }
+              
+              
+              
+              test replaceManyDepartmentInOneStaff{ 
+              
+              Hospital aHospital("RandomString1","unidentified","unidentified");
+
+              Department baDepartment(aHospital);
+              
+              
+              
+              Department aDepartment(aHospital);
+                            
+              Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+              
+                            
+              //Department baDepartment(aHospital);
+              
+              aStaff.setDepartment(baDepartment);
+              
+              assertEqual ( aStaff.getDepartment(),baDepartment);              
+              
+                            
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class SurgicalTechnologist       */
+  /*-------------------------*/
+
+ 
+ 
+
+ }

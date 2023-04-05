@@ -1,0 +1,79 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Phone {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :phoneNumber
+
+      test attribute_phoneNumber {
+    
+      
+        Phone aPhone("RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aPhone.setPhoneNumber("RandomString1"));
+    assertTrue( aPhone.getPhoneNumber() =="RandomString1");
+    assertTrue( aPhone.setPhoneNumber("RandomString2"));
+    assertTrue( aPhone.getPhoneNumber()=="RandomString2");
+    assertFalse( aPhone.getPhoneNumber() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :phoneHolderName
+
+      test attribute_phoneHolderName {
+    
+      
+        Phone aPhone("RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aPhone.setPhoneHolderName("RandomString1"));
+    assertTrue( aPhone.getPhoneHolderName() =="RandomString1");
+    assertTrue( aPhone.setPhoneHolderName("RandomString2"));
+    assertTrue( aPhone.getPhoneHolderName()=="RandomString2");
+    assertFalse( aPhone.getPhoneHolderName() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :relation
+
+      test attribute_relation {
+    
+      
+        Phone aPhone("RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aPhone.setRelation("RandomString1"));
+    assertTrue( aPhone.getRelation() =="RandomString1");
+    assertTrue( aPhone.setRelation("RandomString2"));
+    assertTrue( aPhone.getRelation()=="RandomString2");
+    assertFalse( aPhone.getRelation() =="RandomString1");
+             
+          
+        	}
+
+
+  
+ 
+   
+
+}

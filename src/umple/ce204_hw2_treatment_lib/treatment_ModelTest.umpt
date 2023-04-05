@@ -1,0 +1,367 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  treatment ----/////
+
+test treatment {
+
+generate JUnit;
+
+depend  Patient,Doctor,Examination,Diagnosis,Prescription,Treatment,Surgery,Therapy ; 
+
+
+
+
+GIVEN:
+treatment.ump;
+THEN:
+ 
+  /*-------------------------*/
+  /*  Association Test       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Patient       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [0,*] Examination /////// 
+              
+              test createPatientWithExamination {              
+              Examination aExamination();
+
+              Patient aPatient(aExamination);
+              
+              assertTrue (aPatient.getExamination() == aExamination);
+              }
+              
+              
+              
+              test replaceManyExaminationInOnePatient{ 
+              
+              
+              Examination baExamination();
+              
+              
+              
+              Examination aExamination();
+                            
+              Patient aPatient(aExamination);
+              
+                            
+              //Examination baExamination();
+              
+              aPatient.setExamination(baExamination);
+              
+              assertEqual ( aPatient.getExamination(),baExamination);              
+              
+                            
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class Doctor       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [0,*] Examination /////// 
+              
+              test createDoctorWithExamination {              
+              Examination aExamination();
+
+              Doctor aDoctor(aExamination);
+              
+              assertTrue (aDoctor.getExamination() == aExamination);
+              }
+              
+              
+              
+              test replaceManyExaminationInOneDoctor{ 
+              
+              
+              Examination baExamination();
+              
+              
+              
+              Examination aExamination();
+                            
+              Doctor aDoctor(aExamination);
+              
+                            
+              //Examination baExamination();
+              
+              aDoctor.setExamination(baExamination);
+              
+              assertEqual ( aDoctor.getExamination(),baExamination);              
+              
+                            
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class Examination       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [1,1] Patient /////// 
+              
+              test createExaminationWithoutPatient {              
+              
+              Examination aExamination();
+              
+              assertTrue (aExamination.numberOfPatients()== 0);
+              }
+              
+              
+              
+              test replaceMandatoryOneExaminationInPatient { 
+              
+                                          
+              Examination baExamination();
+              
+              Examination aExamination();
+
+              Patient aPatient(aExamination); 
+              Patient baPatient(aExamination);
+              
+              aPatient.setExamination(baExamination);
+              assertEqual (aPatient.getExamination() , baExamination);              
+              assertEqual(baPatient.getExamination() , aExamination );
+                            
+              }
+              
+              
+              
+              test removePatientInExamination {
+              
+              
+              Examination baExamination();
+              Examination aExamination();
+
+              Patient aPatient(aExamination);
+              aExamination.addPatient(aPatient);
+              
+              aPatient.delete(); 
+              assertTrue (aExamination.numberOfPatients() == 0);
+              }
+              
+              
+              
+              
+              test AddPatientToNewExamination { 
+              
+              
+              Examination baExamination();
+              
+              Examination aExamination();
+
+              Patient aPatient(aExamination);
+              Patient baPatient(aExamination);
+              
+
+              aExamination.addPatient(aPatient);
+              aExamination.addPatient(baPatient);  
+        
+              assertEqual( aExamination.getPatient(1),baPatient); 
+              assertEqual ( baPatient.getExamination(), aExamination);
+              assertEqual ( aExamination.numberOfPatients(),  2);
+              }
+              
+              
+              
+
+              
+              /////// Association: -- [1,1] Doctor /////// 
+              
+              test createExaminationWithoutDoctor {              
+              
+              Examination aExamination();
+              
+              assertTrue (aExamination.numberOfDoctors()== 0);
+              }
+              
+              
+              
+              test replaceMandatoryOneExaminationInDoctor { 
+              
+                                          
+              Examination baExamination();
+              
+              Examination aExamination();
+
+              Doctor aDoctor(aExamination); 
+              Doctor baDoctor(aExamination);
+              
+              aDoctor.setExamination(baExamination);
+              assertEqual (aDoctor.getExamination() , baExamination);              
+              assertEqual(baDoctor.getExamination() , aExamination );
+                            
+              }
+              
+              
+              
+              test removeDoctorInExamination {
+              
+              
+              Examination baExamination();
+              Examination aExamination();
+
+              Doctor aDoctor(aExamination);
+              aExamination.addDoctor(aDoctor);
+              
+              aDoctor.delete(); 
+              assertTrue (aExamination.numberOfDoctors() == 0);
+              }
+              
+              
+              
+              
+              test AddDoctorToNewExamination { 
+              
+              
+              Examination baExamination();
+              
+              Examination aExamination();
+
+              Doctor aDoctor(aExamination);
+              Doctor baDoctor(aExamination);
+              
+
+              aExamination.addDoctor(aDoctor);
+              aExamination.addDoctor(baDoctor);  
+        
+              assertEqual( aExamination.getDoctor(1),baDoctor); 
+              assertEqual ( baDoctor.getExamination(), aExamination);
+              assertEqual ( aExamination.numberOfDoctors(),  2);
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class Diagnosis       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Prescription       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [1,1] Therapy /////// 
+              
+              test createPrescriptionWithoutTherapy {              
+              
+              Prescription aPrescription();
+              
+              assertTrue (aPrescription.numberOfTherapys()== 0);
+              }
+              
+              
+              
+              test replaceMandatoryOnePrescriptionInTherapy { 
+              
+                                          
+              Prescription baPrescription();
+              
+              Prescription aPrescription();
+
+              Therapy aTherapy(aPrescription); 
+              Therapy baTherapy(aPrescription);
+              
+              aTherapy.setPrescription(baPrescription);
+              assertEqual (aTherapy.getPrescription() , baPrescription);              
+              assertEqual(baTherapy.getPrescription() , aPrescription );
+                            
+              }
+              
+              
+              
+              test removeTherapyInPrescription {
+              
+              
+              Prescription baPrescription();
+              Prescription aPrescription();
+
+              Therapy aTherapy(aPrescription);
+              aPrescription.addTherapy(aTherapy);
+              
+              aTherapy.delete(); 
+              assertTrue (aPrescription.numberOfTherapys() == 0);
+              }
+              
+              
+              
+              
+              test AddTherapyToNewPrescription { 
+              
+              
+              Prescription baPrescription();
+              
+              Prescription aPrescription();
+
+              Therapy aTherapy(aPrescription);
+              Therapy baTherapy(aPrescription);
+              
+
+              aPrescription.addTherapy(aTherapy);
+              aPrescription.addTherapy(baTherapy);  
+        
+              assertEqual( aPrescription.getTherapy(1),baTherapy); 
+              assertEqual ( baTherapy.getPrescription(), aPrescription);
+              assertEqual ( aPrescription.numberOfTherapys(),  2);
+              }
+              
+              
+              
+  /*-------------------------*/
+  /*  Class Treatment       */
+  /*-------------------------*/
+  /*-------------------------*/
+  /*  Class Surgery       */
+  /*-------------------------*/
+
+  /*-------------------------*/
+  /*  Class Therapy       */
+  /*-------------------------*/
+
+              
+              /////// Association: -- [0,*] Prescription /////// 
+              
+              test createTherapyWithPrescription {              
+              Prescription aPrescription();
+
+              Therapy aTherapy(aPrescription);
+              
+              assertTrue (aTherapy.getPrescription() == aPrescription);
+              }
+              
+              
+              
+              test replaceManyPrescriptionInOneTherapy{ 
+              
+              
+              Prescription baPrescription();
+              
+              
+              
+              Prescription aPrescription();
+                            
+              Therapy aTherapy(aPrescription);
+              
+                            
+              //Prescription baPrescription();
+              
+              aTherapy.setPrescription(baPrescription);
+              
+              assertEqual ( aTherapy.getPrescription(),baPrescription);              
+              
+                            
+              }
+              
+              
+              
+ 
+ 
+
+ }

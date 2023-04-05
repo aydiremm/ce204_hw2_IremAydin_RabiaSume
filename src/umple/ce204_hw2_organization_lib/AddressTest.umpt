@@ -1,0 +1,96 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Address {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :street
+
+      test attribute_street {
+    
+      
+        Address aAddress("RandomString1","RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aAddress.setStreet("RandomString1"));
+    assertTrue( aAddress.getStreet() =="RandomString1");
+    assertTrue( aAddress.setStreet("RandomString2"));
+    assertTrue( aAddress.getStreet()=="RandomString2");
+    assertFalse( aAddress.getStreet() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :city
+
+      test attribute_city {
+    
+      
+        Address aAddress("RandomString1","RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aAddress.setCity("RandomString1"));
+    assertTrue( aAddress.getCity() =="RandomString1");
+    assertTrue( aAddress.setCity("RandomString2"));
+    assertTrue( aAddress.getCity()=="RandomString2");
+    assertFalse( aAddress.getCity() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :postalCode
+
+      test attribute_postalCode {
+    
+      
+        Address aAddress("RandomString1","RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aAddress.setPostalCode("RandomString1"));
+    assertTrue( aAddress.getPostalCode() =="RandomString1");
+    assertTrue( aAddress.setPostalCode("RandomString2"));
+    assertTrue( aAddress.getPostalCode()=="RandomString2");
+    assertFalse( aAddress.getPostalCode() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :country
+
+      test attribute_country {
+    
+      
+        Address aAddress("RandomString1","RandomString1","RandomString1","RandomString1");
+        
+        
+    assertTrue( aAddress.setCountry("RandomString1"));
+    assertTrue( aAddress.getCountry() =="RandomString1");
+    assertTrue( aAddress.setCountry("RandomString2"));
+    assertTrue( aAddress.getCountry()=="RandomString2");
+    assertFalse( aAddress.getCountry() =="RandomString1");
+             
+          
+        	}
+
+
+  
+ 
+   
+
+}

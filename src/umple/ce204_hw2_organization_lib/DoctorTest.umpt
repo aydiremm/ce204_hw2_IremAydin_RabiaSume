@@ -1,0 +1,62 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Doctor {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :specialty
+
+      test attribute_specialty {
+    
+      
+        Doctor aDoctor();
+        
+        
+    assertTrue( aDoctor.setSpecialty("RandomString1"));
+    assertTrue( aDoctor.getSpecialty() =="RandomString1");
+    assertTrue( aDoctor.setSpecialty("RandomString2"));
+    assertTrue( aDoctor.getSpecialty()=="RandomString2");
+    assertFalse( aDoctor.getSpecialty() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :locations
+
+      test attribute_locations {
+    
+      
+        Doctor aDoctor();
+        
+        
+    assertTrue( aDoctor.setLocations("RandomString1"));
+    assertTrue( aDoctor.getLocations() =="RandomString1");
+    assertTrue( aDoctor.setLocations("RandomString2"));
+    assertTrue( aDoctor.getLocations()=="RandomString2");
+    assertFalse( aDoctor.getLocations() =="RandomString1");
+             
+          
+        	}
+
+
+  
+ 
+   
+
+}

@@ -1,0 +1,29 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Technician {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+ 
+
+  
+ 
+   
+
+}

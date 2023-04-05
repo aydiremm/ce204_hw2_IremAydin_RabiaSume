@@ -1,0 +1,98 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Staff {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :joined
+
+      test attribute_joined {
+    
+      Department aDepartment(aHospital);
+
+        Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);    
+      Date aDate = Date.valueOf("1999-12-12");
+      assertTrue( aStaff.setJoined(aDate));
+      
+      assertEqual( aStaff.getJoined() , aDate);
+      
+          
+          
+        	}
+
+ //tests for :education
+
+      test attribute_education {
+    
+      Department aDepartment(aHospital);
+
+        Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+        
+        
+    assertTrue( aStaff.setEducation("RandomString1"));
+    assertTrue( aStaff.getEducation() =="RandomString1");
+    assertTrue( aStaff.setEducation("RandomString2"));
+    assertTrue( aStaff.getEducation()=="RandomString2");
+    assertFalse( aStaff.getEducation() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :certification
+
+      test attribute_certification {
+    
+      Department aDepartment(aHospital);
+
+        Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+        
+        
+    assertTrue( aStaff.setCertification("RandomString1"));
+    assertTrue( aStaff.getCertification() =="RandomString1");
+    assertTrue( aStaff.setCertification("RandomString2"));
+    assertTrue( aStaff.getCertification()=="RandomString2");
+    assertFalse( aStaff.getCertification() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :languages
+
+      test attribute_languages {
+    
+      Department aDepartment(aHospital);
+
+        Staff aStaff("Date.valueOf("1999-12-12")",aDepartment);
+        
+        
+    assertTrue( aStaff.setLanguages("RandomString1"));
+    assertTrue( aStaff.getLanguages() =="RandomString1");
+    assertTrue( aStaff.setLanguages("RandomString2"));
+    assertTrue( aStaff.getLanguages()=="RandomString2");
+    assertFalse( aStaff.getLanguages() =="RandomString1");
+             
+          
+        	}
+
+
+  
+ 
+   
+
+}

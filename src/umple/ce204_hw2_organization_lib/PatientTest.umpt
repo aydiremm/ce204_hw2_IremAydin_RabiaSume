@@ -1,0 +1,134 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Patient {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :id
+
+      test attribute_id {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");
+        
+        
+    assertTrue( aPatient.set›d("RandomString1"));
+    assertTrue( aPatient.get›d() =="RandomString1");
+    assertTrue( aPatient.set›d("RandomString2"));
+    assertTrue( aPatient.get›d()=="RandomString2");
+    assertFalse( aPatient.get›d() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :age
+
+      test attribute_age {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");        
+            
+      assertTrue( aPatient.setAge(123));
+      assertTrue( aPatient.getAge() == 123);
+      assertTrue( aPatient.setAge(321));
+      assertTrue( aPatient.getAge() == 321);
+      assertFalse( aPatient.getAge() == 123);
+          
+          
+        	}
+
+ //tests for :accepted
+
+      test attribute_accepted {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");    
+      Date aDate = Date.valueOf("1999-12-12");
+      assertTrue( aPatient.setAccepted(aDate));
+      
+      assertEqual( aPatient.getAccepted() , aDate);
+      
+          
+          
+        	}
+
+ //tests for :sickness
+
+      test attribute_sickness {
+    
+          
+        	}
+
+ //tests for :prescriptions
+
+      test attribute_prescriptions {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");
+        
+        
+    assertTrue( aPatient.setPrescriptions("RandomString1"));
+    assertTrue( aPatient.getPrescriptions() =="RandomString1");
+    assertTrue( aPatient.setPrescriptions("RandomString2"));
+    assertTrue( aPatient.getPrescriptions()=="RandomString2");
+    assertFalse( aPatient.getPrescriptions() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :allergies
+
+      test attribute_allergies {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");
+        
+        
+    assertTrue( aPatient.setAllergies("RandomString1"));
+    assertTrue( aPatient.getAllergies() =="RandomString1");
+    assertTrue( aPatient.setAllergies("RandomString2"));
+    assertTrue( aPatient.getAllergies()=="RandomString2");
+    assertFalse( aPatient.getAllergies() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :specialReqs
+
+      test attribute_specialReqs {
+    
+      
+        Patient aPatient("RandomString1","RandomString1","unidentified","Date.valueOf("1999-12-12")",123,"Date.valueOf("1999-12-12")","unidentified");
+        
+        
+    assertTrue( aPatient.setSpecialReqs("RandomString1"));
+    assertTrue( aPatient.getSpecialReqs() =="RandomString1");
+    assertTrue( aPatient.setSpecialReqs("RandomString2"));
+    assertTrue( aPatient.getSpecialReqs()=="RandomString2");
+    assertFalse( aPatient.getSpecialReqs() =="RandomString1");
+             
+          
+        	}
+
+
+  
+ 
+   
+
+}

@@ -1,0 +1,149 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+
+
+
+////---- Tests for  organization ----/////
+
+test Person {
+
+ generate JUnit ;
+ 
+ depend  Address,Phone,History,Person,Hospital,Patient,Department,OperationsStaff,AdministrativeStaff,Doctor,Nurse,Surgeon,FrontDeskStaff,Receptionist,TechnicalStaff,Technician,Technologist,Staff,SurgicalTechnologist ; 
+
+
+
+ 
+ GIVEN:
+ organization.ump;
+ 
+ 
+ 
+ THEN:
+  //tests for :title
+
+      test attribute_title {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");
+        
+        
+    assertTrue( aPerson.setTitle("RandomString1"));
+    assertTrue( aPerson.getTitle() =="RandomString1");
+    assertTrue( aPerson.setTitle("RandomString2"));
+    assertTrue( aPerson.getTitle()=="RandomString2");
+    assertFalse( aPerson.getTitle() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :givenName
+
+      test attribute_givenName {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");
+        
+        
+    assertTrue( aPerson.setGivenName("RandomString1"));
+    assertTrue( aPerson.getGivenName() =="RandomString1");
+    assertTrue( aPerson.setGivenName("RandomString2"));
+    assertTrue( aPerson.getGivenName()=="RandomString2");
+    assertFalse( aPerson.getGivenName() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :middleName
+
+      test attribute_middleName {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");
+        
+        
+    assertTrue( aPerson.setMiddleName("RandomString1"));
+    assertTrue( aPerson.getMiddleName() =="RandomString1");
+    assertTrue( aPerson.setMiddleName("RandomString2"));
+    assertTrue( aPerson.getMiddleName()=="RandomString2");
+    assertFalse( aPerson.getMiddleName() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :familyName
+
+      test attribute_familyName {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");
+        
+        
+    assertTrue( aPerson.setFamilyName("RandomString1"));
+    assertTrue( aPerson.getFamilyName() =="RandomString1");
+    assertTrue( aPerson.setFamilyName("RandomString2"));
+    assertTrue( aPerson.getFamilyName()=="RandomString2");
+    assertFalse( aPerson.getFamilyName() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :name
+
+      test attribute_name {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");
+        
+        
+    assertTrue( aPerson.setName("RandomString1"));
+    assertTrue( aPerson.getName() =="RandomString1");
+    assertTrue( aPerson.setName("RandomString2"));
+    assertTrue( aPerson.getName()=="RandomString2");
+    assertFalse( aPerson.getName() =="RandomString1");
+             
+          
+        	}
+
+ //tests for :birthDate
+
+      test attribute_birthDate {
+    
+      
+        Person aPerson("RandomString1","RandomString1","RandomString1","RandomString1","RandomString1","Date.valueOf("1999-12-12")","unidentified","unidentified","unidentified");    
+      Date aDate = Date.valueOf("1999-12-12");
+      assertTrue( aPerson.setBirthDate(aDate));
+      
+      assertEqual( aPerson.getBirthDate() , aDate);
+      
+          
+          
+        	}
+
+ //tests for :gender
+
+      test attribute_gender {
+    
+          
+        	}
+
+ //tests for :homeAddress
+
+      test attribute_homeAddress {
+    
+          
+        	}
+
+ //tests for :phone
+
+      test attribute_phone {
+    
+          
+        	}
+
+
+  
+ 
+   
+
+}
