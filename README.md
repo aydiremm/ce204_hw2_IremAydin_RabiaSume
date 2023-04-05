@@ -1,5 +1,20 @@
-https://cruise.umple.org/umpleonline/umple.php?model=23040330y9xcn66fe3![Screenshot 2023-04-05 231836](https://user-images.githubusercontent.com/93473372/230202498-92f6b7c5-86c0-4cda-a89e-19f3940a8154.png)
+[Click Here to See Diagrams On UmpleOnline Editor](https://cruise.umple.org/umpleonline/umple.php?model=23040330y9xcn66fe3)
+
+[Click Here to Navigate The Page About Diagram Files](https://github.com/aydiremm/ce204_hw2_IremAydin_RabiaSume/tree/main/src/umple)
+
+(https://cruise.umple.org/umpleonline/umple.php?model=23040330y9xcn66fe3)
+
+<br>
+<br>
+
+
+![Screenshot 2023-04-05 231836](https://user-images.githubusercontent.com/93473372/230202498-92f6b7c5-86c0-4cda-a89e-19f3940a8154.png)
+
+
 ![warrdsandteams](https://user-images.githubusercontent.com/93473372/230202505-130ae13e-3501-4a9b-8ee2-abd947c667a3.png)
+
+
 ![organization](https://user-images.githubusercontent.com/93473372/230202512-73964924-7cb0-4b89-851e-9e1bd04be49b.png)
+
+
 ![treatment](https://user-images.githubusercontent.com/93473372/230202697-14b5ded6-788d-4429-b927-e7da5bb397f1.png)
-http://try.umple.org/?text=namespace%20ce204_hw2_wards_and_teams_lib%3B%0A%0A%0Aclass%20History%20%7B%0A%0A%7D%0A%0Aclass%20Address%20%7B%20%20%0A%20%20street%3B%20%20%0A%20%20city%3B%20%20%0A%20%20postalCode%3B%20%20%0A%20%20country%3B%20%20%0A%7D%0A%0Aclass%20Phone%20%7B%0A%20%20phoneNumber%3B%0A%20%20phoneHolderName%3B%0A%20%20relation%3B%0A%7D%0Aclass%20Hospital%0A%7B%0A%20%20unique%20name%3B%0A%20%20Address%20address%3B%0A%20%20Phone%20phone%3B%0A%20%201%20%3C%40%3E-%20*%20Ward%3B%0A%20%201%20%3C%40%3E-%201..*%20Team%3B%0A%7D%0A%0Aclass%20Team%0A%7B%0A%20%20unique%20name%3B%0A%7D%0A%0Aclass%20Ward%0A%7B%0A%20%20unique%20id%3B%0A%20%20Gender%20patientsGender%3B%0A%20%20Integer%20capacity%3B%0A%20%20%2F%2F%5Bpatient.upper%20%3C%3D%20capacity%5D%0A%7D%0A%0Aclass%20Patient%0A%7B%0A%20%20%0Aenum%20Gender%20%0A%7B%0A%20%20male%2C%0A%20%20female%0A%7D%0A%20%20unique%20id%3B%0A%20%20Gender%20gender%3B%0A%20%20Date%20birthDate%3B%0A%20%20Integer%20age%20%3D%20Java%20%7B%20new%20Date(System.currentTimeMillis()).getYear()%20-%20birthDate.getYear()%20%7D%3B%0A%20%20Date%20accepted%3B%0A%20%20History%20sickness%3B%0A%20%20String%5B%5D%20prescriptions%3B%0A%20%20String%5B%5D%20allergies%3B%0A%20%20String%5B%5D%20specialReqs%3B%0A%20%20*%20--%201%20Team%3B%0A%7D%0Aassociation%20%7B%20%20%0A%20%201%20Ward%20ward%20--%20*%20Patient%20patient%3B%20%20%0A%7D%20%20%0A%0Aclass%20Doctor%0A%7B%0A%20%20String%5B%5D%20specialty%3B%0A%20%20String%5B%5D%20locations%3B%0A%20%20*%20--%20*%20Patient%20treats%3B%0A%20%200..*%20-%3C%40%3E%200..1%20Team%3B%0A%7D%0A%0Aclass%20JuniourDoctor%0A%7B%0A%20%20isA%20Doctor%3B%0A%7D%0A%0Aclass%20ConsultantDoctor%0A%7B%0A%20%20isA%20Doctor%3B%0A%20%201%20--%200..1%20Team%20team_leader%3B%0A%20%201%20--%20*%20Patient%20ultimate_responsibility%3B%0A%7D%0A%0A%2F%2F%24%3F%5BEnd_of_model%5D%24%3F%0A%0Anamespace%20-%3B%0A%0A%0Aclass%20Address%0A%7B%0A%20%20position%20925%20381%20149.469%20109.359%3B%0A%7D%0A%0Aclass%20Phone%0A%7B%0A%20%20position%20923%20232%20199.359%2092.3594%3B%0A%7D%0A%0Aclass%20Hospital%0A%7B%0A%20%20position%20222%2013%20140.5%2092.3594%3B%0A%20%20position.association%20Hospital__Ward%2017%2C92%2030%2C0%3B%0A%20%20position.association%20Hospital__Team%2026%2C92%2030%2C0%3B%0A%7D%0A%0Aclass%20Team%0A%7B%0A%20%20position%20128%20192%20112.922%2058.3594%3B%0A%7D%0A%0Aclass%20Ward%0A%7B%0A%20%20position%20568%20159%20186.203%2092.3594%3B%0A%7D%0A%0Aclass%20Patient%0A%7B%0A%20%20position%20623%20434%20173.531%20194.359%3B%0A%20%20position.association%20Patient__Team%200%2C10%20114%2C2%3B%0A%7D%0A%0Aclass%20Doctor%0A%7B%0A%20%20position%20187%20381%20146.766%2075.3594%3B%0A%20%20position.association%20Doctor__Team%201%2C0%2076%2C58%3B%0A%20%20position.association%20Doctor__Patient%3Atreats%20148%2C21%200%2C10%3B%0A%7D%0A%0Aclass%20JuniourDoctor%0A%7B%0A%20%20position%20264%20538%20116.844%2041.3594%3B%0A%7D%0A%0Aclass%20ConsultantDoctor%0A%7B%0A%20%20position%2075%20540%20139.844%2041.3594%3B%0A%20%20position.association%20ConsultantDoctor__Patient%3Aultimate_responsibility%20141%2C38%200%2C177%3B%0A%20%20position.association%20ConsultantDoctor__Team%3Ateam_leader%204%2C0%2096%2C58%3B%0A%7D%0A%0Aclass%20History%0A%7B%0A%20%20position%20923%20331%20109%2041.3594%3B%0A%7D
