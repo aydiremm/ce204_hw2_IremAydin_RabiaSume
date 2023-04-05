@@ -1,19 +1,13 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
 import java.util.*;
 
-// line 35 "../organization.ump"
-// line 152 "../organization.ump"
+// line 36 "../../model.ump"
+// line 153 "../../model.ump"
 public class Hospital
 {
-
-  //------------------------
-  // STATIC VARIABLES
-  //------------------------
-
-  private static Map<String, Hospital> hospitalsByName = new HashMap<String, Hospital>();
 
   //------------------------
   // MEMBER VARIABLES
@@ -21,8 +15,8 @@ public class Hospital
 
   //Hospital Attributes
   private String name;
-  private Address address;
-  private Phone phone;
+  private String address;
+  private String phone;
 
   //Hospital Associations
   private List<Person> persons;
@@ -32,14 +26,11 @@ public class Hospital
   // CONSTRUCTOR
   //------------------------
 
-  public Hospital(String aName, Address aAddress, Phone aPhone)
+  public Hospital(String aName, String aAddress, String aPhone)
   {
+    name = aName;
     address = aAddress;
     phone = aPhone;
-    if (!setName(aName))
-    {
-      throw new RuntimeException("Cannot create due to duplicate name. See http://manual.umple.org?RE003ViolationofUniqueness.html");
-    }
     persons = new ArrayList<Person>();
     departments = new ArrayList<Department>();
   }
@@ -51,23 +42,12 @@ public class Hospital
   public boolean setName(String aName)
   {
     boolean wasSet = false;
-    String anOldName = getName();
-    if (anOldName != null && anOldName.equals(aName)) {
-      return true;
-    }
-    if (hasWithName(aName)) {
-      return wasSet;
-    }
     name = aName;
     wasSet = true;
-    if (anOldName != null) {
-      hospitalsByName.remove(anOldName);
-    }
-    hospitalsByName.put(aName, this);
     return wasSet;
   }
 
-  public boolean setAddress(Address aAddress)
+  public boolean setAddress(String aAddress)
   {
     boolean wasSet = false;
     address = aAddress;
@@ -75,7 +55,7 @@ public class Hospital
     return wasSet;
   }
 
-  public boolean setPhone(Phone aPhone)
+  public boolean setPhone(String aPhone)
   {
     boolean wasSet = false;
     phone = aPhone;
@@ -87,23 +67,13 @@ public class Hospital
   {
     return name;
   }
-  /* Code from template attribute_GetUnique */
-  public static Hospital getWithName(String aName)
-  {
-    return hospitalsByName.get(aName);
-  }
-  /* Code from template attribute_HasUnique */
-  public static boolean hasWithName(String aName)
-  {
-    return getWithName(aName) != null;
-  }
 
-  public Address getAddress()
+  public String getAddress()
   {
     return address;
   }
 
-  public Phone getPhone()
+  public String getPhone()
   {
     return phone;
   }
@@ -324,7 +294,6 @@ public class Hospital
 
   public void delete()
   {
-    hospitalsByName.remove(getName());
     ArrayList<Person> copyOfPersons = new ArrayList<Person>(persons);
     persons.clear();
     for(Person aPerson : copyOfPersons)
@@ -344,8 +313,8 @@ public class Hospital
   public String toString()
   {
     return super.toString() + "["+
-            "name" + ":" + getName()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "address" + "=" + (getAddress() != null ? !getAddress().equals(this)  ? getAddress().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "phone" + "=" + (getPhone() != null ? !getPhone().equals(this)  ? getPhone().toString().replaceAll("  ","    ") : "this" : "null");
+            "name" + ":" + getName()+ "," +
+            "address" + ":" + getAddress()+ "," +
+            "phone" + ":" + getPhone()+ "]";
   }
 }

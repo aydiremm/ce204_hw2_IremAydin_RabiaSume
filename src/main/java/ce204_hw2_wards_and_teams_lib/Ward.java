@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
 import java.sql.Date;
 
-// line 34 "../wards_and_teams.ump"
-// line 112 "../wards_and_teams.ump"
+// line 35 "../../model.ump"
+// line 127 "../../model.ump"
 public class Ward
 {
 
@@ -22,18 +22,18 @@ public class Ward
 
   //Ward Attributes
   private String id;
-  private Patient.Gender patientsGender;
+  private String patientsGender;
   private int capacity;
 
   //Ward Associations
-  private Hospital hospital;
-  private List<Patient> patient;
+  private HospitalWT hospitalWT;
+  private List<PatientWT> patient;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Ward(String aId, Patient.Gender aPatientsGender, int aCapacity, Hospital aHospital)
+  public Ward(String aId, String aPatientsGender, int aCapacity, HospitalWT aHospitalWT)
   {
     patientsGender = aPatientsGender;
     capacity = aCapacity;
@@ -41,12 +41,12 @@ public class Ward
     {
       throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
     }
-    boolean didAddHospital = setHospital(aHospital);
-    if (!didAddHospital)
+    boolean didAddHospitalWT = setHospitalWT(aHospitalWT);
+    if (!didAddHospitalWT)
     {
-      throw new RuntimeException("Unable to create ward due to hospital. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create ward due to hospitalWT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    patient = new ArrayList<Patient>();
+    patient = new ArrayList<PatientWT>();
   }
 
   //------------------------
@@ -72,7 +72,7 @@ public class Ward
     return wasSet;
   }
 
-  public boolean setPatientsGender(Patient.Gender aPatientsGender)
+  public boolean setPatientsGender(String aPatientsGender)
   {
     boolean wasSet = false;
     patientsGender = aPatientsGender;
@@ -103,7 +103,7 @@ public class Ward
     return getWithId(aId) != null;
   }
 
-  public Patient.Gender getPatientsGender()
+  public String getPatientsGender()
   {
     return patientsGender;
   }
@@ -113,20 +113,20 @@ public class Ward
     return capacity;
   }
   /* Code from template association_GetOne */
-  public Hospital getHospital()
+  public HospitalWT getHospitalWT()
   {
-    return hospital;
+    return hospitalWT;
   }
   /* Code from template association_GetMany */
-  public Patient getPatient(int index)
+  public PatientWT getPatient(int index)
   {
-    Patient aPatient = patient.get(index);
+    PatientWT aPatient = patient.get(index);
     return aPatient;
   }
 
-  public List<Patient> getPatient()
+  public List<PatientWT> getPatient()
   {
-    List<Patient> newPatient = Collections.unmodifiableList(patient);
+    List<PatientWT> newPatient = Collections.unmodifiableList(patient);
     return newPatient;
   }
 
@@ -142,27 +142,27 @@ public class Ward
     return has;
   }
 
-  public int indexOfPatient(Patient aPatient)
+  public int indexOfPatient(PatientWT aPatient)
   {
     int index = patient.indexOf(aPatient);
     return index;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setHospital(Hospital aHospital)
+  public boolean setHospitalWT(HospitalWT aHospitalWT)
   {
     boolean wasSet = false;
-    if (aHospital == null)
+    if (aHospitalWT == null)
     {
       return wasSet;
     }
 
-    Hospital existingHospital = hospital;
-    hospital = aHospital;
-    if (existingHospital != null && !existingHospital.equals(aHospital))
+    HospitalWT existingHospitalWT = hospitalWT;
+    hospitalWT = aHospitalWT;
+    if (existingHospitalWT != null && !existingHospitalWT.equals(aHospitalWT))
     {
-      existingHospital.removeWard(this);
+      existingHospitalWT.removeWard(this);
     }
-    hospital.addWard(this);
+    hospitalWT.addWard(this);
     wasSet = true;
     return wasSet;
   }
@@ -172,12 +172,12 @@ public class Ward
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Patient addPatient(String aId, Patient.Gender aGender, Date aBirthDate, Date aAccepted, History aSickness, Team aTeam, ConsultantDoctor aConsultantDoctor)
+  public PatientWT addPatient(String aId, String aGender, Date aBirthDate, Date aAccepted, String aSickness, String aPrescriptions, String aAllergies, String aSpecialReqs, Team aTeam, ConsultantDoctor aConsultantDoctor)
   {
-    return new Patient(aId, aGender, aBirthDate, aAccepted, aSickness, aTeam, aConsultantDoctor, this);
+    return new PatientWT(aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aAccepted, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, capacity, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aTeam, null);
   }
 
-  public boolean addPatient(Patient aPatient)
+  public boolean addPatient(PatientWT aPatient)
   {
     boolean wasAdded = false;
     if (patient.contains(aPatient)) { return false; }
@@ -195,7 +195,7 @@ public class Ward
     return wasAdded;
   }
 
-  public boolean removePatient(Patient aPatient)
+  public boolean removePatient(PatientWT aPatient)
   {
     boolean wasRemoved = false;
     //Unable to remove aPatient, as it must always have a ward
@@ -207,7 +207,7 @@ public class Ward
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addPatientAt(Patient aPatient, int index)
+  public boolean addPatientAt(PatientWT aPatient, int index)
   {  
     boolean wasAdded = false;
     if(addPatient(aPatient))
@@ -221,7 +221,7 @@ public class Ward
     return wasAdded;
   }
 
-  public boolean addOrMovePatientAt(Patient aPatient, int index)
+  public boolean addOrMovePatientAt(PatientWT aPatient, int index)
   {
     boolean wasAdded = false;
     if(patient.contains(aPatient))
@@ -242,15 +242,15 @@ public class Ward
   public void delete()
   {
     wardsById.remove(getId());
-    Hospital placeholderHospital = hospital;
-    this.hospital = null;
-    if(placeholderHospital != null)
+    HospitalWT placeholderHospitalWT = hospitalWT;
+    this.hospitalWT = null;
+    if(placeholderHospitalWT != null)
     {
-      placeholderHospital.removeWard(this);
+      placeholderHospitalWT.removeWard(this);
     }
     for(int i=patient.size(); i > 0; i--)
     {
-      Patient aPatient = patient.get(i - 1);
+      PatientWT aPatient = patient.get(i - 1);
       aPatient.delete();
     }
   }
@@ -260,8 +260,8 @@ public class Ward
   {
     return super.toString() + "["+
             "id" + ":" + getId()+ "," +
+            "patientsGender" + ":" + getPatientsGender()+ "," +
             "capacity" + ":" + getCapacity()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "patientsGender" + "=" + (getPatientsGender() != null ? !getPatientsGender().equals(this)  ? getPatientsGender().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "hospital = "+(getHospital()!=null?Integer.toHexString(System.identityHashCode(getHospital())):"null");
+            "  " + "hospitalWT = "+(getHospitalWT()!=null?Integer.toHexString(System.identityHashCode(getHospitalWT())):"null");
   }
 }

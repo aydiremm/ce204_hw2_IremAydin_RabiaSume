@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
 
-// line 73 "../wards_and_teams.ump"
-// line 129 "../wards_and_teams.ump"
-public class JuniourDoctor extends Doctor
+// line 74 "../../model.ump"
+// line 137 "../../model.ump"
+public class JuniourDoctor extends DoctorWT
 {
 
   //------------------------
@@ -17,9 +17,9 @@ public class JuniourDoctor extends Doctor
   // CONSTRUCTOR
   //------------------------
 
-  public JuniourDoctor()
+  public JuniourDoctor(String aSpecialty, String aLocations)
   {
-    super();
+    super(aLocations, aLocations, aLocations, aLocations, null, aLocations, aLocations, aLocations, null, aLocations, aLocations, aLocations, null, aLocations, aLocations);
   }
 
   //------------------------

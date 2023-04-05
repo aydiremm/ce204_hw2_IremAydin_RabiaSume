@@ -1,10 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_wards_and_teams_lib;
 
-// line 15 "../wards_and_teams.ump"
-// line 95 "../wards_and_teams.ump"
+// line 16 "../../model.ump"
+// line 112 "../../model.ump"
 public class Phone
 {
 

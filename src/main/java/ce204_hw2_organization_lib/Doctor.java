@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
 import java.util.*;
 import java.sql.Date;
 
-// line 76 "../organization.ump"
-// line 179 "../organization.ump"
+// line 77 "../../model.ump"
+// line 180 "../../model.ump"
 public class Doctor extends OperationsStaff
 {
 
@@ -15,110 +15,48 @@ public class Doctor extends OperationsStaff
   //------------------------
 
   //Doctor Attributes
-  private List<String> specialty;
-  private List<String> locations;
+  private String specialty;
+  private String locations;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Doctor(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined, Department aDepartment)
+  public Doctor(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification, String aLanguages, Department aDepartment, String aSpecialty, String aLocations)
   {
-    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aDepartment);
-    specialty = new ArrayList<String>();
-    locations = new ArrayList<String>();
+    super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aEducation, aCertification, aLanguages, aDepartment);
+    specialty = aSpecialty;
+    locations = aLocations;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-  /* Code from template attribute_SetMany */
-  public boolean addSpecialty(String aSpecialty)
+
+  public boolean setSpecialty(String aSpecialty)
   {
-    boolean wasAdded = false;
-    wasAdded = specialty.add(aSpecialty);
-    return wasAdded;
+    boolean wasSet = false;
+    specialty = aSpecialty;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removeSpecialty(String aSpecialty)
+  public boolean setLocations(String aLocations)
   {
-    boolean wasRemoved = false;
-    wasRemoved = specialty.remove(aSpecialty);
-    return wasRemoved;
-  }
-  /* Code from template attribute_SetMany */
-  public boolean addLocation(String aLocation)
-  {
-    boolean wasAdded = false;
-    wasAdded = locations.add(aLocation);
-    return wasAdded;
+    boolean wasSet = false;
+    locations = aLocations;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removeLocation(String aLocation)
+  public String getSpecialty()
   {
-    boolean wasRemoved = false;
-    wasRemoved = locations.remove(aLocation);
-    return wasRemoved;
-  }
-  /* Code from template attribute_GetMany */
-  public String getSpecialty(int index)
-  {
-    String aSpecialty = specialty.get(index);
-    return aSpecialty;
+    return specialty;
   }
 
-  public String[] getSpecialty()
+  public String getLocations()
   {
-    String[] newSpecialty = specialty.toArray(new String[specialty.size()]);
-    return newSpecialty;
-  }
-
-  public int numberOfSpecialty()
-  {
-    int number = specialty.size();
-    return number;
-  }
-
-  public boolean hasSpecialty()
-  {
-    boolean has = specialty.size() > 0;
-    return has;
-  }
-
-  public int indexOfSpecialty(String aSpecialty)
-  {
-    int index = specialty.indexOf(aSpecialty);
-    return index;
-  }
-  /* Code from template attribute_GetMany */
-  public String getLocation(int index)
-  {
-    String aLocation = locations.get(index);
-    return aLocation;
-  }
-
-  public String[] getLocations()
-  {
-    String[] newLocations = locations.toArray(new String[locations.size()]);
-    return newLocations;
-  }
-
-  public int numberOfLocations()
-  {
-    int number = locations.size();
-    return number;
-  }
-
-  public boolean hasLocations()
-  {
-    boolean has = locations.size() > 0;
-    return has;
-  }
-
-  public int indexOfLocation(String aLocation)
-  {
-    int index = locations.indexOf(aLocation);
-    return index;
+    return locations;
   }
 
   public void delete()
@@ -129,6 +67,8 @@ public class Doctor extends OperationsStaff
 
   public String toString()
   {
-    return super.toString() + "["+ "]";
+    return super.toString() + "["+
+            "specialty" + ":" + getSpecialty()+ "," +
+            "locations" + ":" + getLocations()+ "]";
   }
 }

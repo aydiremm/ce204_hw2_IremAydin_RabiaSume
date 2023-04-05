@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
 import java.sql.Date;
 import java.util.*;
 
-// line 118 "../organization.ump"
-// line 219 "../organization.ump"
+// line 119 "../../model.ump"
+// line 220 "../../model.ump"
 public class Staff extends Person
 {
 
@@ -16,9 +16,9 @@ public class Staff extends Person
 
   //Staff Attributes
   private Date joined;
-  private List<String> education;
-  private List<String> certification;
-  private List<String> languages;
+  private String education;
+  private String certification;
+  private String languages;
 
   //Staff Associations
   private Department department;
@@ -27,13 +27,13 @@ public class Staff extends Person
   // CONSTRUCTOR
   //------------------------
 
-  public Staff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined, Department aDepartment)
+  public Staff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification, String aLanguages, Department aDepartment)
   {
     super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
     joined = aJoined;
-    education = new ArrayList<String>();
-    certification = new ArrayList<String>();
-    languages = new ArrayList<String>();
+    education = aEducation;
+    certification = aCertification;
+    languages = aLanguages;
     boolean didAddDepartment = setDepartment(aDepartment);
     if (!didAddDepartment)
     {
@@ -52,142 +52,49 @@ public class Staff extends Person
     wasSet = true;
     return wasSet;
   }
-  /* Code from template attribute_SetMany */
-  public boolean addEducation(String aEducation)
+
+  public boolean setEducation(String aEducation)
   {
-    boolean wasAdded = false;
-    wasAdded = education.add(aEducation);
-    return wasAdded;
+    boolean wasSet = false;
+    education = aEducation;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removeEducation(String aEducation)
+  public boolean setCertification(String aCertification)
   {
-    boolean wasRemoved = false;
-    wasRemoved = education.remove(aEducation);
-    return wasRemoved;
-  }
-  /* Code from template attribute_SetMany */
-  public boolean addCertification(String aCertification)
-  {
-    boolean wasAdded = false;
-    wasAdded = certification.add(aCertification);
-    return wasAdded;
+    boolean wasSet = false;
+    certification = aCertification;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removeCertification(String aCertification)
+  public boolean setLanguages(String aLanguages)
   {
-    boolean wasRemoved = false;
-    wasRemoved = certification.remove(aCertification);
-    return wasRemoved;
-  }
-  /* Code from template attribute_SetMany */
-  public boolean addLanguage(String aLanguage)
-  {
-    boolean wasAdded = false;
-    wasAdded = languages.add(aLanguage);
-    return wasAdded;
-  }
-
-  public boolean removeLanguage(String aLanguage)
-  {
-    boolean wasRemoved = false;
-    wasRemoved = languages.remove(aLanguage);
-    return wasRemoved;
+    boolean wasSet = false;
+    languages = aLanguages;
+    wasSet = true;
+    return wasSet;
   }
 
   public Date getJoined()
   {
     return joined;
   }
-  /* Code from template attribute_GetMany */
-  public String getEducation(int index)
+
+  public String getEducation()
   {
-    String aEducation = education.get(index);
-    return aEducation;
+    return education;
   }
 
-  public String[] getEducation()
+  public String getCertification()
   {
-    String[] newEducation = education.toArray(new String[education.size()]);
-    return newEducation;
+    return certification;
   }
 
-  public int numberOfEducation()
+  public String getLanguages()
   {
-    int number = education.size();
-    return number;
-  }
-
-  public boolean hasEducation()
-  {
-    boolean has = education.size() > 0;
-    return has;
-  }
-
-  public int indexOfEducation(String aEducation)
-  {
-    int index = education.indexOf(aEducation);
-    return index;
-  }
-  /* Code from template attribute_GetMany */
-  public String getCertification(int index)
-  {
-    String aCertification = certification.get(index);
-    return aCertification;
-  }
-
-  public String[] getCertification()
-  {
-    String[] newCertification = certification.toArray(new String[certification.size()]);
-    return newCertification;
-  }
-
-  public int numberOfCertification()
-  {
-    int number = certification.size();
-    return number;
-  }
-
-  public boolean hasCertification()
-  {
-    boolean has = certification.size() > 0;
-    return has;
-  }
-
-  public int indexOfCertification(String aCertification)
-  {
-    int index = certification.indexOf(aCertification);
-    return index;
-  }
-  /* Code from template attribute_GetMany */
-  public String getLanguage(int index)
-  {
-    String aLanguage = languages.get(index);
-    return aLanguage;
-  }
-
-  public String[] getLanguages()
-  {
-    String[] newLanguages = languages.toArray(new String[languages.size()]);
-    return newLanguages;
-  }
-
-  public int numberOfLanguages()
-  {
-    int number = languages.size();
-    return number;
-  }
-
-  public boolean hasLanguages()
-  {
-    boolean has = languages.size() > 0;
-    return has;
-  }
-
-  public int indexOfLanguage(String aLanguage)
-  {
-    int index = languages.indexOf(aLanguage);
-    return index;
+    return languages;
   }
   /* Code from template association_GetOne */
   public Department getDepartment()
@@ -228,7 +135,10 @@ public class Staff extends Person
 
   public String toString()
   {
-    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
+    return super.toString() + "["+
+            "education" + ":" + getEducation()+ "," +
+            "certification" + ":" + getCertification()+ "," +
+            "languages" + ":" + getLanguages()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "joined" + "=" + (getJoined() != null ? !getJoined().equals(this)  ? getJoined().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "department = "+(getDepartment()!=null?Integer.toHexString(System.identityHashCode(getDepartment())):"null");
   }

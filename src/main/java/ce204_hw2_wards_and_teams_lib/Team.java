@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
 import java.sql.Date;
 
-// line 29 "../wards_and_teams.ump"
-// line 107 "../wards_and_teams.ump"
+// line 30 "../../model.ump"
+// line 122 "../../model.ump"
 public class Team
 {
 
@@ -24,28 +24,28 @@ public class Team
   private String name;
 
   //Team Associations
-  private Hospital hospital;
-  private List<Patient> patients;
-  private List<Doctor> doctors;
+  private HospitalWT hospitalWT;
+  private List<PatientWT> patientWTs;
+  private List<DoctorWT> doctorWTs;
   private ConsultantDoctor consultantDoctor;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Team(String aName, Hospital aHospital, ConsultantDoctor aConsultantDoctor)
+  public Team(String aName, HospitalWT aHospitalWT, ConsultantDoctor aConsultantDoctor)
   {
     if (!setName(aName))
     {
       throw new RuntimeException("Cannot create due to duplicate name. See http://manual.umple.org?RE003ViolationofUniqueness.html");
     }
-    boolean didAddHospital = setHospital(aHospital);
-    if (!didAddHospital)
+    boolean didAddHospitalWT = setHospitalWT(aHospitalWT);
+    if (!didAddHospitalWT)
     {
-      throw new RuntimeException("Unable to create team due to hospital. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create team due to hospitalWT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    patients = new ArrayList<Patient>();
-    doctors = new ArrayList<Doctor>();
+    patientWTs = new ArrayList<PatientWT>();
+    doctorWTs = new ArrayList<DoctorWT>();
     boolean didAddConsultantDoctor = setConsultantDoctor(aConsultantDoctor);
     if (!didAddConsultantDoctor)
     {
@@ -91,68 +91,68 @@ public class Team
     return getWithName(aName) != null;
   }
   /* Code from template association_GetOne */
-  public Hospital getHospital()
+  public HospitalWT getHospitalWT()
   {
-    return hospital;
+    return hospitalWT;
   }
   /* Code from template association_GetMany */
-  public Patient getPatient(int index)
+  public PatientWT getPatientWT(int index)
   {
-    Patient aPatient = patients.get(index);
-    return aPatient;
+    PatientWT aPatientWT = patientWTs.get(index);
+    return aPatientWT;
   }
 
-  public List<Patient> getPatients()
+  public List<PatientWT> getPatientWTs()
   {
-    List<Patient> newPatients = Collections.unmodifiableList(patients);
-    return newPatients;
+    List<PatientWT> newPatientWTs = Collections.unmodifiableList(patientWTs);
+    return newPatientWTs;
   }
 
-  public int numberOfPatients()
+  public int numberOfPatientWTs()
   {
-    int number = patients.size();
+    int number = patientWTs.size();
     return number;
   }
 
-  public boolean hasPatients()
+  public boolean hasPatientWTs()
   {
-    boolean has = patients.size() > 0;
+    boolean has = patientWTs.size() > 0;
     return has;
   }
 
-  public int indexOfPatient(Patient aPatient)
+  public int indexOfPatientWT(PatientWT aPatientWT)
   {
-    int index = patients.indexOf(aPatient);
+    int index = patientWTs.indexOf(aPatientWT);
     return index;
   }
   /* Code from template association_GetMany */
-  public Doctor getDoctor(int index)
+  public DoctorWT getDoctorWT(int index)
   {
-    Doctor aDoctor = doctors.get(index);
-    return aDoctor;
+    DoctorWT aDoctorWT = doctorWTs.get(index);
+    return aDoctorWT;
   }
 
-  public List<Doctor> getDoctors()
+  public List<DoctorWT> getDoctorWTs()
   {
-    List<Doctor> newDoctors = Collections.unmodifiableList(doctors);
-    return newDoctors;
+    List<DoctorWT> newDoctorWTs = Collections.unmodifiableList(doctorWTs);
+    return newDoctorWTs;
   }
 
-  public int numberOfDoctors()
+  public int numberOfDoctorWTs()
   {
-    int number = doctors.size();
+    int number = doctorWTs.size();
     return number;
   }
 
-  public boolean hasDoctors()
+  public boolean hasDoctorWTs()
   {
-    boolean has = doctors.size() > 0;
+    boolean has = doctorWTs.size() > 0;
     return has;
   }
 
-  public int indexOfDoctor(Doctor aDoctor)
+  public int indexOfDoctorWT(DoctorWT aDoctorWT)
   {
-    int index = doctors.indexOf(aDoctor);
+    int index = doctorWTs.indexOf(aDoctorWT);
     return index;
   }
   /* Code from template association_GetOne */
@@ -161,175 +161,175 @@ public class Team
     return consultantDoctor;
   }
   /* Code from template association_SetOneToMandatoryMany */
-  public boolean setHospital(Hospital aHospital)
+  public boolean setHospitalWT(HospitalWT aHospitalWT)
   {
     boolean wasSet = false;
-    //Must provide hospital to team
-    if (aHospital == null)
+    //Must provide hospitalWT to team
+    if (aHospitalWT == null)
     {
       return wasSet;
     }
 
-    if (hospital != null && hospital.numberOfTeams() <= Hospital.minimumNumberOfTeams())
+    if (hospitalWT != null && hospitalWT.numberOfTeams() <= HospitalWT.minimumNumberOfTeams())
     {
       return wasSet;
     }
 
-    Hospital existingHospital = hospital;
-    hospital = aHospital;
-    if (existingHospital != null && !existingHospital.equals(aHospital))
+    HospitalWT existingHospitalWT = hospitalWT;
+    hospitalWT = aHospitalWT;
+    if (existingHospitalWT != null && !existingHospitalWT.equals(aHospitalWT))
     {
-      boolean didRemove = existingHospital.removeTeam(this);
+      boolean didRemove = existingHospitalWT.removeTeam(this);
       if (!didRemove)
       {
-        hospital = existingHospital;
+        hospitalWT = existingHospitalWT;
         return wasSet;
       }
     }
-    hospital.addTeam(this);
+    hospitalWT.addTeam(this);
     wasSet = true;
     return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPatients()
+  public static int minimumNumberOfPatientWTs()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Patient addPatient(String aId, Patient.Gender aGender, Date aBirthDate, Date aAccepted, History aSickness, ConsultantDoctor aConsultantDoctor, Ward aWard)
+  public PatientWT addPatientWT(String aId, String aGender, Date aBirthDate, Date aAccepted, String aSickness, String aPrescriptions, String aAllergies, String aSpecialReqs, ConsultantDoctor aConsultantDoctor, Ward aWard)
   {
-    return new Patient(aId, aGender, aBirthDate, aAccepted, aSickness, this, aConsultantDoctor, aWard);
+    return new PatientWT(aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aAccepted, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, 0, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, aSpecialReqs, null, aWard);
   }
 
-  public boolean addPatient(Patient aPatient)
+  public boolean addPatientWT(PatientWT aPatientWT)
   {
     boolean wasAdded = false;
-    if (patients.contains(aPatient)) { return false; }
-    Team existingTeam = aPatient.getTeam();
+    if (patientWTs.contains(aPatientWT)) { return false; }
+    Team existingTeam = aPatientWT.getTeam();
     boolean isNewTeam = existingTeam != null && !this.equals(existingTeam);
     if (isNewTeam)
     {
-      aPatient.setTeam(this);
+      aPatientWT.setTeam(this);
     }
     else
     {
-      patients.add(aPatient);
+      patientWTs.add(aPatientWT);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removePatient(Patient aPatient)
+  public boolean removePatientWT(PatientWT aPatientWT)
   {
     boolean wasRemoved = false;
-    //Unable to remove aPatient, as it must always have a team
-    if (!this.equals(aPatient.getTeam()))
+    //Unable to remove aPatientWT, as it must always have a team
+    if (!this.equals(aPatientWT.getTeam()))
     {
-      patients.remove(aPatient);
+      patientWTs.remove(aPatientWT);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addPatientAt(Patient aPatient, int index)
+  public boolean addPatientWTAt(PatientWT aPatientWT, int index)
   {  
     boolean wasAdded = false;
-    if(addPatient(aPatient))
+    if(addPatientWT(aPatientWT))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
-      patients.remove(aPatient);
-      patients.add(index, aPatient);
+      if(index > numberOfPatientWTs()) { index = numberOfPatientWTs() - 1; }
+      patientWTs.remove(aPatientWT);
+      patientWTs.add(index, aPatientWT);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMovePatientAt(Patient aPatient, int index)
+  public boolean addOrMovePatientWTAt(PatientWT aPatientWT, int index)
   {
     boolean wasAdded = false;
-    if(patients.contains(aPatient))
+    if(patientWTs.contains(aPatientWT))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
-      patients.remove(aPatient);
-      patients.add(index, aPatient);
+      if(index > numberOfPatientWTs()) { index = numberOfPatientWTs() - 1; }
+      patientWTs.remove(aPatientWT);
+      patientWTs.add(index, aPatientWT);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addPatientAt(aPatient, index);
+      wasAdded = addPatientWTAt(aPatientWT, index);
     }
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfDoctors()
+  public static int minimumNumberOfDoctorWTs()
   {
     return 0;
   }
   /* Code from template association_AddManyToOptionalOne */
-  public boolean addDoctor(Doctor aDoctor)
+  public boolean addDoctorWT(DoctorWT aDoctorWT)
   {
     boolean wasAdded = false;
-    if (doctors.contains(aDoctor)) { return false; }
-    Team existingTeam = aDoctor.getTeam();
+    if (doctorWTs.contains(aDoctorWT)) { return false; }
+    Team existingTeam = aDoctorWT.getTeam();
     if (existingTeam == null)
     {
-      aDoctor.setTeam(this);
+      aDoctorWT.setTeam(this);
     }
     else if (!this.equals(existingTeam))
     {
-      existingTeam.removeDoctor(aDoctor);
-      addDoctor(aDoctor);
+      existingTeam.removeDoctorWT(aDoctorWT);
+      addDoctorWT(aDoctorWT);
     }
     else
     {
-      doctors.add(aDoctor);
+      doctorWTs.add(aDoctorWT);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeDoctor(Doctor aDoctor)
+  public boolean removeDoctorWT(DoctorWT aDoctorWT)
   {
     boolean wasRemoved = false;
-    if (doctors.contains(aDoctor))
+    if (doctorWTs.contains(aDoctorWT))
     {
-      doctors.remove(aDoctor);
-      aDoctor.setTeam(null);
+      doctorWTs.remove(aDoctorWT);
+      aDoctorWT.setTeam(null);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addDoctorAt(Doctor aDoctor, int index)
+  public boolean addDoctorWTAt(DoctorWT aDoctorWT, int index)
   {  
     boolean wasAdded = false;
-    if(addDoctor(aDoctor))
+    if(addDoctorWT(aDoctorWT))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
-      doctors.remove(aDoctor);
-      doctors.add(index, aDoctor);
+      if(index > numberOfDoctorWTs()) { index = numberOfDoctorWTs() - 1; }
+      doctorWTs.remove(aDoctorWT);
+      doctorWTs.add(index, aDoctorWT);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveDoctorAt(Doctor aDoctor, int index)
+  public boolean addOrMoveDoctorWTAt(DoctorWT aDoctorWT, int index)
   {
     boolean wasAdded = false;
-    if(doctors.contains(aDoctor))
+    if(doctorWTs.contains(aDoctorWT))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
-      doctors.remove(aDoctor);
-      doctors.add(index, aDoctor);
+      if(index > numberOfDoctorWTs()) { index = numberOfDoctorWTs() - 1; }
+      doctorWTs.remove(aDoctorWT);
+      doctorWTs.add(index, aDoctorWT);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addDoctorAt(aDoctor, index);
+      wasAdded = addDoctorWTAt(aDoctorWT, index);
     }
     return wasAdded;
   }
@@ -365,22 +365,22 @@ public class Team
   public void delete()
   {
     teamsByName.remove(getName());
-    Hospital placeholderHospital = hospital;
-    this.hospital = null;
-    if(placeholderHospital != null)
+    HospitalWT placeholderHospitalWT = hospitalWT;
+    this.hospitalWT = null;
+    if(placeholderHospitalWT != null)
     {
-      placeholderHospital.removeTeam(this);
+      placeholderHospitalWT.removeTeam(this);
     }
-    for(int i=patients.size(); i > 0; i--)
+    for(int i=patientWTs.size(); i > 0; i--)
     {
-      Patient aPatient = patients.get(i - 1);
-      aPatient.delete();
+      PatientWT aPatientWT = patientWTs.get(i - 1);
+      aPatientWT.delete();
     }
-    while (doctors.size() > 0)
+    while (doctorWTs.size() > 0)
     {
-      Doctor aDoctor = doctors.get(doctors.size() - 1);
-      aDoctor.delete();
-      doctors.remove(aDoctor);
+      DoctorWT aDoctorWT = doctorWTs.get(doctorWTs.size() - 1);
+      aDoctorWT.delete();
+      doctorWTs.remove(aDoctorWT);
     }
     
     ConsultantDoctor existingConsultantDoctor = consultantDoctor;
@@ -396,7 +396,7 @@ public class Team
   {
     return super.toString() + "["+
             "name" + ":" + getName()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "hospital = "+(getHospital()!=null?Integer.toHexString(System.identityHashCode(getHospital())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "hospitalWT = "+(getHospitalWT()!=null?Integer.toHexString(System.identityHashCode(getHospitalWT())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "consultantDoctor = "+(getConsultantDoctor()!=null?Integer.toHexString(System.identityHashCode(getConsultantDoctor())):"null");
   }
 }

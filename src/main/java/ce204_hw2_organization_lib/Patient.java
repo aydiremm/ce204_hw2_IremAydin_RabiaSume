@@ -1,20 +1,14 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
 import java.util.*;
 import java.sql.Date;
 
-// line 45 "../organization.ump"
-// line 157 "../organization.ump"
+// line 46 "../../model.ump"
+// line 158 "../../model.ump"
 public class Patient extends Person
 {
-
-  //------------------------
-  // STATIC VARIABLES
-  //------------------------
-
-  private static Map<String, Patient> patientsById = new HashMap<String, Patient>();
 
   //------------------------
   // MEMBER VARIABLES
@@ -23,11 +17,11 @@ public class Patient extends Person
   //Patient Attributes
   private String id;
   private int age;
-  private Date accepted;
-  private History sickness;
-  private List<String> prescriptions;
-  private List<String> allergies;
-  private List<String> specialReqs;
+  private String accepted;
+  private String sickness;
+  private String prescriptions;
+  private String allergies;
+  private String specialReqs;
 
   //Patient Associations
   private List<OperationsStaff> operationsStaffs;
@@ -36,19 +30,16 @@ public class Patient extends Person
   // CONSTRUCTOR
   //------------------------
 
-  public Patient(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone, String aId, int aAge, Date aAccepted, History aSickness)
+  public Patient(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, String aGender, String aHomeAddress, String aPhone, String aId, int aAge, String aAccepted, String aSickness, String aPrescriptions, String aAllergies, String aSpecialReqs)
   {
     super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone);
+    id = aId;
     age = aAge;
     accepted = aAccepted;
     sickness = aSickness;
-    prescriptions = new ArrayList<String>();
-    allergies = new ArrayList<String>();
-    specialReqs = new ArrayList<String>();
-    if (!setId(aId))
-    {
-      throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
-    }
+    prescriptions = aPrescriptions;
+    allergies = aAllergies;
+    specialReqs = aSpecialReqs;
     operationsStaffs = new ArrayList<OperationsStaff>();
   }
 
@@ -59,19 +50,8 @@ public class Patient extends Person
   public boolean setId(String aId)
   {
     boolean wasSet = false;
-    String anOldId = getId();
-    if (anOldId != null && anOldId.equals(aId)) {
-      return true;
-    }
-    if (hasWithId(aId)) {
-      return wasSet;
-    }
     id = aId;
     wasSet = true;
-    if (anOldId != null) {
-      patientsById.remove(anOldId);
-    }
-    patientsById.put(aId, this);
     return wasSet;
   }
 
@@ -83,7 +63,7 @@ public class Patient extends Person
     return wasSet;
   }
 
-  public boolean setAccepted(Date aAccepted)
+  public boolean setAccepted(String aAccepted)
   {
     boolean wasSet = false;
     accepted = aAccepted;
@@ -91,69 +71,41 @@ public class Patient extends Person
     return wasSet;
   }
 
-  public boolean setSickness(History aSickness)
+  public boolean setSickness(String aSickness)
   {
     boolean wasSet = false;
     sickness = aSickness;
     wasSet = true;
     return wasSet;
   }
-  /* Code from template attribute_SetMany */
-  public boolean addPrescription(String aPrescription)
+
+  public boolean setPrescriptions(String aPrescriptions)
   {
-    boolean wasAdded = false;
-    wasAdded = prescriptions.add(aPrescription);
-    return wasAdded;
+    boolean wasSet = false;
+    prescriptions = aPrescriptions;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removePrescription(String aPrescription)
+  public boolean setAllergies(String aAllergies)
   {
-    boolean wasRemoved = false;
-    wasRemoved = prescriptions.remove(aPrescription);
-    return wasRemoved;
-  }
-  /* Code from template attribute_SetMany */
-  public boolean addAllergy(String aAllergy)
-  {
-    boolean wasAdded = false;
-    wasAdded = allergies.add(aAllergy);
-    return wasAdded;
+    boolean wasSet = false;
+    allergies = aAllergies;
+    wasSet = true;
+    return wasSet;
   }
 
-  public boolean removeAllergy(String aAllergy)
+  public boolean setSpecialReqs(String aSpecialReqs)
   {
-    boolean wasRemoved = false;
-    wasRemoved = allergies.remove(aAllergy);
-    return wasRemoved;
-  }
-  /* Code from template attribute_SetMany */
-  public boolean addSpecialReq(String aSpecialReq)
-  {
-    boolean wasAdded = false;
-    wasAdded = specialReqs.add(aSpecialReq);
-    return wasAdded;
-  }
-
-  public boolean removeSpecialReq(String aSpecialReq)
-  {
-    boolean wasRemoved = false;
-    wasRemoved = specialReqs.remove(aSpecialReq);
-    return wasRemoved;
+    boolean wasSet = false;
+    specialReqs = aSpecialReqs;
+    wasSet = true;
+    return wasSet;
   }
 
   public String getId()
   {
     return id;
-  }
-  /* Code from template attribute_GetUnique */
-  public static Patient getWithId(String aId)
-  {
-    return patientsById.get(aId);
-  }
-  /* Code from template attribute_HasUnique */
-  public static boolean hasWithId(String aId)
-  {
-    return getWithId(aId) != null;
   }
 
   public int getAge()
@@ -161,104 +113,29 @@ public class Patient extends Person
     return age;
   }
 
-  public Date getAccepted()
+  public String getAccepted()
   {
     return accepted;
   }
 
-  public History getSickness()
+  public String getSickness()
   {
     return sickness;
   }
-  /* Code from template attribute_GetMany */
-  public String getPrescription(int index)
+
+  public String getPrescriptions()
   {
-    String aPrescription = prescriptions.get(index);
-    return aPrescription;
+    return prescriptions;
   }
 
-  public String[] getPrescriptions()
+  public String getAllergies()
   {
-    String[] newPrescriptions = prescriptions.toArray(new String[prescriptions.size()]);
-    return newPrescriptions;
+    return allergies;
   }
 
-  public int numberOfPrescriptions()
+  public String getSpecialReqs()
   {
-    int number = prescriptions.size();
-    return number;
-  }
-
-  public boolean hasPrescriptions()
-  {
-    boolean has = prescriptions.size() > 0;
-    return has;
-  }
-
-  public int indexOfPrescription(String aPrescription)
-  {
-    int index = prescriptions.indexOf(aPrescription);
-    return index;
-  }
-  /* Code from template attribute_GetMany */
-  public String getAllergy(int index)
-  {
-    String aAllergy = allergies.get(index);
-    return aAllergy;
-  }
-
-  public String[] getAllergies()
-  {
-    String[] newAllergies = allergies.toArray(new String[allergies.size()]);
-    return newAllergies;
-  }
-
-  public int numberOfAllergies()
-  {
-    int number = allergies.size();
-    return number;
-  }
-
-  public boolean hasAllergies()
-  {
-    boolean has = allergies.size() > 0;
-    return has;
-  }
-
-  public int indexOfAllergy(String aAllergy)
-  {
-    int index = allergies.indexOf(aAllergy);
-    return index;
-  }
-  /* Code from template attribute_GetMany */
-  public String getSpecialReq(int index)
-  {
-    String aSpecialReq = specialReqs.get(index);
-    return aSpecialReq;
-  }
-
-  public String[] getSpecialReqs()
-  {
-    String[] newSpecialReqs = specialReqs.toArray(new String[specialReqs.size()]);
-    return newSpecialReqs;
-  }
-
-  public int numberOfSpecialReqs()
-  {
-    int number = specialReqs.size();
-    return number;
-  }
-
-  public boolean hasSpecialReqs()
-  {
-    boolean has = specialReqs.size() > 0;
-    return has;
-  }
-
-  public int indexOfSpecialReq(String aSpecialReq)
-  {
-    int index = specialReqs.indexOf(aSpecialReq);
-    return index;
+    return specialReqs;
   }
   /* Code from template association_GetMany */
   public OperationsStaff getOperationsStaff(int index)
@@ -375,7 +252,6 @@ public class Patient extends Person
 
   public void delete()
   {
-    patientsById.remove(getId());
     ArrayList<OperationsStaff> copyOfOperationsStaffs = new ArrayList<OperationsStaff>(operationsStaffs);
     operationsStaffs.clear();
     for(OperationsStaff aOperationsStaff : copyOfOperationsStaffs)
@@ -390,8 +266,11 @@ public class Patient extends Person
   {
     return super.toString() + "["+
             "id" + ":" + getId()+ "," +
-            "age" + ":" + getAge()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "accepted" + "=" + (getAccepted() != null ? !getAccepted().equals(this)  ? getAccepted().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "sickness" + "=" + (getSickness() != null ? !getSickness().equals(this)  ? getSickness().toString().replaceAll("  ","    ") : "this" : "null");
+            "age" + ":" + getAge()+ "," +
+            "accepted" + ":" + getAccepted()+ "," +
+            "sickness" + ":" + getSickness()+ "," +
+            "prescriptions" + ":" + getPrescriptions()+ "," +
+            "allergies" + ":" + getAllergies()+ "," +
+            "specialReqs" + ":" + getSpecialReqs()+ "]";
   }
 }

@@ -1,32 +1,43 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_wards_and_teams_lib;
 import java.util.*;
+
+import ce204_hw2_organization_lib.Address;
+import ce204_hw2_organization_lib.Department;
+import ce204_hw2_organization_lib.Phone;
+
 import java.sql.Date;
 
-// line 78 "../wards_and_teams.ump"
-// line 134 "../wards_and_teams.ump"
-public class ConsultantDoctor extends Doctor
+// line 79 "../../model.ump"
+// line 142 "../../model.ump"
+public class ConsultantDoctor extends DoctorWT
 {
 
-  //------------------------
+  
+
+public ConsultantDoctor(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate,
+			String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification,
+			String aLanguages, Department aDepartment, String aSpecialty, String aLocations) {
+		super(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aEducation,
+				aCertification, aLanguages, aDepartment, aSpecialty, aLocations);
+		// TODO Auto-generated constructor stub
+	}
+
+//------------------------
   // MEMBER VARIABLES
   //------------------------
 
   //ConsultantDoctor Associations
   private Team team_leader;
-  private List<Patient> ultimate_responsibility;
+  private List<PatientWT> ultimate_responsibility;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public ConsultantDoctor()
-  {
-    super();
-    ultimate_responsibility = new ArrayList<Patient>();
-  }
+  
 
   //------------------------
   // INTERFACE
@@ -43,15 +54,15 @@ public class ConsultantDoctor extends Doctor
     return has;
   }
   /* Code from template association_GetMany */
-  public Patient getUltimate_responsibility(int index)
+  public PatientWT getUltimate_responsibility(int index)
   {
-    Patient aUltimate_responsibility = ultimate_responsibility.get(index);
+    PatientWT aUltimate_responsibility = ultimate_responsibility.get(index);
     return aUltimate_responsibility;
   }
 
-  public List<Patient> getUltimate_responsibility()
+  public List<PatientWT> getUltimate_responsibility()
   {
-    List<Patient> newUltimate_responsibility = Collections.unmodifiableList(ultimate_responsibility);
+    List<PatientWT> newUltimate_responsibility = Collections.unmodifiableList(ultimate_responsibility);
     return newUltimate_responsibility;
   }
 
@@ -67,7 +78,7 @@ public class ConsultantDoctor extends Doctor
     return has;
   }
 
-  public int indexOfUltimate_responsibility(Patient aUltimate_responsibility)
+  public int indexOfUltimate_responsibility(PatientWT aUltimate_responsibility)
   {
     int index = ultimate_responsibility.indexOf(aUltimate_responsibility);
     return index;
@@ -105,12 +116,9 @@ public class ConsultantDoctor extends Doctor
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Patient addUltimate_responsibility(String aId, Patient.Gender aGender, Date aBirthDate, Date aAccepted, History aSickness, Team aTeam, Ward aWard)
-  {
-    return new Patient(aId, aGender, aBirthDate, aAccepted, aSickness, aTeam, this, aWard);
-  }
 
-  public boolean addUltimate_responsibility(Patient aUltimate_responsibility)
+
+  public boolean addUltimate_responsibility(PatientWT aUltimate_responsibility)
   {
     boolean wasAdded = false;
     if (ultimate_responsibility.contains(aUltimate_responsibility)) { return false; }
@@ -128,7 +136,7 @@ public class ConsultantDoctor extends Doctor
     return wasAdded;
   }
 
-  public boolean removeUltimate_responsibility(Patient aUltimate_responsibility)
+  public boolean removeUltimate_responsibility(PatientWT aUltimate_responsibility)
   {
     boolean wasRemoved = false;
     //Unable to remove aUltimate_responsibility, as it must always have a consultantDoctor
@@ -140,7 +148,7 @@ public class ConsultantDoctor extends Doctor
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addUltimate_responsibilityAt(Patient aUltimate_responsibility, int index)
+  public boolean addUltimate_responsibilityAt(PatientWT aUltimate_responsibility, int index)
   {  
     boolean wasAdded = false;
     if(addUltimate_responsibility(aUltimate_responsibility))
@@ -154,7 +162,7 @@ public class ConsultantDoctor extends Doctor
     return wasAdded;
   }
 
-  public boolean addOrMoveUltimate_responsibilityAt(Patient aUltimate_responsibility, int index)
+  public boolean addOrMoveUltimate_responsibilityAt(PatientWT aUltimate_responsibility, int index)
   {
     boolean wasAdded = false;
     if(ultimate_responsibility.contains(aUltimate_responsibility))
@@ -182,10 +190,14 @@ public class ConsultantDoctor extends Doctor
     }
     for(int i=ultimate_responsibility.size(); i > 0; i--)
     {
-      Patient aUltimate_responsibility = ultimate_responsibility.get(i - 1);
+      PatientWT aUltimate_responsibility = ultimate_responsibility.get(i - 1);
       aUltimate_responsibility.delete();
     }
     super.delete();
   }
+  public static ConsultantDoctor get(int i) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
 
 }

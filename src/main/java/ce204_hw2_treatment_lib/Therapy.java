@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_treatment_lib;
 import java.util.*;
 
-// line 45 "../treatment.ump"
-// line 94 "../treatment.ump"
+// line 41 "../../model.ump"
+// line 77 "../../model.ump"
 public class Therapy extends Treatment
 {
 
@@ -20,9 +20,9 @@ public class Therapy extends Treatment
   // CONSTRUCTOR
   //------------------------
 
-  public Therapy(Prescription aPrescription)
+  public Therapy(PatientTrT aPatientTrT, Prescription aPrescription)
   {
-    super();
+    super(aPatientTrT);
     boolean didAddPrescription = setPrescription(aPrescription);
     if (!didAddPrescription)
     {

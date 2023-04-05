@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
-import java.sql.Date;
 import java.util.*;
+import java.sql.Date;
 
-// line 60 "../organization.ump"
-// line 162 "../organization.ump"
+// line 61 "../../model.ump"
+// line 163 "../../model.ump"
 public class Department
 {
 
@@ -76,9 +76,9 @@ public class Department
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Staff addStaff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, ce204_hw2_organization_lib.Person.Gender aGender, Address aHomeAddress, Phone aPhone, Date aJoined)
+  public Staff addStaff(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, String aGender, String aHomeAddress, String aPhone, Date aJoined, String aEducation, String aCertification, String aLanguages)
   {
-    return new Staff(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, this);
+    return new Staff(aTitle, aGivenName, aMiddleName, aFamilyName, aBirthDate, aGender, aHomeAddress, aPhone, aJoined, aEducation, aCertification, aLanguages, this);
   }
 
   public boolean addStaff(Staff aStaff)

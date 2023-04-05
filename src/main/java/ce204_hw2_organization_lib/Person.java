@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_organization_lib;
 import java.sql.Date;
 import java.util.*;
 
-// line 20 "../organization.ump"
-// line 147 "../organization.ump"
+// line 21 "../../model.ump"
+// line 148 "../../model.ump"
 public class Person
 {
 
@@ -26,9 +26,9 @@ public class Person
   private String middleName;
   private String familyName;
   private Date birthDate;
-  private Gender gender;
-  private Address homeAddress;
-  private Phone phone;
+  private String gender;
+  private String homeAddress;
+  private String phone;
 
   //Person Associations
   private List<Hospital> hospitals;
@@ -37,7 +37,7 @@ public class Person
   // CONSTRUCTOR
   //------------------------
 
-  public Person(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, Gender aGender, Address aHomeAddress, Phone aPhone)
+  public Person(String aTitle, String aGivenName, String aMiddleName, String aFamilyName, Date aBirthDate, String aGender, String aHomeAddress, String aPhone)
   {
     title = aTitle;
     givenName = aGivenName;
@@ -94,7 +94,7 @@ public class Person
     return wasSet;
   }
 
-  public boolean setGender(Gender aGender)
+  public boolean setGender(String aGender)
   {
     boolean wasSet = false;
     gender = aGender;
@@ -102,7 +102,7 @@ public class Person
     return wasSet;
   }
 
-  public boolean setHomeAddress(Address aHomeAddress)
+  public boolean setHomeAddress(String aHomeAddress)
   {
     boolean wasSet = false;
     homeAddress = aHomeAddress;
@@ -110,7 +110,7 @@ public class Person
     return wasSet;
   }
 
-  public boolean setPhone(Phone aPhone)
+  public boolean setPhone(String aPhone)
   {
     boolean wasSet = false;
     phone = aPhone;
@@ -148,17 +148,17 @@ public class Person
     return birthDate;
   }
 
-  public Gender getGender()
+  public String getGender()
   {
     return gender;
   }
 
-  public Address getHomeAddress()
+  public String getHomeAddress()
   {
     return homeAddress;
   }
 
-  public Phone getPhone()
+  public String getPhone()
   {
     return phone;
   }
@@ -293,10 +293,10 @@ public class Person
             "givenName" + ":" + getGivenName()+ "," +
             "middleName" + ":" + getMiddleName()+ "," +
             "familyName" + ":" + getFamilyName()+ "," +
-            "name" + ":" + getName()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "birthDate" + "=" + (getBirthDate() != null ? !getBirthDate().equals(this)  ? getBirthDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "gender" + "=" + (getGender() != null ? !getGender().equals(this)  ? getGender().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "homeAddress" + "=" + (getHomeAddress() != null ? !getHomeAddress().equals(this)  ? getHomeAddress().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "phone" + "=" + (getPhone() != null ? !getPhone().equals(this)  ? getPhone().toString().replaceAll("  ","    ") : "this" : "null");
+            "name" + ":" + getName()+ "," +
+            "gender" + ":" + getGender()+ "," +
+            "homeAddress" + ":" + getHomeAddress()+ "," +
+            "phone" + ":" + getPhone()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "birthDate" + "=" + (getBirthDate() != null ? !getBirthDate().equals(this)  ? getBirthDate().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

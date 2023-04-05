@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ce204_hw2_treatment_lib;
 import java.util.*;
 
-// line 16 "../treatment.ump"
-// line 67 "../treatment.ump"
+// line 18 "../../model.ump"
+// line 55 "../../model.ump"
 public class Examination
 {
 
@@ -14,83 +14,41 @@ public class Examination
   //------------------------
 
   //Examination Associations
-  private List<Patient> patients;
-  private List<Doctor> doctors;
+  private PatientTrT patientTrT;
+  private DoctorTrT doctorTrT;
   private List<Diagnosis> diagnosis;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Examination()
+  public Examination(PatientTrT aPatientTrT, DoctorTrT aDoctorTrT)
   {
-    patients = new ArrayList<Patient>();
-    doctors = new ArrayList<Doctor>();
+    boolean didAddPatientTrT = setPatientTrT(aPatientTrT);
+    if (!didAddPatientTrT)
+    {
+      throw new RuntimeException("Unable to create examination due to patientTrT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+    boolean didAddDoctorTrT = setDoctorTrT(aDoctorTrT);
+    if (!didAddDoctorTrT)
+    {
+      throw new RuntimeException("Unable to create examination due to doctorTrT. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
     diagnosis = new ArrayList<Diagnosis>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-  /* Code from template association_GetMany */
-  public Patient getPatient(int index)
+  /* Code from template association_GetOne */
+  public PatientTrT getPatientTrT()
   {
-    Patient aPatient = patients.get(index);
-    return aPatient;
+    return patientTrT;
   }
-
-  public List<Patient> getPatients()
+  /* Code from template association_GetOne */
+  public DoctorTrT getDoctorTrT()
   {
-    List<Patient> newPatients = Collections.unmodifiableList(patients);
-    return newPatients;
-  }
-
-  public int numberOfPatients()
-  {
-    int number = patients.size();
-    return number;
-  }
-
-  public boolean hasPatients()
-  {
-    boolean has = patients.size() > 0;
-    return has;
-  }
-
-  public int indexOfPatient(Patient aPatient)
-  {
-    int index = patients.indexOf(aPatient);
-    return index;
-  }
-  /* Code from template association_GetMany */
-  public Doctor getDoctor(int index)
-  {
-    Doctor aDoctor = doctors.get(index);
-    return aDoctor;
-  }
-
-  public List<Doctor> getDoctors()
-  {
-    List<Doctor> newDoctors = Collections.unmodifiableList(doctors);
-    return newDoctors;
-  }
-
-  public int numberOfDoctors()
-  {
-    int number = doctors.size();
-    return number;
-  }
-
-  public boolean hasDoctors()
-  {
-    boolean has = doctors.size() > 0;
-    return has;
-  }
-
-  public int indexOfDoctor(Doctor aDoctor)
-  {
-    int index = doctors.indexOf(aDoctor);
-    return index;
+    return doctorTrT;
   }
   /* Code from template association_GetMany */
   public Diagnosis getDiagnosi(int index)
@@ -122,149 +80,43 @@ public class Examination
     int index = diagnosis.indexOf(aDiagnosi);
     return index;
   }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPatients()
+  /* Code from template association_SetOneToMany */
+  public boolean setPatientTrT(PatientTrT aPatientTrT)
   {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne */
-  public Patient addPatient()
-  {
-    return new Patient(this);
-  }
+    boolean wasSet = false;
+    if (aPatientTrT == null)
+    {
+      return wasSet;
+    }
 
-  public boolean addPatient(Patient aPatient)
-  {
-    boolean wasAdded = false;
-    if (patients.contains(aPatient)) { return false; }
-    Examination existingExamination = aPatient.getExamination();
-    boolean isNewExamination = existingExamination != null && !this.equals(existingExamination);
-    if (isNewExamination)
+    PatientTrT existingPatientTrT = patientTrT;
+    patientTrT = aPatientTrT;
+    if (existingPatientTrT != null && !existingPatientTrT.equals(aPatientTrT))
     {
-      aPatient.setExamination(this);
+      existingPatientTrT.removeExamination(this);
     }
-    else
-    {
-      patients.add(aPatient);
-    }
-    wasAdded = true;
-    return wasAdded;
+    patientTrT.addExamination(this);
+    wasSet = true;
+    return wasSet;
   }
+  /* Code from template association_SetOneToMany */
+  public boolean setDoctorTrT(DoctorTrT aDoctorTrT)
+  {
+    boolean wasSet = false;
+    if (aDoctorTrT == null)
+    {
+      return wasSet;
+    }
 
-  public boolean removePatient(Patient aPatient)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aPatient, as it must always have a examination
-    if (!this.equals(aPatient.getExamination()))
+    DoctorTrT existingDoctorTrT = doctorTrT;
+    doctorTrT = aDoctorTrT;
+    if (existingDoctorTrT != null && !existingDoctorTrT.equals(aDoctorTrT))
     {
-      patients.remove(aPatient);
-      wasRemoved = true;
+      existingDoctorTrT.removeExamination(this);
     }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addPatientAt(Patient aPatient, int index)
-  {  
-    boolean wasAdded = false;
-    if(addPatient(aPatient))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
-      patients.remove(aPatient);
-      patients.add(index, aPatient);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMovePatientAt(Patient aPatient, int index)
-  {
-    boolean wasAdded = false;
-    if(patients.contains(aPatient))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPatients()) { index = numberOfPatients() - 1; }
-      patients.remove(aPatient);
-      patients.add(index, aPatient);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addPatientAt(aPatient, index);
-    }
-    return wasAdded;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfDoctors()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne */
-  public Doctor addDoctor()
-  {
-    return new Doctor(this);
-  }
-
-  public boolean addDoctor(Doctor aDoctor)
-  {
-    boolean wasAdded = false;
-    if (doctors.contains(aDoctor)) { return false; }
-    Examination existingExamination = aDoctor.getExamination();
-    boolean isNewExamination = existingExamination != null && !this.equals(existingExamination);
-    if (isNewExamination)
-    {
-      aDoctor.setExamination(this);
-    }
-    else
-    {
-      doctors.add(aDoctor);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeDoctor(Doctor aDoctor)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aDoctor, as it must always have a examination
-    if (!this.equals(aDoctor.getExamination()))
-    {
-      doctors.remove(aDoctor);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addDoctorAt(Doctor aDoctor, int index)
-  {  
-    boolean wasAdded = false;
-    if(addDoctor(aDoctor))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
-      doctors.remove(aDoctor);
-      doctors.add(index, aDoctor);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveDoctorAt(Doctor aDoctor, int index)
-  {
-    boolean wasAdded = false;
-    if(doctors.contains(aDoctor))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfDoctors()) { index = numberOfDoctors() - 1; }
-      doctors.remove(aDoctor);
-      doctors.add(index, aDoctor);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addDoctorAt(aDoctor, index);
-    }
-    return wasAdded;
+    doctorTrT.addExamination(this);
+    wasSet = true;
+    return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfDiagnosis()
@@ -351,15 +203,17 @@ public class Examination
 
   public void delete()
   {
-    for(int i=patients.size(); i > 0; i--)
+    PatientTrT placeholderPatientTrT = patientTrT;
+    this.patientTrT = null;
+    if(placeholderPatientTrT != null)
     {
-      Patient aPatient = patients.get(i - 1);
-      aPatient.delete();
+      placeholderPatientTrT.removeExamination(this);
     }
-    for(int i=doctors.size(); i > 0; i--)
+    DoctorTrT placeholderDoctorTrT = doctorTrT;
+    this.doctorTrT = null;
+    if(placeholderDoctorTrT != null)
     {
-      Doctor aDoctor = doctors.get(i - 1);
-      aDoctor.delete();
+      placeholderDoctorTrT.removeExamination(this);
     }
     ArrayList<Diagnosis> copyOfDiagnosis = new ArrayList<Diagnosis>(diagnosis);
     diagnosis.clear();
