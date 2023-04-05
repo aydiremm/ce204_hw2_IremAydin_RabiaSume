@@ -5,97 +5,148 @@ package ce204_hw2_organization_lib;
 
 // line 4 "../../model.ump"
 // line 230 "../../model.ump"
-public class Address
-{
+public class Address {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
 
-  //Address Attributes
-  private String street;
-  private String city;
-  private String postalCode;
-  private String country;
+	// Address Attributes
+	private String street;
+	private String city;
+	private String postalCode;
+	private String country;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+	// ------------------------
+	// CONSTRUCTOR
+	// ------------------------
 
-  public Address(String aStreet, String aCity, String aPostalCode, String aCountry)
-  {
-    street = aStreet;
-    city = aCity;
-    postalCode = aPostalCode;
-    country = aCountry;
-  }
+	/**
+	 * Constructor for the Address class.
+	 * 
+	 * @param aStreet     the street address
+	 * @param aCity       the city name
+	 * @param aPostalCode the postal code
+	 * @param aCountry    the country name
+	 */
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+	public Address(String aStreet, String aCity, String aPostalCode, String aCountry) {
+		street = aStreet;
+		city = aCity;
+		postalCode = aPostalCode;
+		country = aCountry;
+	}
 
-  public boolean setStreet(String aStreet)
-  {
-    boolean wasSet = false;
-    street = aStreet;
-    wasSet = true;
-    return wasSet;
-  }
+	// ------------------------
+	// INTERFACE
+	// ------------------------
 
-  public boolean setCity(String aCity)
-  {
-    boolean wasSet = false;
-    city = aCity;
-    wasSet = true;
-    return wasSet;
-  }
+	/**
+	 * Setter for the street attribute.
+	 * 
+	 * @param aStreet the new street address
+	 * @return true if the attribute was set successfully, false otherwise
+	 */
 
-  public boolean setPostalCode(String aPostalCode)
-  {
-    boolean wasSet = false;
-    postalCode = aPostalCode;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setStreet(String aStreet) {
+		boolean wasSet = false;
+		street = aStreet;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public boolean setCountry(String aCountry)
-  {
-    boolean wasSet = false;
-    country = aCountry;
-    wasSet = true;
-    return wasSet;
-  }
+	/**
+	 * Setter for the city attribute.
+	 * 
+	 * @param aCity the new city name
+	 * @return true if the attribute was set successfully, false otherwise
+	 */
+	public boolean setCity(String aCity) {
+		boolean wasSet = false;
+		city = aCity;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public String getStreet()
-  {
-    return street;
-  }
+	/**
+	 * Setter for the postalCode attribute.
+	 * 
+	 * @param aPostalCode the new postal code
+	 * @return true if the attribute was set successfully, false otherwise
+	 */
 
-  public String getCity()
-  {
-    return city;
-  }
+	public boolean setPostalCode(String aPostalCode) {
+		boolean wasSet = false;
+		postalCode = aPostalCode;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public String getPostalCode()
-  {
-    return postalCode;
-  }
+	/**
+	 * Setter for the country attribute.
+	 * 
+	 * @param aCountry the new country name
+	 * @return true if the attribute was set successfully, false otherwise
+	 */
 
-  public String getCountry()
-  {
-    return country;
-  }
+	public boolean setCountry(String aCountry) {
+		boolean wasSet = false;
+		country = aCountry;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public void delete()
-  {}
+	/**
+	 * Getter for the street attribute.
+	 * 
+	 * @return the street address
+	 */
 
+	public String getStreet() {
+		return street;
+	}
 
-  public String toString()
-  {
-    return super.toString() + "["+
-            "street" + ":" + getStreet()+ "," +
-            "city" + ":" + getCity()+ "," +
-            "postalCode" + ":" + getPostalCode()+ "," +
-            "country" + ":" + getCountry()+ "]";
-  }
+	/**
+	 * Getter for the city attribute.
+	 * 
+	 * @return the city name
+	 */
+
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * Getter for the postalCode attribute.
+	 * 
+	 * @return the postal code
+	 */
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	/**
+	 * Getter for the country attribute.
+	 * 
+	 * @return the country name
+	 */
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void delete() {
+	}
+
+	/**
+	 * Returns a string representation of the address.
+	 * 
+	 * @return the address as a string
+	 */
+
+	public String toString() {
+		return super.toString() + "[" + "street" + ":" + getStreet() + "," + "city" + ":" + getCity() + ","
+				+ "postalCode" + ":" + getPostalCode() + "," + "country" + ":" + getCountry() + "]";
+	}
 }

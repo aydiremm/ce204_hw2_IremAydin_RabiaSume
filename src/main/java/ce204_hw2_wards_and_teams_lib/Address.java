@@ -1,6 +1,13 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+//PLEASE DO NOT EDIT THIS CODE/
 
+//This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!/
+/**
+
+@file
+@brief This file contains the implementation of the Address class.
+This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language.
+Please do not edit this code.
+*/
 package ce204_hw2_wards_and_teams_lib;
 
 // line 9 "../../model.ump"
@@ -21,7 +28,14 @@ public class Address
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  /**
 
+  Constructs an Address object with the given street, city, postal code, and country.
+  @param aStreet The street of the address.
+  @param aCity The city of the address.
+  @param aPostalCode The postal code of the address.
+  @param aCountry The country of the address.
+  */
   public Address(String aStreet, String aCity, String aPostalCode, String aCountry)
   {
     street = aStreet;
@@ -33,7 +47,12 @@ public class Address
   //------------------------
   // INTERFACE
   //------------------------
+  /**
 
+  Sets the street of the address.
+  @param aStreet The new street of the address.
+  @return true if the street was set, false otherwise.
+  */
   public boolean setStreet(String aStreet)
   {
     boolean wasSet = false;
@@ -41,7 +60,12 @@ public class Address
     wasSet = true;
     return wasSet;
   }
+  /**
 
+  Sets the city of the address.
+  @param aCity The new city of the address.
+  @return true if the city was set, false otherwise.
+  */
   public boolean setCity(String aCity)
   {
     boolean wasSet = false;
@@ -49,7 +73,12 @@ public class Address
     wasSet = true;
     return wasSet;
   }
+  /**
 
+  Sets the postal code of the address.
+  @param aPostalCode The new postal code of the address.
+  @return true if the postal code was set, false otherwise.
+  */
   public boolean setPostalCode(String aPostalCode)
   {
     boolean wasSet = false;
@@ -57,7 +86,12 @@ public class Address
     wasSet = true;
     return wasSet;
   }
+  /**
 
+  Sets the country of the address.
+  @param aCountry The new country of the address.
+  @return true if the country was set, false otherwise.
+  */
   public boolean setCountry(String aCountry)
   {
     boolean wasSet = false;
@@ -65,12 +99,21 @@ public class Address
     wasSet = true;
     return wasSet;
   }
+  /**
 
+  Returns the street of the address.
+  @return The street of the address.
+  */
+  
   public String getStreet()
   {
     return street;
   }
+  /**
 
+  Returns the city of the address.
+  @return The city of the address.
+  */
   public String getCity()
   {
     return city;

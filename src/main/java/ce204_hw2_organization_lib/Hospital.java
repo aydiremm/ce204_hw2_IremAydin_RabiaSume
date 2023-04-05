@@ -25,6 +25,13 @@ public class Hospital
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  /**
+   * @brief Constructor for the Hospital class.
+   * 
+   * @param aName The name of the hospital.
+   * @param aAddress The address of the hospital.
+   * @param aPhone The phone number of the hospital.
+   */
 
   public Hospital(String aName, String aAddress, String aPhone)
   {
@@ -38,6 +45,12 @@ public class Hospital
   //------------------------
   // INTERFACE
   //------------------------
+  /**
+   * @brief Sets the name of the hospital.
+   * 
+   * @param aName The new name of the hospital.
+   * @return True if the name was successfully set, false otherwise.
+   */
 
   public boolean setName(String aName)
   {
@@ -46,7 +59,12 @@ public class Hospital
     wasSet = true;
     return wasSet;
   }
-
+  /**
+   * @brief Sets the address of the hospital.
+   *
+   * @param aAddress The new address of the hospital.
+   * @return True if the address was successfully set, false otherwise.
+   */
   public boolean setAddress(String aAddress)
   {
     boolean wasSet = false;
@@ -54,7 +72,12 @@ public class Hospital
     wasSet = true;
     return wasSet;
   }
-
+  /**
+   * @brief Sets the phone number of the hospital.
+   *
+   * @param aPhone The new phone number of the hospital.
+   * @return True if the phone number was successfully set, false otherwise.
+   */
   public boolean setPhone(String aPhone)
   {
     boolean wasSet = false;
@@ -62,45 +85,84 @@ public class Hospital
     wasSet = true;
     return wasSet;
   }
-
+  /**
+   * @brief Gets the name of the hospital.
+   *
+   * @return The name of the hospital.
+   */
   public String getName()
   {
     return name;
   }
+  /**
+   * @brief Gets the address of the hospital.
+   *
+   * @return The address of the hospital.
+   */
 
   public String getAddress()
   {
     return address;
   }
+  /**
+   * @brief Gets the phone number of the hospital.
+   *
+   * @return The phone number of the hospital.
+   */
 
   public String getPhone()
   {
     return phone;
   }
   /* Code from template association_GetMany */
+  /**
+   * @brief Gets a specific Person from the hospital's list of persons.
+   *
+   * @param index The index of the Person to retrieve.
+   * @return The Person at the specified index.
+   */
   public Person getPerson(int index)
   {
     Person aPerson = persons.get(index);
     return aPerson;
   }
+  /**
+   * @brief Gets an unmodifiable List of all Persons associated with the hospital.
+   *
+   * @return An unmodifiable List of all Persons associated with the hospital.
+   */
 
   public List<Person> getPersons()
   {
     List<Person> newPersons = Collections.unmodifiableList(persons);
     return newPersons;
   }
+  /**
+   * @brief Gets the number of Persons associated with the hospital.
+   *
+   * @return The number of Persons associated with the hospital.
+   */
 
   public int numberOfPersons()
   {
     int number = persons.size();
     return number;
   }
+  /**
+   * Check if this hospital has any persons.
+   * @return true if this hospital has one or more persons, false otherwise.
+   */
 
   public boolean hasPersons()
   {
     boolean has = persons.size() > 0;
     return has;
   }
+  /**
+   * Get the index of the specified person in the list of persons associated with this hospital.
+   * @param aPerson The person to look for.
+   * @return The index of the person in the list, or -1 if the person is not found.
+   */
 
   public int indexOfPerson(Person aPerson)
   {
@@ -108,29 +170,51 @@ public class Hospital
     return index;
   }
   /* Code from template association_GetMany */
+  /**
+   * Get the department at the specified index in the list of departments associated with this hospital.
+   * @param index The index of the department to get.
+   * @return The department at the specified index.
+   * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= numberOfDepartments()).
+   */
   public Department getDepartment(int index)
   {
     Department aDepartment = departments.get(index);
     return aDepartment;
   }
-
+  /**
+   * Get an unmodifiable view of the list of departments associated with this hospital.
+   * @return An unmodifiable list of departments.
+   */
   public List<Department> getDepartments()
   {
     List<Department> newDepartments = Collections.unmodifiableList(departments);
     return newDepartments;
   }
+  /**
+   * Get the number of departments associated with this hospital.
+   * @return The number of departments.
+   */
 
   public int numberOfDepartments()
   {
     int number = departments.size();
     return number;
   }
+  /**
+   * Check if this hospital has any departments.
+   * @return true if this hospital has one or more departments, false otherwise.
+   */
 
   public boolean hasDepartments()
   {
     boolean has = departments.size() > 0;
     return has;
   }
+  /**
+   * Get the index of the specified department in the list of departments associated with this hospital.
+   * @param aDepartment The department to look for.
+   * @return The index of the department in the list, or -1 if the department is not found.
+   */
 
   public int indexOfDepartment(Department aDepartment)
   {
@@ -138,11 +222,21 @@ public class Hospital
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
+
+/**
+ * Get the minimum number of persons that can be associated with a hospital.
+ * @return The minimum number of persons.
+ */
   public static int minimumNumberOfPersons()
   {
     return 0;
   }
   /* Code from template association_AddManyToManyMethod */
+  /**
+   * Add the specified person to the list of persons associated with this hospital.
+   * @param aPerson The person to add.
+   * @return true if the person was added to the list, false otherwise.
+   */
   public boolean addPerson(Person aPerson)
   {
     boolean wasAdded = false;
@@ -163,6 +257,13 @@ public class Hospital
     return wasAdded;
   }
   /* Code from template association_RemoveMany */
+  /**
+   * Removes a Person from the list of persons associated with this Hospital.
+   * If the Person was not in the list, nothing is changed.
+   *
+   * @param aPerson the Person to be removed
+   * @return true if the Person was successfully removed, false otherwise
+   */
   public boolean removePerson(Person aPerson)
   {
     boolean wasRemoved = false;
@@ -188,6 +289,13 @@ public class Hospital
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
+  /**
+   * Adds a Person to the list of persons associated with this Hospital at a given index.
+   *
+   * @param aPerson the Person to be added
+   * @param index the index at which to add the Person
+   * @return true if the Person was successfully added, false otherwise
+   */
   public boolean addPersonAt(Person aPerson, int index)
   {  
     boolean wasAdded = false;
@@ -201,7 +309,13 @@ public class Hospital
     }
     return wasAdded;
   }
-
+  /**
+   * Adds a Person to the list of persons associated with this Hospital at a given index, or moves it to the index if it already exists in the list.
+   *
+   * @param aPerson the Person to be added or moved
+   * @param index the index at which to add or move the Person
+   * @return true if the Person was successfully added or moved, false otherwise
+   */
   public boolean addOrMovePersonAt(Person aPerson, int index)
   {
     boolean wasAdded = false;
@@ -220,15 +334,31 @@ public class Hospital
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
+  /**
+   * Returns the minimum number of Departments associated with this Hospital.
+   *
+   * @return the minimum number of Departments associated with this Hospital
+   */
   public static int minimumNumberOfDepartments()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
+  /**
+   * Creates a new Department associated with this Hospital and returns it.
+   *
+   * @return the new Department associated with this Hospital
+   */
   public Department addDepartment()
   {
     return new Department(this);
   }
+  /**
+   * Adds a Department to the list of Departments associated with this Hospital.
+   *
+   * @param aDepartment the Department to be added
+   * @return true if the Department was successfully added, false otherwise
+   */
 
   public boolean addDepartment(Department aDepartment)
   {
@@ -247,7 +377,12 @@ public class Hospital
     wasAdded = true;
     return wasAdded;
   }
-
+  /**
+   * Removes the given Department from the list of Departments associated with this Hospital, if it is not currently assigned to a different hospital.
+   *
+   * @param aDepartment the Department to be removed
+   * @return true if the Department was successfully removed, false otherwise
+   */
   public boolean removeDepartment(Department aDepartment)
   {
     boolean wasRemoved = false;
@@ -260,6 +395,13 @@ public class Hospital
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
+  /**
+   * Adds the given Department to the list of Departments associated with this Hospital at the given index.
+   *
+   * @param aDepartment the Department to be added
+   * @param index the index at which to add the Department
+   * @return true if the Department was successfully added, false otherwise
+   */
   public boolean addDepartmentAt(Department aDepartment, int index)
   {  
     boolean wasAdded = false;
@@ -273,6 +415,13 @@ public class Hospital
     }
     return wasAdded;
   }
+  /**
+   * Adds the given Department to the list of Departments associated with this Hospital at the given index, or moves it to the index if it already exists in the list.
+   *
+   * @param aDepartment the Department to be added or moved
+   * @param index the index at which to add or move the Department
+   * @return true if the Department was successfully added or moved, false otherwise
+   */
 
   public boolean addOrMoveDepartmentAt(Department aDepartment, int index)
   {
@@ -291,6 +440,10 @@ public class Hospital
     }
     return wasAdded;
   }
+  /**
+  Delete this hospital.
+  Removes all persons associated with this hospital and deletes all departments associated with it.
+  */
 
   public void delete()
   {
@@ -308,6 +461,13 @@ public class Hospital
     }
     
   }
+  
+  /**
+  Returns a string representation of this hospital in the format:
+  <pre>
+  Hospital[name:NAME,address:ADDRESS,phone:PHONE]
+  </pre>
+  */
 
 
   public String toString()
